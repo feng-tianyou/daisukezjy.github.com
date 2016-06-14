@@ -1,0 +1,815 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-简单值">
+<meta property="og:url" content="http://yoursite.com/2016/06/14/Swift-简单值/index.html">
+<meta property="og:site_name" content="DaiSuke">
+<meta property="og:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
+<meta property="og:updated_time" content="2016-06-14T05:28:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-简单值">
+<meta name="twitter:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Swift-简单值 | DaiSuke </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c9ee80663574cfe4141f5d6a33812bb8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">DaiSuke</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Who am I</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift-简单值
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-06-14T13:14:47+08:00" content="2016-06-14">
+              2016-06-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/14/Swift-简单值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/14/Swift-简单值/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/14/Swift-简单值/" class="leancloud_visitors" data-flag-title="Swift-简单值">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><h3 id="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><a href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const" class="headerlink" title="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"></a>let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</h3><p><strong> 例如： </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OC: NSString * const name = @&quot;只可读取&quot;;</span><br><span class="line">swift: let constantV = 50</span><br></pre></td></tr></table></figure>
+<p><strong> 值得注意的是：let不像var关键字一样，会自动判断类型，所以用let声明的时候，没有初始值，那么就要在变量后面声明类型，冒号分割 </strong></p>
+<p><strong> 例如： </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let constantV: Double = 50</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="var"><a href="#var" class="headerlink" title="var"></a>var</h2><h3 id="var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个"><a href="#var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个" class="headerlink" title="var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个"></a>var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个</h3><p><strong> 例如： </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var stringV = “我是字符串” // 那么这个变量就是字符串变量</span><br><span class="line">var floatV = 0.5   // 这个变量就是浮点型</span><br></pre></td></tr></table></figure>
+<p><strong> 但是两个关键字不能完全理解为OC重的不可变(NSSting)和可变(NSMutableString)<br>在oc中，NSSting也可以修改值 </strong></p>
+<hr>
+<h2 id="字符串String"><a href="#字符串String" class="headerlink" title="字符串String"></a>字符串String</h2><h3 id="声明字符串跟OC的区别在于没有-符号，其实跟Java的一样"><a href="#声明字符串跟OC的区别在于没有-符号，其实跟Java的一样" class="headerlink" title="声明字符串跟OC的区别在于没有@符号，其实跟Java的一样"></a>声明字符串跟OC的区别在于没有@符号，其实跟Java的一样</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let StringL = “我是字符串”</span><br><span class="line">var StringV = “我是字符串”</span><br></pre></td></tr></table></figure>
+<h3 id="常用的几个方法"><a href="#常用的几个方法" class="headerlink" title="常用的几个方法"></a>常用的几个方法</h3><h4 id="1、拼接字符串"><a href="#1、拼接字符串" class="headerlink" title="1、拼接字符串"></a>1、拼接字符串</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">OC:</span><br><span class="line">NSString *str = </span><br><span class="line">[NSString stringWithFormat:@“%@%@”, @“拼接”, @“字符串</span><br><span class="line"> &quot;];</span><br><span class="line">// 或者</span><br><span class="line">NSString *str = @&quot;拼接”;    </span><br><span class="line">NSString *newStr = [str stringByAppendingString:@&quot;字符串”];</span><br></pre></td></tr></table></figure>
+<p><strong> 但是在swift中只需要两个字符串之间加个+就拼接完成，Java一样 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let stringL = “拼接” + “字符串 &quot;</span><br></pre></td></tr></table></figure>
+<h4 id="2、数值转换为字符串"><a href="#2、数值转换为字符串" class="headerlink" title="2、数值转换为字符串"></a>2、数值转换为字符串</h4><p><strong> 在OC中，一般把数值封装成number类型 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSInteger intV = 10;</span><br><span class="line"></span><br><span class="line">NSString *str = [NSString stringWithFormat:@&quot;%@&quot;, @(intV)];</span><br><span class="line"></span><br><span class="line">NSNumber *number = [NSNumber numberWithInteger:intV];</span><br><span class="line"></span><br><span class="line">NSString *str = [number stringValue];</span><br></pre></td></tr></table></figure>
+<p><strong> 在swift中，调用String(数值)方法 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let strA =  “A”</span><br><span class="line"></span><br><span class="line">let intB = 10</span><br><span class="line"></span><br><span class="line">let strL = strA + String(intB)</span><br></pre></td></tr></table></figure>
+<p><strong> 或者另外一种写法,反斜杠（） </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let strL = strA + &quot;\(intB)”</span><br><span class="line"></span><br><span class="line">let strL = @“我的年龄是：\(intB)&quot;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="数组和字典"><a href="#数组和字典" class="headerlink" title="数组和字典"></a>数组和字典</h2><p><strong> 使用[]来创建数组和字典，使用下标和key值访问元素，并且最后一个元素可以有逗号 </strong></p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><strong> oc: </strong></p>
+<p>// 空数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *arrary = @[];</span><br><span class="line"></span><br><span class="line">// 元素类型（对象）</span><br><span class="line"></span><br><span class="line">NSArray *arrary = @[];</span><br></pre></td></tr></table></figure>
+<p>// 不为空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSArray *arrary = @[@&quot;A&quot;, @&quot;B&quot;, @&quot;C&quot;];</span><br></pre></td></tr></table></figure>
+<p><strong> swift: </strong></p>
+<p>// 空数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arratrV = []</span><br></pre></td></tr></table></figure>
+<p>// 元素类型（字段串，声明数组存储的类型）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arratrV = [String]()</span><br></pre></td></tr></table></figure>
+<p>// 不为空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arratrV = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span><br></pre></td></tr></table></figure>
+<p><strong> 相同点：使用下标访问元素   </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString *str0 = arrary[0];</span><br><span class="line"></span><br><span class="line">var str0 = arraryM[0];</span><br></pre></td></tr></table></figure>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p><strong> oc: </strong></p>
+<p>// 空字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSDictionary *dict = @&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>// 不为空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSDictionary *dict = @&#123;@&quot;name&quot;: @&quot;daisuke&quot;,  @&quot;age&quot; : @(10)&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong> swift: </strong></p>
+<p>// 空字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var dict V = []</span><br></pre></td></tr></table></figure>
+<p>// 声明元素类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var dictV = [String : Float]()</span><br></pre></td></tr></table></figure>
+<p>// 不为空,不声明元素类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var dict V= [&quot;name&quot; : &quot;daisuke&quot;, &quot;age&quot; : 10]</span><br></pre></td></tr></table></figure>
+<p><strong> 相同点：使用key访问元素  </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString *name = [dict objectForKey:@&quot;name”];</span><br><span class="line"></span><br><span class="line">var name = dict[&quot;name&quot;]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/08/FTYGuideTableView/" rel="next" title="FTYGuideTableView">
+                <i class="fa fa-chevron-left"></i> FTYGuideTableView
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/14/Swift-简单值/"
+           data-title="Swift-简单值" data-url="http://yoursite.com/2016/06/14/Swift-简单值/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="DaiSuke" />
+          <p class="site-author-name" itemprop="name">DaiSuke</p>
+          <p class="site-description motion-element" itemprop="description">just's like IT</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/527447678/home" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#let"><span class="nav-number">1.</span> <span class="nav-text">let</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><span class="nav-number">1.1.</span> <span class="nav-text">let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var"><span class="nav-number">2.</span> <span class="nav-text">var</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个"><span class="nav-number">2.1.</span> <span class="nav-text">var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串String"><span class="nav-number">3.</span> <span class="nav-text">字符串String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明字符串跟OC的区别在于没有-符号，其实跟Java的一样"><span class="nav-number">3.1.</span> <span class="nav-text">声明字符串跟OC的区别在于没有@符号，其实跟Java的一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的几个方法"><span class="nav-number">3.2.</span> <span class="nav-text">常用的几个方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、拼接字符串"><span class="nav-number">3.2.1.</span> <span class="nav-text">1、拼接字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、数值转换为字符串"><span class="nav-number">3.2.2.</span> <span class="nav-text">2、数值转换为字符串</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和字典"><span class="nav-number">4.</span> <span class="nav-text">数组和字典</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">4.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典"><span class="nav-number">4.2.</span> <span class="nav-text">字典</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiSuke</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"daisukecn"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EHtYvSIfNxQXWTd66LKTOamk-gzGzoHsz", "QmOk07bceNRvEUFI2Wxs2R0n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
