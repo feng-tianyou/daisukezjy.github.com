@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/14/Swift-简单值/index.html">
 <meta property="og:site_name" content="DaiSuke">
 <meta property="og:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
-<meta property="og:updated_time" content="2016-06-14T05:28:56.000Z">
+<meta property="og:updated_time" content="2016-06-14T15:16:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift-简单值">
 <meta name="twitter:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
@@ -328,7 +328,7 @@
 
       
         <blockquote>
-<p>文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典</p>
+<p>文章是根据<code>The Swift Programming Language</code> 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，<code>let</code>和<code>var</code>，以及<code>字符串</code>，<code>数组</code>，<code>字典</code></p>
 </blockquote>
 <a id="more"></a>
 <h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><h3 id="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><a href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const" class="headerlink" title="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"></a>let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</h3><p><strong> 例如： </strong></p>
@@ -342,18 +342,27 @@
 <p><strong> 但是两个关键字不能完全理解为OC重的不可变(NSSting)和可变(NSMutableString)<br>在oc中，NSSting也可以修改值 </strong></p>
 <hr>
 <h2 id="字符串String"><a href="#字符串String" class="headerlink" title="字符串String"></a>字符串String</h2><h3 id="声明字符串跟OC的区别在于没有-符号，其实跟Java的一样"><a href="#声明字符串跟OC的区别在于没有-符号，其实跟Java的一样" class="headerlink" title="声明字符串跟OC的区别在于没有@符号，其实跟Java的一样"></a>声明字符串跟OC的区别在于没有@符号，其实跟Java的一样</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let StringL = “我是字符串”</span><br><span class="line">var StringV = “我是字符串”</span><br></pre></td></tr></table></figure>
-<h3 id="常用的几个方法"><a href="#常用的几个方法" class="headerlink" title="常用的几个方法"></a>常用的几个方法</h3><h4 id="1、拼接字符串"><a href="#1、拼接字符串" class="headerlink" title="1、拼接字符串"></a>1、拼接字符串</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">OC:</span><br><span class="line">NSString *str = </span><br><span class="line">[NSString stringWithFormat:@“%@%@”, @“拼接”, @“字符串</span><br><span class="line"> &quot;];</span><br><span class="line">// 或者</span><br><span class="line">NSString *str = @&quot;拼接”;    </span><br><span class="line">NSString *newStr = [str stringByAppendingString:@&quot;字符串”];</span><br></pre></td></tr></table></figure>
+<h3 id="使用String的原因"><a href="#使用String的原因" class="headerlink" title="使用String的原因"></a>使用<code>String</code>的原因</h3><ul>
+<li><code>String</code> 是一个结构体，性能更高</li>
+<li><code>String</code> 目前具有了绝大多数 NSString 的功能</li>
+<li><code>String</code> 支持直接遍历</li>
+<li><code>NSString</code> 是一个 <code>OC</code> 对象，性能略差</li>
+<li><code>Swift</code> 提供了 <code>String</code> 和 <code>NSString</code> 之间的无缝转换</li>
+</ul>
+<h3 id="常用的几个方法"><a href="#常用的几个方法" class="headerlink" title="常用的几个方法"></a>常用的几个方法</h3><h4 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">OC:</span><br><span class="line">NSString *str = </span><br><span class="line">[NSString stringWithFormat:@“%@%@”, @“拼接”, @“字符串</span><br><span class="line"> &quot;];</span><br><span class="line">// 或者</span><br><span class="line">NSString *str = @&quot;拼接”;    </span><br><span class="line">NSString *newStr = [str stringByAppendingString:@&quot;字符串”];</span><br></pre></td></tr></table></figure>
 <p><strong> 但是在swift中只需要两个字符串之间加个+就拼接完成，Java一样 </strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let stringL = “拼接” + “字符串 &quot;</span><br></pre></td></tr></table></figure>
-<h4 id="2、数值转换为字符串"><a href="#2、数值转换为字符串" class="headerlink" title="2、数值转换为字符串"></a>2、数值转换为字符串</h4><p><strong> 在OC中，一般把数值封装成number类型 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let stringL = “拼接” + “字符串 &quot;</span><br><span class="line">// 或者</span><br><span class="line">let stringL = &quot;\(str) \(str) &quot;</span><br></pre></td></tr></table></figure>
+<h4 id="数值转换为字符串"><a href="#数值转换为字符串" class="headerlink" title="数值转换为字符串"></a>数值转换为字符串</h4><p><strong> 在OC中，一般把数值封装成number类型 </strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSInteger intV = 10;</span><br><span class="line"></span><br><span class="line">NSString *str = [NSString stringWithFormat:@&quot;%@&quot;, @(intV)];</span><br><span class="line"></span><br><span class="line">NSNumber *number = [NSNumber numberWithInteger:intV];</span><br><span class="line"></span><br><span class="line">NSString *str = [number stringValue];</span><br></pre></td></tr></table></figure>
 <p><strong> 在swift中，调用String(数值)方法 </strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let strA =  “A”</span><br><span class="line"></span><br><span class="line">let intB = 10</span><br><span class="line"></span><br><span class="line">let strL = strA + String(intB)</span><br></pre></td></tr></table></figure>
 <p><strong> 或者另外一种写法,反斜杠（） </strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let strL = strA + &quot;\(intB)”</span><br><span class="line"></span><br><span class="line">let strL = @“我的年龄是：\(intB)&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="遍历字符串"><a href="#遍历字符串" class="headerlink" title="遍历字符串"></a>遍历字符串</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let str = &quot;我爱中国&quot;</span><br><span class="line"></span><br><span class="line">for s in str &#123;</span><br><span class="line">    print(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="数组和字典"><a href="#数组和字典" class="headerlink" title="数组和字典"></a>数组和字典</h2><p><strong> 使用[]来创建数组和字典，使用下标和key值访问元素，并且最后一个元素可以有逗号 </strong></p>
-<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><strong> oc: </strong></p>
+<h2 id="数组和字典"><a href="#数组和字典" class="headerlink" title="数组和字典"></a>数组和字典</h2><p><strong> 使用<code>[]</code>来创建数组和字典，使用<code>下标</code>和<code>key</code>值访问元素，并且最后一个元素可以有逗号 </strong></p>
+<p>** 数组里面的元素必须保持一致，<code>Swift</code>里面存储的是<code>String</code></p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h4 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h4><p><strong> oc: </strong></p>
 <p>// 空数组</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *arrary = @[];</span><br><span class="line"></span><br><span class="line">// 元素类型（对象）</span><br><span class="line"></span><br><span class="line">NSArray *arrary = @[];</span><br></pre></td></tr></table></figure>
 <p>// 不为空</p>
@@ -367,7 +376,27 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arratrV = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span><br></pre></td></tr></table></figure>
 <p><strong> 相同点：使用下标访问元素   </strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString *str0 = arrary[0];</span><br><span class="line"></span><br><span class="line">var str0 = arraryM[0];</span><br></pre></td></tr></table></figure>
-<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p><strong> oc: </strong></p>
+<h4 id="数组常用几个方法"><a href="#数组常用几个方法" class="headerlink" title="数组常用几个方法"></a>数组常用几个方法</h4><ul>
+<li>添加元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.append(&quot;lisi&quot;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.removeAtIndex(1)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除所有元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.removeAll(keepCapacity: true)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>遍历</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in 0..&lt;10 &#123;</span><br><span class="line">    array.append(&quot;\(i)&quot;)</span><br><span class="line">    print(&quot;\(array) --- \(array.capacity)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>拼接数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var array2 = [String]()</span><br><span class="line">array2.append(&quot;1&quot;)</span><br><span class="line">array2.append(&quot;2&quot;)</span><br><span class="line"></span><br><span class="line">// 拼接数组</span><br><span class="line">array += array2</span><br></pre></td></tr></table></figure>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><h4 id="初始化字典"><a href="#初始化字典" class="headerlink" title="初始化字典"></a>初始化字典</h4><p><strong> oc: </strong></p>
 <p>// 空字典</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSDictionary *dict = @&#123;&#125;;</span><br></pre></td></tr></table></figure>
 <p>// 不为空</p>
@@ -381,6 +410,26 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var dict V= [&quot;name&quot; : &quot;daisuke&quot;, &quot;age&quot; : 10]</span><br></pre></td></tr></table></figure>
 <p><strong> 相同点：使用key访问元素  </strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString *name = [dict objectForKey:@&quot;name”];</span><br><span class="line"></span><br><span class="line">var name = dict[&quot;name&quot;]</span><br></pre></td></tr></table></figure>
+<h4 id="字典常用的几个方法"><a href="#字典常用的几个方法" class="headerlink" title="字典常用的几个方法"></a>字典常用的几个方法</h4><ul>
+<li>定义并实例化字典</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var dict = [String: AnyObject]()</span><br><span class="line"></span><br><span class="line">dict[&quot;name&quot;] = &quot;daisuke&quot;</span><br><span class="line">dict[&quot;age&quot;] = 23</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置相同 key，之前的数值会被覆盖</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict[&quot;name&quot;] = &quot;alex&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除某一个 key</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict.removeValueForKey(&quot;age&quot;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>遍历字典(k, v可以随便写)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (k, v) in dict &#123;</span><br><span class="line">    print(&quot;\(k) -- \(v)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>合并字典</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var dict2 = [&quot;name&quot;: &quot;wangwu&quot;, &quot;age&quot;: 80, &quot;title&quot;: &quot;boss&quot;]</span><br><span class="line">for (k, v) in dict2 &#123;</span><br><span class="line">    dict.updateValue(v, forKey: k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -418,6 +467,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/14/Swift-控制符/" rel="prev" title="Swift-控制符">
+                Swift-控制符 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -489,7 +542,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -557,7 +610,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#let"><span class="nav-number">1.</span> <span class="nav-text">let</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><span class="nav-number">1.1.</span> <span class="nav-text">let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var"><span class="nav-number">2.</span> <span class="nav-text">var</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个"><span class="nav-number">2.1.</span> <span class="nav-text">var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串String"><span class="nav-number">3.</span> <span class="nav-text">字符串String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明字符串跟OC的区别在于没有-符号，其实跟Java的一样"><span class="nav-number">3.1.</span> <span class="nav-text">声明字符串跟OC的区别在于没有@符号，其实跟Java的一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的几个方法"><span class="nav-number">3.2.</span> <span class="nav-text">常用的几个方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、拼接字符串"><span class="nav-number">3.2.1.</span> <span class="nav-text">1、拼接字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、数值转换为字符串"><span class="nav-number">3.2.2.</span> <span class="nav-text">2、数值转换为字符串</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和字典"><span class="nav-number">4.</span> <span class="nav-text">数组和字典</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">4.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典"><span class="nav-number">4.2.</span> <span class="nav-text">字典</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#let"><span class="nav-number">1.</span> <span class="nav-text">let</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><span class="nav-number">1.1.</span> <span class="nav-text">let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var"><span class="nav-number">2.</span> <span class="nav-text">var</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个"><span class="nav-number">2.1.</span> <span class="nav-text">var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串String"><span class="nav-number">3.</span> <span class="nav-text">字符串String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明字符串跟OC的区别在于没有-符号，其实跟Java的一样"><span class="nav-number">3.1.</span> <span class="nav-text">声明字符串跟OC的区别在于没有@符号，其实跟Java的一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用String的原因"><span class="nav-number">3.2.</span> <span class="nav-text">使用String的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的几个方法"><span class="nav-number">3.3.</span> <span class="nav-text">常用的几个方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#拼接字符串"><span class="nav-number">3.3.1.</span> <span class="nav-text">拼接字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值转换为字符串"><span class="nav-number">3.3.2.</span> <span class="nav-text">数值转换为字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历字符串"><span class="nav-number">3.3.3.</span> <span class="nav-text">遍历字符串</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和字典"><span class="nav-number">4.</span> <span class="nav-text">数组和字典</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">4.1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组初始化"><span class="nav-number">4.1.1.</span> <span class="nav-text">数组初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组常用几个方法"><span class="nav-number">4.1.2.</span> <span class="nav-text">数组常用几个方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典"><span class="nav-number">4.2.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化字典"><span class="nav-number">4.2.1.</span> <span class="nav-text">初始化字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字典常用的几个方法"><span class="nav-number">4.2.2.</span> <span class="nav-text">字典常用的几个方法</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
