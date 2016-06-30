@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/29/WKWebView详细介绍/index.html">
 <meta property="og:site_name" content="DaiSuke">
 <meta property="og:description" content="对于之前使用的UIWebView,由于性能方面一直被吐槽，所以苹果官方现在推出一款性能极佳的WebKit库来代替UIWebView，WKWebView使用的内存是原来的1/3甚至1/4，WKWebView是现代WebKit API 在iOS8和OS X Yosemite应用中的核心部分。它代替了UIKit中的UIWebView和AppKit 中的WebView，提供了统一的跨双平台 API。自诩">
-<meta property="og:updated_time" content="2016-06-29T15:25:56.000Z">
+<meta property="og:updated_time" content="2016-06-30T14:01:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WKWebView详细介绍">
 <meta name="twitter:description" content="对于之前使用的UIWebView,由于性能方面一直被吐槽，所以苹果官方现在推出一款性能极佳的WebKit库来代替UIWebView，WKWebView使用的内存是原来的1/3甚至1/4，WKWebView是现代WebKit API 在iOS8和OS X Yosemite应用中的核心部分。它代替了UIKit中的UIWebView和AppKit 中的WebView，提供了统一的跨双平台 API。自诩">
@@ -312,12 +312,7 @@
 </blockquote>
 <a id="more"></a>
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><h3 id="initWithFrame-configuration"><a href="#initWithFrame-configuration" class="headerlink" title="initWithFrame:configuration:"></a>initWithFrame:configuration:</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">init</span>(frame frame: <span class="type">CGRect</span>,</span><br><span class="line"> configuration configuration: <span class="type">WKWebViewConfiguration</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line"> configuration:(WKWebViewConfiguration *)configuration</span><br></pre></td></tr></table></figure>
-<p><strong>  这个方法可以自定义WKWebViewConfiguration。并初始化复制指定的配置。 如果你不想配置相关参数，可以使用initwithframe：初始默认配置实例方法。 </strong></p>
-<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><ul>
-<li>configuration：浏览器配置（只读）</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NSCopying</span> <span class="keyword">var</span> configuration: <span class="type">WKWebViewConfiguration</span> &#123; <span class="keyword">get</span> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line"> con          figuration:(WKWebViewConfiguration *)configuration</span><br><span class="line">``</span><br><span class="line"></span><br><span class="line">**  这个方法可以自定义WKWebViewConfiguration。并初始化复制指定的配置。 如果你不想配置相关参数，可以使用initwithframe：初始默认配置实例方法。 **</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">## 属性介绍</span></span><br><span class="line"></span><br><span class="line">* configuration：浏览器配置（只读）</span><br><span class="line"></span><br><span class="line">``` swift</span><br><span class="line">@<span class="built_in">NSCopying</span> var configuration: WKWebViewConfiguration &#123; get &#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">copy</span>) WKWebViewConfiguration *configuration</span><br></pre></td></tr></table></figure>
 <ul>
 <li>scrollview: 滚动视图（只读）</li>
@@ -491,6 +486,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/06/30/UIWebView及WKWebView的用法/" rel="prev" title="UIWebView及WKWebView的用法">
+                UIWebView及WKWebView的用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -561,7 +560,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -629,7 +628,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">1.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#initWithFrame-configuration"><span class="nav-number">1.1.</span> <span class="nav-text">initWithFrame:configuration:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性介绍"><span class="nav-number">2.</span> <span class="nav-text">属性介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载内容"><span class="nav-number">3.</span> <span class="nav-text">加载内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navigating导航"><span class="nav-number">4.</span> <span class="nav-text">Navigating导航</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">1.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#initWithFrame-configuration"><span class="nav-number">1.1.</span> <span class="nav-text">initWithFrame:configuration:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载内容"><span class="nav-number">2.</span> <span class="nav-text">加载内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navigating导航"><span class="nav-number">3.</span> <span class="nav-text">Navigating导航</span></a></li></ol></div>
             
           </div>
         </section>
