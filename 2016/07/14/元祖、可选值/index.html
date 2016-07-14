@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="DaiSuke">
 <meta property="og:description" content="元祖概念 在其他语言中很早就有元祖这个概念，但是对于Objective-C程序员来说这是一个新的概念，什么是元祖呢？元祖就是讲多个相同或者不用类型的值用一个小括号括起来就是一个元祖 
 123456/// 声明一个元祖let student = (&quot;daisuke&quot;, 24, 174)// 访问元祖print(student.0)print(student.1)print(student.2)">
-<meta property="og:updated_time" content="2016-07-14T15:57:33.000Z">
+<meta property="og:updated_time" content="2016-07-14T15:59:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="元祖、可选值">
 <meta name="twitter:description" content="元祖概念 在其他语言中很早就有元祖这个概念，但是对于Objective-C程序员来说这是一个新的概念，什么是元祖呢？元祖就是讲多个相同或者不用类型的值用一个小括号括起来就是一个元祖 
@@ -334,6 +334,7 @@
 <hr>
 <h2 id="可选值optionals"><a href="#可选值optionals" class="headerlink" title="可选值optionals"></a>可选值optionals</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p><strong> 可选值，顾名思义就是可有可无，那么optionals就有两种两种状态了，一是有值，而是没有值，也就是nil </strong></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有值</span></span><br><span class="line"><span class="keyword">var</span> nameValue: <span class="type">String</span>? = <span class="string">"daisuke"</span></span><br><span class="line"><span class="comment">// 没有值</span></span><br><span class="line"><span class="keyword">var</span> ageValue: <span class="type">Int</span>?</span><br><span class="line"><span class="keyword">var</span> heightValue: <span class="type">Int</span>? = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+<hr>
 <h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
 <li>可选值可以利用if语句来进行判断</li>
 </ul>
@@ -349,6 +350,7 @@
 </ul>
 <p><strong> 为了更安全的解析可选类型的值，一般情况下使用可选绑定。什么是可选绑定？ 如果<code>optionValue</code>没有值就<code>不会做任何操作</code>，如果<code>optionValue</code>有值会返回<code>true</code>，并将<code>optionValue</code>的值返回给result，然后继续<code>执行大括号的代码</code>，这就是可选绑定 </strong></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串</span></span><br><span class="line"><span class="keyword">var</span> optionName: <span class="type">String</span>? = <span class="string">"daisuke"</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> result = optionName</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 整数</span></span><br><span class="line"><span class="keyword">var</span> optionAge: <span class="type">Int</span>? = <span class="number">24</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> result = optionAge</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><strong> 1、可选类型就是两个状态，有值和没有值。 2、一般情况下使用可选绑定方式进行可选值的获取 </strong></p>
 
       
