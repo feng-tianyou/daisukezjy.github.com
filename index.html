@@ -312,48 +312,14 @@
 
       
         
-          
-            <h2 id="元祖"><a href="#元祖" class="headerlink" title="元祖"></a>元祖</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong> 在其他语言中很早就有元祖这个概念，但是对于Objective-C程序员来说这是一个新的概念，什么是元祖呢？元祖就是讲多个<code>相同</code>或者<code>不用类型的值</code>用一个<code>小括号</code>括起来就是一个元祖 </strong></p>
+          <h2 id="元祖"><a href="#元祖" class="headerlink" title="元祖"></a>元祖</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong> 在其他语言中很早就有元祖这个概念，但是对于Objective-C程序员来说这是一个新的概念，什么是元祖呢？元祖就是讲多个<code>相同</code>或者<code>不用类型的值</code>用一个<code>小括号</code>括起来就是一个元祖 </strong></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 声明一个元祖</span></span><br><span class="line"><span class="keyword">let</span> student = (<span class="string">"daisuke"</span>, <span class="number">24</span>, <span class="number">174</span>)</span><br><span class="line"><span class="comment">// 访问元祖</span></span><br><span class="line"><span class="built_in">print</span>(student.<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(student.<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(student.<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong> 元祖其实和结构体很像，只是不需要提前定义类型。那么如果不定义类型元祖是什么类型呢？元祖其实是复合类型，所以小括号可以写任意类型，当然你也可以定义类型 </strong></p>
-<ul>
-<li>常规定义</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> teacher : (<span class="type">String</span>, <span class="type">Int</span>, <span class="type">Int</span>) = (<span class="string">"daisuke"</span>, <span class="number">40</span>, <span class="number">170</span>)</span><br><span class="line"><span class="keyword">let</span> student2 : (<span class="type">String</span>, <span class="type">String</span>, <span class="type">Int</span>) = (<span class="string">"daisuke"</span>, <span class="string">"niubility"</span>, <span class="number">174</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>指明应用元祖元素的名称定义</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> student2 = (name: <span class="string">"daisuke"</span>, age: <span class="number">24</span>, height: <span class="number">174</span>)</span><br><span class="line"><span class="built_in">print</span>(student2.name)</span><br><span class="line"><span class="built_in">print</span>(student2.age)</span><br><span class="line"><span class="built_in">print</span>(student2.height)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>通过制定的名称提取元祖对应的值，会将对应位置的值，赋值给对应位置的名称</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> (name, age, height) = (<span class="string">"daisuke"</span>, <span class="number">24</span>, <span class="number">174</span>)</span><br><span class="line"><span class="built_in">print</span>(name)</span><br><span class="line"><span class="built_in">print</span>(age)</span><br><span class="line"><span class="built_in">print</span>(height)</span><br></pre></td></tr></table></figure>
-<p><strong> 如果不关心元祖中的某个值，可以利用_通配符忽略提取 </strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> (name1, age1, <span class="number">_</span>) = (<span class="string">"daisuke"</span>, <span class="number">24</span>, <span class="number">174</span>)</span><br><span class="line"><span class="built_in">print</span>(name1)</span><br><span class="line"><span class="built_in">print</span>(age1)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong> 在以前没有元祖之前，C和OC语言时候通过传入指针或者返回结构体方式来返回多个值的，而有了元祖之后就可以实现让一个函数返回多个值了 </strong></p>
-<hr>
-<h2 id="可选值optionals"><a href="#可选值optionals" class="headerlink" title="可选值optionals"></a>可选值optionals</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p><strong> 可选值，顾名思义就是可有可无，那么optionals就有两种两种状态了，一是有值，而是没有值，也就是nil </strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有值</span></span><br><span class="line"><span class="keyword">var</span> nameValue: <span class="type">String</span>? = <span class="string">"daisuke"</span></span><br><span class="line"><span class="comment">// 没有值</span></span><br><span class="line"><span class="keyword">var</span> ageValue: <span class="type">Int</span>?</span><br><span class="line"><span class="keyword">var</span> heightValue: <span class="type">Int</span>? = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
-<li>可选值可以利用if语句来进行判断</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> weightVaule: <span class="type">Int</span>?</span><br><span class="line"><span class="keyword">if</span> weightVaule != <span class="literal">nil</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">print</span>(weightVaule)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(weightVaule)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// var weightVaule: Int?  结果是:nil</span></span><br><span class="line"><span class="comment">// var weightVaule: Int? = 10  结果是:Optional(10)</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>提取可选类型的值</li>
-</ul>
-<p><strong>（强制解析），会将<code>optionValue</code>中的整形值强制拿出来赋值给变量<code>result</code>，换句话来说就是告诉编译器<code>optionValue</code>一定有值，因为可选类型有两种状态，<code>有值</code>和<code>没有值</code>，所以需要告诉编译器到底有没有值。需要注意的是：如果强制解析<code>optionValue</code>，但是<code>optionValue</code>中没有值时会引发一个<code>运行错误</code> </strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> optionAge: <span class="type">Int</span>? = <span class="number">24</span></span><br><span class="line"><span class="keyword">var</span> result: <span class="type">Int</span> = optionAge!</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="comment">// fatal error: unexpectedly found nil while unwrapping an Optional value</span></span><br><span class="line"><span class="keyword">var</span> optionAge1: <span class="type">Int</span>?</span><br><span class="line"><span class="keyword">var</span> result1: <span class="type">Int</span> = optionAge1!</span><br><span class="line"><span class="built_in">print</span>(result1)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>可选绑定</li>
-</ul>
-<p><strong> 为了更安全的解析可选类型的值，一般情况下使用可选绑定。什么是可选绑定？ 如果<code>optionValue</code>没有值就<code>不会做任何操作</code>，如果<code>optionValue</code>有值会返回<code>true</code>，并将<code>optionValue</code>的值返回给result，然后继续<code>执行大括号的代码</code>，这就是可选绑定 </strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串</span></span><br><span class="line"><span class="keyword">var</span> optionName: <span class="type">String</span>? = <span class="string">"daisuke"</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> result = optionName</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 整数</span></span><br><span class="line"><span class="keyword">var</span> optionAge: <span class="type">Int</span>? = <span class="number">24</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> result = optionAge</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><strong> 1、可选类型就是两个状态，有值和没有值。 2、一般情况下使用可选绑定方式进行可选值的获取 </strong></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/14/元祖、可选值/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
