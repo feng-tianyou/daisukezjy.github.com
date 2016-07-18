@@ -884,6 +884,9 @@
 <p>文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的控制符，本文总结的是<code>if</code>、<code>switch</code>、<code>for-in</code>、<code>for</code>、<code>while</code>、<code>repeat-while</code></p>
 <p><strong> 首先注意的是：条件语句括号<code>()</code>可以省略，跟其他编程语言有很大的差别，但是语句体的大括号<code>{}</code>是必须的，下面会有demo展示 </strong></p>
 </blockquote>
+<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><p><strong> 基本语法 </strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OC: </span><br><span class="line">Bool flag = <span class="literal">YES</span>;</span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">        <span class="comment">// TODO</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Swift</span>:</span><br><span class="line"><span class="keyword">let</span> flag = <span class="literal">true</span>      </span><br><span class="line"><span class="keyword">if</span> flag &#123;</span><br><span class="line">   <span class="comment">// TODO</span></span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">   <span class="comment">// TODO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/14/Swift-控制符/#more" rel="contents">
               Read more &raquo;
@@ -1001,10 +1004,6 @@
 <h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><h3 id="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><a href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const" class="headerlink" title="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"></a>let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</h3><p><strong> 例如： </strong></p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OC: <span class="built_in">NSString</span> * <span class="keyword">const</span> name = <span class="string">@"只可读取"</span>;</span><br></pre></td></tr></table></figure>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swift: <span class="keyword">let</span> constantV = <span class="number">50</span></span><br></pre></td></tr></table></figure>
-<p><strong> 值得注意的是：let不像var关键字一样，会自动判断类型，所以用let声明的时候，没有初始值，那么就要在变量后面声明类型，冒号分割 </strong></p>
-<p><strong> 例如： </strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> constantV: <span class="type">Double</span> = <span class="number">50</span></span><br></pre></td></tr></table></figure>
-<hr>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/14/Swift-简单值/#more" rel="contents">
               Read more &raquo;
