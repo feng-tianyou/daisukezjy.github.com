@@ -84,16 +84,22 @@
 
 
 
-<meta name="description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的函数用法，本文总结的是函数的声明与使用">
+<meta name="description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的函数用法，本文总结的是函数的声明与使用
+
+OC的方法声明与使用123456789101112131415161718192021222324// 没有参数，没有返回值- (void)sayHolle&amp;#123;    NSLog(@&quot;Hello, Objective-C&quot;);&amp;#125;//">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift-函数">
 <meta property="og:url" content="http://yoursite.com/2016/06/16/Swift-函数/index.html">
 <meta property="og:site_name" content="DaiSuke">
-<meta property="og:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的函数用法，本文总结的是函数的声明与使用">
-<meta property="og:updated_time" content="2016-06-17T14:58:08.000Z">
+<meta property="og:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的函数用法，本文总结的是函数的声明与使用
+
+OC的方法声明与使用123456789101112131415161718192021222324// 没有参数，没有返回值- (void)sayHolle&amp;#123;    NSLog(@&quot;Hello, Objective-C&quot;);&amp;#125;//">
+<meta property="og:updated_time" content="2016-07-18T13:39:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift-函数">
-<meta name="twitter:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的函数用法，本文总结的是函数的声明与使用">
+<meta name="twitter:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的函数用法，本文总结的是函数的声明与使用
+
+OC的方法声明与使用123456789101112131415161718192021222324// 没有参数，没有返回值- (void)sayHolle&amp;#123;    NSLog(@&quot;Hello, Objective-C&quot;);&amp;#125;//">
 
 
 
@@ -310,9 +316,9 @@
         <blockquote>
 <p>文章是根据<code>The Swift Programming Language</code> 来总结的，今天就学习一下最基础的<code>函数</code>用法，本文总结的是函数的<code>声明</code>与<code>使用</code></p>
 </blockquote>
-<a id="more"></a>
 <h2 id="OC的方法声明与使用"><a href="#OC的方法声明与使用" class="headerlink" title="OC的方法声明与使用"></a>OC的方法声明与使用</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有参数，没有返回值</span></span><br><span class="line">- (<span class="keyword">void</span>)sayHolle&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Hello, Objective-C"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 一个参数，没有返回值</span></span><br><span class="line">- (<span class="keyword">void</span>)oneParam:(<span class="built_in">NSString</span> *)name&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 多个参数，没有返回值</span></span><br><span class="line">- (<span class="keyword">void</span>)moreParam:(<span class="built_in">NSString</span> *)name age:(<span class="built_in">NSInteger</span>)age score:(<span class="keyword">double</span>)score&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@--%@--%@"</span>, name, @(age), @(score));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 没有参数，有返回值</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)returnMyName&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">@"daisuke"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 多个参数，有返回值</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)getInfoWithName:(<span class="built_in">NSString</span> *)name age:(<span class="built_in">NSInteger</span>)age score:(<span class="keyword">double</span>)score&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@--%@--%@"</span>, name, @(age), @(score)];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [<span class="keyword">self</span> getInfoWithName:<span class="string">@"daisuke"</span> age:<span class="number">24</span> score:<span class="number">99</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
+<a id="more"></a>
 <h2 id="Swift的函数声明与使用"><a href="#Swift的函数声明与使用" class="headerlink" title="Swift的函数声明与使用"></a>Swift的函数声明与使用</h2><ul>
 <li><p>函数的格式：<code>func 函数名(参数: 参数类型...) -&gt; 返回值 { // 代码实现 }</code></p>
 </li>

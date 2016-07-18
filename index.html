@@ -767,6 +767,8 @@
           <blockquote>
 <p>文章是根据<code>The Swift Programming Language</code> 来总结的，今天就学习一下最基础的<code>函数</code>用法，本文总结的是函数的<code>声明</code>与<code>使用</code></p>
 </blockquote>
+<h2 id="OC的方法声明与使用"><a href="#OC的方法声明与使用" class="headerlink" title="OC的方法声明与使用"></a>OC的方法声明与使用</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有参数，没有返回值</span></span><br><span class="line">- (<span class="keyword">void</span>)sayHolle&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Hello, Objective-C"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 一个参数，没有返回值</span></span><br><span class="line">- (<span class="keyword">void</span>)oneParam:(<span class="built_in">NSString</span> *)name&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 多个参数，没有返回值</span></span><br><span class="line">- (<span class="keyword">void</span>)moreParam:(<span class="built_in">NSString</span> *)name age:(<span class="built_in">NSInteger</span>)age score:(<span class="keyword">double</span>)score&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@--%@--%@"</span>, name, @(age), @(score));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 没有参数，有返回值</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)returnMyName&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">@"daisuke"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 多个参数，有返回值</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)getInfoWithName:(<span class="built_in">NSString</span> *)name age:(<span class="built_in">NSInteger</span>)age score:(<span class="keyword">double</span>)score&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@--%@--%@"</span>, name, @(age), @(score)];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [<span class="keyword">self</span> getInfoWithName:<span class="string">@"daisuke"</span> age:<span class="number">24</span> score:<span class="number">99</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/16/Swift-函数/#more" rel="contents">
               Read more &raquo;
@@ -880,6 +882,7 @@
         
           <blockquote>
 <p>文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的控制符，本文总结的是<code>if</code>、<code>switch</code>、<code>for-in</code>、<code>for</code>、<code>while</code>、<code>repeat-while</code></p>
+<p><strong> 首先注意的是：条件语句括号<code>()</code>可以省略，跟其他编程语言有很大的差别，但是语句体的大括号<code>{}</code>是必须的，下面会有demo展示 </strong></p>
 </blockquote>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/14/Swift-控制符/#more" rel="contents">
@@ -995,6 +998,13 @@
           <blockquote>
 <p>文章是根据<code>The Swift Programming Language</code> 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，<code>let</code>和<code>var</code>，以及<code>字符串</code>，<code>数组</code>，<code>字典</code></p>
 </blockquote>
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><h3 id="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><a href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const" class="headerlink" title="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"></a>let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</h3><p><strong> 例如： </strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OC: <span class="built_in">NSString</span> * <span class="keyword">const</span> name = <span class="string">@"只可读取"</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swift: <span class="keyword">let</span> constantV = <span class="number">50</span></span><br></pre></td></tr></table></figure>
+<p><strong> 值得注意的是：let不像var关键字一样，会自动判断类型，所以用let声明的时候，没有初始值，那么就要在变量后面声明类型，冒号分割 </strong></p>
+<p><strong> 例如： </strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> constantV: <span class="type">Double</span> = <span class="number">50</span></span><br></pre></td></tr></table></figure>
+<hr>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/14/Swift-简单值/#more" rel="contents">
               Read more &raquo;

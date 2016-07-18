@@ -84,16 +84,28 @@
 
 
 
-<meta name="description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
+<meta name="description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典
+
+letlet声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const 例如： 
+1OC: NSString * const name = @&quot;只可读取&quot;;
+1swift: let constan">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift-简单值">
 <meta property="og:url" content="http://yoursite.com/2016/06/14/Swift-简单值/index.html">
 <meta property="og:site_name" content="DaiSuke">
-<meta property="og:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
-<meta property="og:updated_time" content="2016-06-15T09:51:50.000Z">
+<meta property="og:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典
+
+letlet声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const 例如： 
+1OC: NSString * const name = @&quot;只可读取&quot;;
+1swift: let constan">
+<meta property="og:updated_time" content="2016-07-18T13:39:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift-简单值">
-<meta name="twitter:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典">
+<meta name="twitter:description" content="文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，let和var，以及字符串，数组，字典
+
+letlet声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const 例如： 
+1OC: NSString * const name = @&quot;只可读取&quot;;
+1swift: let constan">
 
 
 
@@ -310,7 +322,6 @@
         <blockquote>
 <p>文章是根据<code>The Swift Programming Language</code> 来总结的，今天就学习一下最基础的数据类型，本文总结的是声明变量的两个关键字，<code>let</code>和<code>var</code>，以及<code>字符串</code>，<code>数组</code>，<code>字典</code></p>
 </blockquote>
-<a id="more"></a>
 <h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><h3 id="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"><a href="#let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const" class="headerlink" title="let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const"></a>let声明的是常量，赋值一次就完事，不可以修改赋值，相当于OC中的const</h3><p><strong> 例如： </strong></p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OC: <span class="built_in">NSString</span> * <span class="keyword">const</span> name = <span class="string">@"只可读取"</span>;</span><br></pre></td></tr></table></figure>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swift: <span class="keyword">let</span> constantV = <span class="number">50</span></span><br></pre></td></tr></table></figure>
@@ -318,6 +329,7 @@
 <p><strong> 例如： </strong></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> constantV: <span class="type">Double</span> = <span class="number">50</span></span><br></pre></td></tr></table></figure>
 <hr>
+<a id="more"></a>
 <h2 id="var"><a href="#var" class="headerlink" title="var"></a>var</h2><h3 id="var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个"><a href="#var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个" class="headerlink" title="var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个"></a>var声明的是变量，而且是任何类型，不需要担心因为你赋值不同，而出现警告或者错误，编译器会自动判断是什么类型，总结一句话，只要是经常修改的变量，都用这个</h3><p><strong> 例如： </strong></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringV = “我是字符串” <span class="comment">// 那么这个变量就是字符串变量</span></span><br><span class="line"><span class="keyword">var</span> floatV = <span class="number">0.5</span>   <span class="comment">// 这个变量就是浮点型</span></span><br></pre></td></tr></table></figure>
 <p><strong> 但是两个关键字不能完全理解为OC重的不可变(NSSting)和可变(NSMutableString)<br>在oc中，NSSting也可以修改值 </strong></p>
