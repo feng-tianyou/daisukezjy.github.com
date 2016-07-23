@@ -85,36 +85,18 @@
 
 
 <meta name="description" content="描述
-Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.
-
-
-特征
-“Annotation”基于依赖注入
-
-无缝支持自定义集成和依赖拓展">
+Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objecttion依赖注入">
 <meta property="og:url" content="http://yoursite.com/2016/07/14/Objecttion依赖注入/index.html">
 <meta property="og:site_name" content="DaiSuke">
 <meta property="og:description" content="描述
-Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.
-
-
-特征
-“Annotation”基于依赖注入
-
-无缝支持自定义集成和依赖拓展">
-<meta property="og:updated_time" content="2016-07-23T14:10:42.000Z">
+Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.">
+<meta property="og:updated_time" content="2016-07-23T14:13:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objecttion依赖注入">
 <meta name="twitter:description" content="描述
-Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.
-
-
-特征
-“Annotation”基于依赖注入
-
-无缝支持自定义集成和依赖拓展">
+Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.">
 
 
 
@@ -332,6 +314,7 @@ Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacO
 <p>Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.</p>
 </blockquote>
 <hr>
+<a id="more"></a>
 <h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><ul>
 <li><p>“Annotation”基于依赖注入</p>
 </li>
@@ -357,21 +340,32 @@ Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacO
 <p> ** 默认和自定义参数</p>
 </li>
 </ul>
-<a id="more"></a>
 <hr>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p><strong> CocoaPods </strong></p>
 <ul>
 <li>在Podfile文件中添加</li>
 </ul>
-<figure class="highlight plain"><figcaption><span>'Objection', '1.6.1'```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 安装Objection</span><br><span class="line"></span><br><span class="line">```pod install</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod 'Objection', '1.6.1'</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装Objection</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod install</span><br></pre></td></tr></table></figure>
 <ul>
 <li>包含头文件</li>
 </ul>
-<figure class="highlight plain"><figcaption><span><objection objection.h="">```</objection></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">##使用Objection</span><br><span class="line"></span><br><span class="line">### 基本使用</span><br><span class="line"></span><br><span class="line">#### 一个类必须使用Objection的objection_register（可选）或者objection_register_singleton宏定义来注册。objection_register就是声明所依赖Objection创建的全部实例。</span><br><span class="line"></span><br><span class="line">* 使用objection_register宏，参数是类名</span><br><span class="line"></span><br><span class="line">```objection_register(@&quot;类名&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Objection/Objection.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>##使用Objection</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><h4 id="一个类必须使用Objection的objection-register（可选）或者objection-register-singleton宏定义来注册。objection-register就是声明所依赖Objection创建的全部实例。"><a href="#一个类必须使用Objection的objection-register（可选）或者objection-register-singleton宏定义来注册。objection-register就是声明所依赖Objection创建的全部实例。" class="headerlink" title="一个类必须使用Objection的objection_register（可选）或者objection_register_singleton宏定义来注册。objection_register就是声明所依赖Objection创建的全部实例。"></a>一个类必须使用Objection的objection_register（可选）或者objection_register_singleton宏定义来注册。objection_register就是声明所依赖Objection创建的全部实例。</h4><ul>
+<li>使用objection_register宏，参数是类名</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objection_register(<span class="string">@"类名"</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用objection_requires宏，参数对象名（别名）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">** 例子 **</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line">@class Engine, Brakes;</span><br><span class="line">//</span><br><span class="line">@interface Car : NSObject</span><br><span class="line">&#123;</span><br><span class="line">Engine *engine;</span><br><span class="line">Brakes *brakes;</span><br><span class="line">BOOL awake;</span><br><span class="line">&#125;</span><br><span class="line">// 将会被Objection填充</span><br><span class="line">@property(nonatomic, strong) Engine *engine;</span><br><span class="line">// Will be filled in by objection</span><br><span class="line">@property(nonatomic, strong) Brakes *brakes;</span><br><span class="line">@property(nonatomic) BOOL awake;</span><br><span class="line">//</span><br><span class="line">@implementation Car</span><br><span class="line">// 使用objection_requires来绑定两个对象，填写属性名称即可。</span><br><span class="line">objection_requires(@&quot;engine&quot;, @&quot;brakes&quot;)</span><br><span class="line">// 告诉编译器，自定义setter和getter方法</span><br><span class="line">@synthesize engine, brakes, awake;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objection_requires(<span class="string">@"对象名"</span>)</span><br></pre></td></tr></table></figure>
+<p><strong> 例子 </strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@class</span> <span class="title">Engine</span>, <span class="title">Brakes</span>;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Car</span> : <span class="title">NSObject</span></span></span><br><span class="line">&#123;</span><br><span class="line">Engine *engine;</span><br><span class="line">Brakes *brakes;</span><br><span class="line"><span class="built_in">BOOL</span> awake;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将会被Objection填充</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) Engine *engine;</span><br><span class="line"><span class="comment">// Will be filled in by objection</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) Brakes *brakes;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> awake;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Car</span></span></span><br><span class="line"><span class="comment">// 使用objection_requires来绑定两个对象，填写属性名称即可。</span></span><br><span class="line">objection_requires(<span class="string">@"engine"</span>, <span class="string">@"brakes"</span>)</span><br><span class="line"><span class="comment">// 告诉编译器，自定义setter和getter方法</span></span><br><span class="line"><span class="keyword">@synthesize</span> engine, brakes, awake;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <h4 id="定义方法依赖"><a href="#定义方法依赖" class="headerlink" title="定义方法依赖"></a>定义方法依赖</h4><p><strong> 你也可以使用方法来定义依赖，如果你定义的方法不可见或者没有，那么编译器就会出现一个警告。 </strong></p>
 <p><strong> 例子 </strong></p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Car</span></span></span><br><span class="line">objection_requires_sel(<span class="keyword">@selector</span>(engine), <span class="keyword">@selector</span>(brakes))</span><br><span class="line"><span class="keyword">@synthesize</span> engine, brakes, awake;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
@@ -595,7 +589,7 @@ Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacO
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征"><span class="nav-number">2.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义方法依赖"><span class="nav-number">3.0.1.</span> <span class="nav-text">定义方法依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从Objection获取对象"><span class="nav-number">3.0.2.</span> <span class="nav-text">从Objection获取对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖注入"><span class="nav-number">3.0.3.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下标操作"><span class="nav-number">3.0.4.</span> <span class="nav-text">下标操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从Objection中创建的对象"><span class="nav-number">3.0.5.</span> <span class="nav-text">从Objection中创建的对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象工厂"><span class="nav-number">3.0.6.</span> <span class="nav-text">对象工厂</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模块"><span class="nav-number">3.0.7.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元类绑定"><span class="nav-number">3.0.8.</span> <span class="nav-text">元类绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提供者"><span class="nav-number">3.0.9.</span> <span class="nav-text">提供者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用域"><span class="nav-number">3.0.10.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#别名绑定"><span class="nav-number">3.0.11.</span> <span class="nav-text">别名绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#及早初始化的单例"><span class="nav-number">3.0.12.</span> <span class="nav-text">及早初始化的单例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从一个已经存在的注射器派生一个新的注射器"><span class="nav-number">3.0.13.</span> <span class="nav-text">从一个已经存在的注射器派生一个新的注射器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化Initializers"><span class="nav-number">3.0.14.</span> <span class="nav-text">初始化Initializers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法初始化"><span class="nav-number">3.0.15.</span> <span class="nav-text">类方法初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#专用初始化"><span class="nav-number">3.0.16.</span> <span class="nav-text">专用初始化</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征"><span class="nav-number">2.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用"><span class="nav-number">3.1.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一个类必须使用Objection的objection-register（可选）或者objection-register-singleton宏定义来注册。objection-register就是声明所依赖Objection创建的全部实例。"><span class="nav-number">3.1.1.</span> <span class="nav-text">一个类必须使用Objection的objection_register（可选）或者objection_register_singleton宏定义来注册。objection_register就是声明所依赖Objection创建的全部实例。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义方法依赖"><span class="nav-number">3.1.2.</span> <span class="nav-text">定义方法依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从Objection获取对象"><span class="nav-number">3.1.3.</span> <span class="nav-text">从Objection获取对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖注入"><span class="nav-number">3.1.4.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下标操作"><span class="nav-number">3.1.5.</span> <span class="nav-text">下标操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从Objection中创建的对象"><span class="nav-number">3.1.6.</span> <span class="nav-text">从Objection中创建的对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象工厂"><span class="nav-number">3.1.7.</span> <span class="nav-text">对象工厂</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模块"><span class="nav-number">3.1.8.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元类绑定"><span class="nav-number">3.1.9.</span> <span class="nav-text">元类绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提供者"><span class="nav-number">3.1.10.</span> <span class="nav-text">提供者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用域"><span class="nav-number">3.1.11.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#别名绑定"><span class="nav-number">3.1.12.</span> <span class="nav-text">别名绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#及早初始化的单例"><span class="nav-number">3.1.13.</span> <span class="nav-text">及早初始化的单例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从一个已经存在的注射器派生一个新的注射器"><span class="nav-number">3.1.14.</span> <span class="nav-text">从一个已经存在的注射器派生一个新的注射器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化Initializers"><span class="nav-number">3.1.15.</span> <span class="nav-text">初始化Initializers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法初始化"><span class="nav-number">3.1.16.</span> <span class="nav-text">类方法初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#专用初始化"><span class="nav-number">3.1.17.</span> <span class="nav-text">专用初始化</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
