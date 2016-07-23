@@ -87,6 +87,7 @@
 <meta name="description" content="描述
 Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.
 
+
 特征
 “Annotation”基于依赖注入
 
@@ -98,15 +99,17 @@ Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacO
 <meta property="og:description" content="描述
 Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.
 
+
 特征
 “Annotation”基于依赖注入
 
 无缝支持自定义集成和依赖拓展">
-<meta property="og:updated_time" content="2016-07-23T14:08:22.000Z">
+<meta property="og:updated_time" content="2016-07-23T14:10:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objecttion依赖注入">
 <meta name="twitter:description" content="描述
 Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.
+
 
 特征
 “Annotation”基于依赖注入
@@ -328,6 +331,7 @@ Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacO
         <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><blockquote>
 <p>Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacOS X 或者iOS系统.对于那些使用过Guice(一个Java依赖注入框架)的开发者,会感觉Objection 似曾相识.Objection以一种相对容易接受的方式来使你尽可能地不需要管理一个庞大的XML容器或者手动创建对象.</p>
 </blockquote>
+<hr>
 <h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><ul>
 <li><p>“Annotation”基于依赖注入</p>
 </li>
@@ -353,6 +357,8 @@ Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacO
 <p> ** 默认和自定义参数</p>
 </li>
 </ul>
+<a id="more"></a>
+<hr>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p><strong> CocoaPods </strong></p>
 <ul>
 <li>在Podfile文件中添加</li>
@@ -361,7 +367,7 @@ Objection 是一个轻量级的Objective-C依赖注入框架,可同时用于MacO
 <ul>
 <li>包含头文件</li>
 </ul>
-<figure class="highlight plain"><figcaption><span><objection objection.h="">```</objection></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##使用Objection</span><br><span class="line"></span><br><span class="line">### 基本使用</span><br><span class="line"></span><br><span class="line">#### 一个类必须使用Objection的objection_register（可选）或者objection_register_singleton宏定义来注册。objection_register就是声明所依赖Objection创建的全部实例。</span><br><span class="line"></span><br><span class="line">* 使用objection_register宏，参数是类名</span><br><span class="line"></span><br><span class="line">```objection_register(@&quot;类名&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span><objection objection.h="">```</objection></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">##使用Objection</span><br><span class="line"></span><br><span class="line">### 基本使用</span><br><span class="line"></span><br><span class="line">#### 一个类必须使用Objection的objection_register（可选）或者objection_register_singleton宏定义来注册。objection_register就是声明所依赖Objection创建的全部实例。</span><br><span class="line"></span><br><span class="line">* 使用objection_register宏，参数是类名</span><br><span class="line"></span><br><span class="line">```objection_register(@&quot;类名&quot;)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用objection_requires宏，参数对象名（别名）</li>
 </ul>
