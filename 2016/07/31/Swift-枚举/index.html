@@ -84,22 +84,16 @@
 
 
 
-<meta name="description" content="Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法其中格式为1234&amp;gt; enum Method&amp;#123;&amp;gt; 	case 枚举值&amp;gt; &amp;#125;&amp;gt;
-
-声明12345678enum enumName&amp;#123;    case Add">
+<meta name="description" content="Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法其中格式为 123enum Method&amp;#123;	case 枚举值&amp;#125;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift-枚举">
 <meta property="og:url" content="http://yoursite.com/2016/07/31/Swift-枚举/index.html">
 <meta property="og:site_name" content="DaiSuke">
-<meta property="og:description" content="Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法其中格式为1234&amp;gt; enum Method&amp;#123;&amp;gt; 	case 枚举值&amp;gt; &amp;#125;&amp;gt;
-
-声明12345678enum enumName&amp;#123;    case Add">
-<meta property="og:updated_time" content="2016-07-31T11:21:16.000Z">
+<meta property="og:description" content="Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法其中格式为 123enum Method&amp;#123;	case 枚举值&amp;#125;">
+<meta property="og:updated_time" content="2016-07-31T11:28:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift-枚举">
-<meta name="twitter:description" content="Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法其中格式为1234&amp;gt; enum Method&amp;#123;&amp;gt; 	case 枚举值&amp;gt; &amp;#125;&amp;gt;
-
-声明12345678enum enumName&amp;#123;    case Add">
+<meta name="twitter:description" content="Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法其中格式为 123enum Method&amp;#123;	case 枚举值&amp;#125;">
 
 
 
@@ -314,8 +308,9 @@
 
       
         <blockquote>
-<p>Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法<br>其中格式为<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="class"><span class="keyword">enum</span> <span class="title">Method</span></span>&#123;</span><br><span class="line">&gt; 	<span class="keyword">case</span> 枚举值</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Swift枚举：似乎枚举都是一样，跟平常其他语言的枚举没什么区别，但是可以告诉你，Swift中的枚举比OC的抢答，因为Swift中的枚举是一等类型，他可以想类和结构体一样增加属性和方法<br>其中格式为<br> <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Method</span></span>&#123;</span><br><span class="line">	<span class="keyword">case</span> 枚举值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+<a id="more"></a>
 <h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">enumName</span></span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Add</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Sub</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Mul</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Div</span></span><br><span class="line">    <span class="comment">// 可以现在一起写</span></span><br><span class="line"><span class="comment">//    case Add, Sub, Mul, Div</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//var enumSub = .Sub // 报错，表示式错误，无法知道类型</span></span><br><span class="line"><span class="keyword">var</span> enumAdd: enumName = .<span class="type">Add</span> <span class="comment">// 需要制定类型</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"<span class="subst">\(enumAdd)</span>"</span>) <span class="comment">// Add</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 除了以上写法，还可以在变量或常量没有制定类型时，枚举值面前加上枚举名称来访问</span></span><br><span class="line"><span class="keyword">var</span> enumMul = enumName.<span class="type">Mul</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"<span class="subst">\(enumMul)</span>"</span>) <span class="comment">// Mul</span></span><br></pre></td></tr></table></figure>
