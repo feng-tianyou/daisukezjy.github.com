@@ -1,0 +1,776 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="其实Swift的基础知识还没有学完，但是觉得很鼓噪，多以直接奔着项目去了。这次写的不是别的，是培训常模仿的微博项目，现在我也是边模仿边学习的心态。我会记录我模仿微博的从0到1的过程，希望以后看到自己写的烂文章会笑起来，哈哈。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyWeiBoProjectForSwift">
+<meta property="og:url" content="http://yoursite.com/2016/10/27/MyWeiBoProjectForSwift/index.html">
+<meta property="og:site_name" content="DaiSuke">
+<meta property="og:description" content="其实Swift的基础知识还没有学完，但是觉得很鼓噪，多以直接奔着项目去了。这次写的不是别的，是培训常模仿的微博项目，现在我也是边模仿边学习的心态。我会记录我模仿微博的从0到1的过程，希望以后看到自己写的烂文章会笑起来，哈哈。">
+<meta property="og:image" content="http://obyghtd4m.bkt.clouddn.com/weibo0766F05D-FFED-46B2-8C3F-EAE3102D3281.png">
+<meta property="og:image" content="http://obyghtd4m.bkt.clouddn.com/5D4BE60E-A00C-4BFE-AC5A-836CE464DE20.png">
+<meta property="og:image" content="http://obyghtd4m.bkt.clouddn.com/weibo4AC4757E-82B3-4134-B3C7-3D71F7B4B6E7.png">
+<meta property="og:image" content="http://obyghtd4m.bkt.clouddn.com/weibo4AC4757E-82B3-4134-B3C7-3D71F7B4B6E7.png">
+<meta property="og:image" content="http://obyghtd4m.bkt.clouddn.com/weibo0766F05D-FFED-46B2-8C3F-EAE3102D3281.png">
+<meta property="og:updated_time" content="2016-10-27T09:52:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyWeiBoProjectForSwift">
+<meta name="twitter:description" content="其实Swift的基础知识还没有学完，但是觉得很鼓噪，多以直接奔着项目去了。这次写的不是别的，是培训常模仿的微博项目，现在我也是边模仿边学习的心态。我会记录我模仿微博的从0到1的过程，希望以后看到自己写的烂文章会笑起来，哈哈。">
+<meta name="twitter:image" content="http://obyghtd4m.bkt.clouddn.com/weibo0766F05D-FFED-46B2-8C3F-EAE3102D3281.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> MyWeiBoProjectForSwift | DaiSuke </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c9ee80663574cfe4141f5d6a33812bb8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">DaiSuke</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Who am I</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MyWeiBoProjectForSwift
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-27T14:24:34+08:00" content="2016-10-27">
+              2016-10-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/27/MyWeiBoProjectForSwift/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/27/MyWeiBoProjectForSwift/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/27/MyWeiBoProjectForSwift/" class="leancloud_visitors" data-flag-title="MyWeiBoProjectForSwift">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>其实Swift的基础知识还没有学完，但是觉得很鼓噪，多以直接奔着项目去了。这次写的不是别的，是培训常模仿的微博项目，现在我也是边模仿边学习的心态。我会记录我模仿微博的从0到1的过程，希望以后看到自己写的烂文章会笑起来，哈哈。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="创建工程"><a href="#创建工程" class="headerlink" title="创建工程"></a>创建工程</h2><p>相信大家都会了，这里就不在述说了</p>
+<h2 id="删除StoryBoard"><a href="#删除StoryBoard" class="headerlink" title="删除StoryBoard"></a>删除StoryBoard</h2><p>使用纯代码完成这个项目，所以先把故事版删除，还有把info.plist文件的main删除。如下图<br><img src="http://obyghtd4m.bkt.clouddn.com/weibo0766F05D-FFED-46B2-8C3F-EAE3102D3281.png" alt=""></p>
+<h2 id="框架搭建"><a href="#框架搭建" class="headerlink" title="框架搭建"></a>框架搭建</h2><ul>
+<li>首先建立工程目录</li>
+</ul>
+<p>按照微博的模块，可以分为首页(Home)、消息(Message)、广场(Discover)、我(Profile)四大模块，然后工程在同级别添加Main、Common、Tool三个模块<br>如下图：<br><img src="http://obyghtd4m.bkt.clouddn.com/5D4BE60E-A00C-4BFE-AC5A-836CE464DE20.png" alt=""></p>
+<ul>
+<li>搭建框架</li>
+</ul>
+<p>在Main模块中新建一个继承UITabBarController的自定义MainViewController类<br>那么好了，我们只要在AppDelegate.swift文件中创建Window，并把rootController赋值MainViewController就行了。</p>
+<pre><code>** 在AppDelegate.swift创建视图
+</code></pre><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(<span class="number">_</span> application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line"><span class="comment">// Override point for customization after application launch.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建window</span></span><br><span class="line">    window = <span class="type">UIWindow</span>(frame:<span class="type">UIScreen</span>.main.bounds)</span><br><span class="line">    window?.backgroundColor = <span class="type">UIColor</span>.white</span><br><span class="line">    <span class="comment">// 创建根控制器</span></span><br><span class="line">    window?.rootViewController = <span class="type">MainViewController</span>()</span><br><span class="line">    window?.makeKeyAndVisible()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>** 在首页(Home)、消息(Message)、广场(Discover)、我(Profile)模块建立主要控制器
+</code></pre><p>分别对应HomeTableViewController、MessageTableViewController、DiscoverTableViewController、ProfileTableViewController</p>
+<pre><code>** MainViewController创建子控制器
+</code></pre><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置当前控制器对应tabbar的颜色</span></span><br><span class="line">    <span class="comment">// 注意：在iOS7以前如果设置来了titColor只有文字会变，图片不会变</span></span><br><span class="line">    tabBar.tintColor = <span class="type">UIColor</span>.orange</span><br><span class="line">        </span><br><span class="line">    <span class="comment">//  创建首页子控制器</span></span><br><span class="line">    <span class="keyword">let</span> homeVC = <span class="type">HomeTableViewController</span>()</span><br><span class="line">    homeVC.title = <span class="string">"首页"</span></span><br><span class="line">    homeVC.tabBarItem.image = <span class="type">UIImage</span>(named: <span class="string">"tabbar_home"</span>)</span><br><span class="line">    homeVC.tabBarItem.selectedImage = <span class="type">UIImage</span>(named:imageName+<span class="string">"_highlighted"</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 创建导航控制器包装一下</span></span><br><span class="line">    <span class="keyword">let</span> homeNavC = <span class="type">UINavigationController</span>()</span><br><span class="line">    homeNavC.addChildViewController(homeVC)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将导航控制器添加到当前控制器</span></span><br><span class="line">    addChildViewController(homeNavC)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//  创建消息子控制器</span></span><br><span class="line">    <span class="keyword">let</span> messageVC = <span class="type">MessageTableViewController</span>()</span><br><span class="line">    messageVC.title = <span class="string">"消息"</span></span><br><span class="line">    messageVC.tabBarItem.image = <span class="type">UIImage</span>(named: <span class="string">"tabbar_message_center"</span>)</span><br><span class="line">    messageVC.tabBarItem.selectedImage = <span class="type">UIImage</span>(named:imageName+<span class="string">"_highlighted"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建导航控制器包装一下</span></span><br><span class="line">    <span class="keyword">let</span> messageNavC = <span class="type">UINavigationController</span>()</span><br><span class="line">    messageNavC.addChildViewController(messageVC)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将导航控制器添加到当前控制器</span></span><br><span class="line">    addChildViewController(messageNavC)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//  创建广场子控制器</span></span><br><span class="line">    <span class="keyword">let</span> discoverVC = <span class="type">DiscoverTableViewController</span>()</span><br><span class="line">    discoverVC.title = <span class="string">"广场"</span></span><br><span class="line">    discoverVC.tabBarItem.image = <span class="type">UIImage</span>(named: <span class="string">"tabbar_discover"</span>)</span><br><span class="line">    discoverVC.tabBarItem.selectedImage = <span class="type">UIImage</span>(named:imageName+<span class="string">"_highlighted"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建导航控制器包装一下</span></span><br><span class="line">    <span class="keyword">let</span> discoverNavC = <span class="type">UINavigationController</span>()</span><br><span class="line">    discoverNavC.addChildViewController(discoverVC)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将导航控制器添加到当前控制器</span></span><br><span class="line">    addChildViewController(discoverNavC)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//  创建我子控制器</span></span><br><span class="line">    <span class="keyword">let</span> profileVC = <span class="type">ProfileTableViewController</span>()</span><br><span class="line">    profileVC.title = <span class="string">"我"</span></span><br><span class="line">    profileVC.tabBarItem.image = <span class="type">UIImage</span>(named: <span class="string">"tabbar_profile"</span>)</span><br><span class="line">    profileVC.tabBarItem.selectedImage = <span class="type">UIImage</span>(named:imageName+<span class="string">"_highlighted"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建导航控制器包装一下</span></span><br><span class="line">    <span class="keyword">let</span> profileNavC = <span class="type">UINavigationController</span>()</span><br><span class="line">    profileNavC.addChildViewController(profileVC)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将导航控制器添加到当前控制器</span></span><br><span class="line">    addChildViewController(profileNavC)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了，我们运行一下效果图</p>
+<p><img src="http://obyghtd4m.bkt.clouddn.com/weibo4AC4757E-82B3-4134-B3C7-3D71F7B4B6E7.png" alt=""></p>
+<pre><code>** MainViewController重构
+</code></pre><p>你们有没有发现上面的代码除了类名、标题和图片的名称不一样，其他的都一样，其实很多重复的代码，我们可以使用一个方法把它搞定，而不同的可以通过参数来传递。这个就是简单的重构。废话不多说，上代码</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 初始化子控制器</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - parameter childController: 需要初始化的子控制器</span></span><br><span class="line"><span class="comment">/// - parameter title:           标题</span></span><br><span class="line"><span class="comment">/// - parameter imageName:       图片</span></span><br><span class="line">fileprivate <span class="function"><span class="keyword">func</span> <span class="title">addChildViewController</span><span class="params">(<span class="number">_</span> childController: UIViewController, title:String, imageName:String)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 这里提示一下，fileprivate是swift3.0才有的，以前的是使用private</span></span><br><span class="line"></span><br><span class="line">    childController = title</span><br><span class="line">    childController.tabBarItem.image = <span class="type">UIImage</span>(named:imageName)</span><br><span class="line">    childController.tabBarItem.selectedImage = <span class="type">UIImage</span>(named:imageName+<span class="string">"_highlighted"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 包装一个导航器</span></span><br><span class="line">    <span class="keyword">let</span> navController = <span class="type">UINavigationController</span>()</span><br><span class="line">    navController.addChildViewController(childController)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将导航器添加到当前控制器</span></span><br><span class="line">    addChildViewController(navController)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法构建成功，那么在viewDidLoad中使用就非常简单了<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="keyword">super</span>.viewDidLoad()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置当前控制器对应tabbar的颜色</span></span><br><span class="line">    <span class="comment">// 注意：在iOS7以前如果设置来了titColor只有文字会变，图片不会变</span></span><br><span class="line">    tabBar.tintColor = <span class="type">UIColor</span>.orange</span><br><span class="line"></span><br><span class="line">    addChildViewController(<span class="type">HomeTableViewController</span>(), title: <span class="string">"首页"</span>, imageName: <span class="string">"tabbar_home"</span>)</span><br><span class="line">    addChildViewController(<span class="type">MessageTableViewController</span>(), title: <span class="string">"消息"</span>, imageName: <span class="string">"tabbar_message_center"</span>)</span><br><span class="line">    addChildViewController(<span class="type">DiscoverTableViewController</span>(), title: <span class="string">"广场"</span>, imageName: <span class="string">"tabbar_discover"</span>)</span><br><span class="line">    addChildViewController(<span class="type">ProfileTableViewController</span>(), title: <span class="string">"我"</span>, imageName: <span class="string">"tabbar_profile"</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行一下，是不是效果一样，然后代码立即少了许多是不是？<br><img src="http://obyghtd4m.bkt.clouddn.com/weibo4AC4757E-82B3-4134-B3C7-3D71F7B4B6E7.png" alt=""></p>
+<h2 id="添加中间按钮"><a href="#添加中间按钮" class="headerlink" title="添加中间按钮"></a>添加中间按钮</h2><p>这个按钮比较特殊，所以没必要使用tabBarItem，我们在tabBar添加一个按钮视图就行了。</p>
+<p><img src="http://obyghtd4m.bkt.clouddn.com/weibo0766F05D-FFED-46B2-8C3F-EAE3102D3281.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/02/Swift-结构体/" rel="next" title="Swift-结构体">
+                <i class="fa fa-chevron-left"></i> Swift-结构体
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/27/MyWeiBoProjectForSwift/"
+           data-title="MyWeiBoProjectForSwift" data-url="http://yoursite.com/2016/10/27/MyWeiBoProjectForSwift/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="DaiSuke" />
+          <p class="site-author-name" itemprop="name">DaiSuke</p>
+          <p class="site-description motion-element" itemprop="description">just's like IT</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/527447678/home" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建工程"><span class="nav-number">1.</span> <span class="nav-text">创建工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除StoryBoard"><span class="nav-number">2.</span> <span class="nav-text">删除StoryBoard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#框架搭建"><span class="nav-number">3.</span> <span class="nav-text">框架搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加中间按钮"><span class="nav-number">4.</span> <span class="nav-text">添加中间按钮</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiSuke</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"daisukecn"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EHtYvSIfNxQXWTd66LKTOamk-gzGzoHsz", "QmOk07bceNRvEUFI2Wxs2R0n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
