@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="swift," />
+  <meta name="keywords" content="Swift," />
 
 
 
@@ -94,7 +94,7 @@
 <meta property="og:description" content="描述
 相信在其他开发语言中闭包这个概念都没有，甚至没有听过。闭包在swift开发中具有重要的作用，那闭包是什么？闭包是自包含的函数代码块,可以在代码中被传递和使用。Swift 中的闭包与 C 和 Objective-C 中的代码块(blocks)以及其他一些编程语言中的匿名函数比较相似
 闭包表达式（匿名函数）–&amp;gt; 能够捕获上下文的值语法：in关键字的目的是便于区分返回值和执行语句。闭包表达式">
-<meta property="og:updated_time" content="2016-11-21T14:02:02.000Z">
+<meta property="og:updated_time" content="2016-11-22T13:12:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift-闭包">
 <meta name="twitter:description" content="描述
@@ -275,6 +275,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -319,11 +338,11 @@
 </blockquote>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  (参数) -&gt; 返回值类型 <span class="keyword">in</span></span><br><span class="line">  执行语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="声明闭包"><a href="#声明闭包" class="headerlink" title="声明闭包"></a>声明闭包</h2><h3 id="没有返回值，有参数"><a href="#没有返回值，有参数" class="headerlink" title="没有返回值，有参数"></a>没有返回值，有参数</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourName:(<span class="type">String</span>) -&gt;<span class="type">Void</span> = &#123;</span><br><span class="line">    <span class="comment">// name参数名，随便写</span></span><br><span class="line">    <span class="comment">// in之前的-&gt; Void是返回值，这里显示表示没有返回值，可以省略这个</span></span><br><span class="line">    <span class="comment">// 注意：闭包的参数类型必须一致</span></span><br><span class="line">    <span class="comment">// (name: int) -&gt; Void in如果这样写int跟String类型明显不一致，就会报错</span></span><br><span class="line">    (name: <span class="type">String</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\(name)"</span>)</span><br><span class="line">&#125;</span><br><span class="line">yourName(<span class="string">"daisuke"</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourName:(<span class="type">String</span>) -&gt;<span class="type">Void</span> = &#123;</span><br><span class="line">    <span class="comment">// name参数名，随便写</span></span><br><span class="line">    <span class="comment">// in之前没有返回值，可以省略这个</span></span><br><span class="line">    (name: <span class="type">String</span>) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\(name)"</span>)</span><br><span class="line">&#125;</span><br><span class="line">yourName(<span class="string">"daisuke"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="声明闭包"><a href="#声明闭包" class="headerlink" title="声明闭包"></a>声明闭包</h2><h3 id="没有返回值，有参数"><a href="#没有返回值，有参数" class="headerlink" title="没有返回值，有参数"></a>没有返回值，有参数</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourName:(<span class="type">String</span>) -&gt;<span class="type">Void</span> = &#123;</span><br><span class="line">    <span class="comment">// name参数名，随便写</span></span><br><span class="line">    <span class="comment">// in之前的-&gt; Void是返回值，这里显示表示没有返回值，可以省略这个</span></span><br><span class="line">    <span class="comment">// 注意：闭包的参数类型必须一致</span></span><br><span class="line">    <span class="comment">// (name: int) -&gt; Void in如果这样写int跟String类型明显不一致，就会报错</span></span><br><span class="line">    (name: <span class="type">String</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(name)</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line">yourName(<span class="string">"daisuke"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourName:(<span class="type">String</span>) -&gt;<span class="type">Void</span> = &#123;</span><br><span class="line">    <span class="comment">// name参数名，随便写</span></span><br><span class="line">    <span class="comment">// in之前没有返回值，可以省略这个</span></span><br><span class="line">    (name: <span class="type">String</span>) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(name)</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line">yourName(<span class="string">"daisuke"</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="没有参数，也没有返回值"><a href="#没有参数，也没有返回值" class="headerlink" title="没有参数，也没有返回值"></a>没有参数，也没有返回值</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourAge:() -&gt;<span class="type">Void</span> = &#123;</span><br><span class="line">    <span class="comment">// 这里相当于() in这样，省略不写</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"my age"</span>)</span><br><span class="line">&#125;</span><br><span class="line">yourAge()</span><br></pre></td></tr></table></figure>
-<h3 id="有参数，有返回值"><a href="#有参数，有返回值" class="headerlink" title="有参数，有返回值"></a>有参数，有返回值</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourScore:(<span class="type">Int</span>, <span class="type">Int</span>) -&gt;<span class="type">Int</span> = &#123;</span><br><span class="line">    (math: <span class="type">Int</span>, chinese: <span class="type">Int</span>) -&gt;<span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> math+chinese</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> score = yourScore(<span class="number">90</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"\(score)"</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourProfile:(<span class="type">String</span>, <span class="type">Int</span>) -&gt;<span class="type">String</span> = &#123;</span><br><span class="line">    (name: <span class="type">String</span>, chinese: <span class="type">Int</span>) -&gt;<span class="type">String</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"name = \(name), chinese = \(chinese)"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> profile = yourProfile(<span class="string">"daisuke"</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"\(profile)"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="有参数，有返回值"><a href="#有参数，有返回值" class="headerlink" title="有参数，有返回值"></a>有参数，有返回值</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourScore:(<span class="type">Int</span>, <span class="type">Int</span>) -&gt;<span class="type">Int</span> = &#123;</span><br><span class="line">    (math: <span class="type">Int</span>, chinese: <span class="type">Int</span>) -&gt;<span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> math+chinese</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> score = yourScore(<span class="number">90</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"<span class="subst">\(score)</span>"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourProfile:(<span class="type">String</span>, <span class="type">Int</span>) -&gt;<span class="type">String</span> = &#123;</span><br><span class="line">    (name: <span class="type">String</span>, chinese: <span class="type">Int</span>) -&gt;<span class="type">String</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"name = <span class="subst">\(name)</span>, chinese = <span class="subst">\(chinese)</span>"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> profile = yourProfile(<span class="string">"daisuke"</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"<span class="subst">\(profile)</span>"</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="特殊声明-不要声明参数个数、类型、返回值类型"><a href="#特殊声明-不要声明参数个数、类型、返回值类型" class="headerlink" title="特殊声明,不要声明参数个数、类型、返回值类型"></a>特殊声明,不要声明参数个数、类型、返回值类型</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果只有一条语句可以省略return</span></span><br><span class="line"><span class="keyword">let</span> myName = &#123;</span><br><span class="line">    <span class="string">"daisuke"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(myName())</span><br><span class="line"><span class="comment">// daisuke</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">let</span> myScore = &#123;</span><br><span class="line">    (math: <span class="type">Int</span>, chinese: <span class="type">Int</span>) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> math+chinese;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(myScore(<span class="number">100</span>,<span class="number">99</span>))</span><br><span class="line"><span class="comment">// 199</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="闭包表达式作为回调函数"><a href="#闭包表达式作为回调函数" class="headerlink" title="闭包表达式作为回调函数"></a>闭包表达式作为回调函数</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myScore:(math: <span class="type">Int</span>, chinese: <span class="type">Int</span>) -&gt;<span class="type">Int</span> = &#123;</span><br><span class="line">    (math: <span class="type">Int</span>, chinese: <span class="type">Int</span>) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> math+chinese;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">cmpFunc1</span><span class="params">()</span></span> -&gt;((math: <span class="type">Int</span>, chinese: <span class="type">Int</span>) -&gt;<span class="type">Int</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> myScore;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> cmpResult1 = cmpFunc1();</span><br><span class="line"><span class="built_in">print</span>(cmpResult1(math: <span class="number">10</span>, chinese: <span class="number">30</span>))</span><br><span class="line"><span class="comment">// 40</span></span><br></pre></td></tr></table></figure>
@@ -367,7 +386,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/swift/" rel="tag">#swift</a>
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
           
         </div>
       
@@ -463,6 +482,13 @@
             </a>
           </div>
 
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
           
 
           
