@@ -253,6 +253,162 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/10/CustomSlider/" itemprop="url">
+                  CustomSlider
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-12-10T12:23:54+08:00" content="2016-12-10">
+              2016-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/10/CustomSlider/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/10/CustomSlider/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/10/CustomSlider/" class="leancloud_visitors" data-flag-title="CustomSlider">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<blockquote>
+<p>公司有这么一个需求，滑动滑竿选择项目的造价值。第一反应应该是使用UISlider了，但是设计这边给我一个设计图之后，我觉得没那么简单了。</p>
+</blockquote>
+<p><img src="http://obyghtd4m.bkt.clouddn.com/slider.png" alt=""></p>
+<ul>
+<li>分析主要的几点</li>
+<li>滑竿跟按钮</li>
+<li>尺度</li>
+<li>标注(麻烦的地方)</li>
+</ul>
+<h2 id="最终的效果"><a href="#最终的效果" class="headerlink" title="最终的效果"></a>最终的效果</h2><p><img src="http://obyghtd4m.bkt.clouddn.com/slider%20sliderGIF.gif" alt=""></p>
+<h2 id="初始化Slider控件"><a href="#初始化Slider控件" class="headerlink" title="初始化Slider控件"></a>初始化Slider控件</h2><p>首先我把slider、标尺、标注封装成在一个继承UIControl的PriceSliderView视图中，当然这个父视图可以是UIView，可能我想以后有什么拓展，比如点击某个位置，滑标就移动到哪里，那么就要点击事件。当然这个我没有做。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在PriceSliderView的init方法中初始化控件</span></span><br><span class="line">- (instancetype)init&#123;</span><br><span class="line"><span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line"><span class="built_in">UISlider</span> *slider = [[<span class="built_in">UISlider</span> alloc] init];</span><br><span class="line"><span class="comment">// 设置滑标的状态图片</span></span><br><span class="line">[slider setThumbImage:[<span class="built_in">UIImage</span> getImageWithName:<span class="string">@"publish_icon_price_chose"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">[slider setThumbImage:[<span class="built_in">UIImage</span> getImageWithName:<span class="string">@"publish_icon_price_chose"</span>] forState:<span class="built_in">UIControlStateHighlighted</span>];</span><br><span class="line"><span class="comment">// 设置滑杆最大值（滑标的右边）的状态图片</span></span><br><span class="line">[slider setMaximumTrackImage:[<span class="built_in">UIImage</span> getImageWithName:<span class="string">@"publish_icon_price_line"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">[slider setMaximumTrackImage:[<span class="built_in">UIImage</span> getImageWithName:<span class="string">@"publish_icon_price_line"</span>] forState:<span class="built_in">UIControlStateHighlighted</span>];</span><br><span class="line"><span class="comment">// 设置滑杆最小值（滑标的左边）的状态图片</span></span><br><span class="line">[slider setMinimumTrackImage:[<span class="built_in">UIImage</span> getImageWithName:<span class="string">@"publish_icon_price_line"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">[slider setMinimumTrackImage:[<span class="built_in">UIImage</span> getImageWithName:<span class="string">@"publish_icon_price_line"</span>] forState:<span class="built_in">UIControlStateHighlighted</span>];</span><br><span class="line"><span class="comment">// 添加方法监听值得变化</span></span><br><span class="line">[slider addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(sliderValueChanged:) forControlEvents:<span class="built_in">UIControlEventValueChanged</span>];</span><br><span class="line"><span class="comment">// 根据需求设置滑杆最大、最大值</span></span><br><span class="line"><span class="comment">// 因为需求分成7个分段</span></span><br><span class="line">[slider setMinimumValue:<span class="number">0</span>];</span><br><span class="line">[slider setMaximumValue:<span class="number">7</span>];</span><br><span class="line"><span class="keyword">self</span>.slider = slider;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="分析数据，设置分段值"><a href="#分析数据，设置分段值" class="headerlink" title="分析数据，设置分段值"></a>分析数据，设置分段值</h2><p>那么就有了Slider的控件了。滑动滑竿，打印数据<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)sliderValueChanged:(<span class="built_in">UISlider</span> *)slider&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @(slider.value)); </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span><br><span class="line">-&gt;0</span><br><span class="line">-&gt;0.2947368</span><br><span class="line">-&gt;0.2947368</span><br><span class="line">-&gt;0.368421</span><br><span class="line">-&gt;0.4421053</span><br><span class="line">-&gt;0.4912281</span><br><span class="line">-&gt;0.5526316</span><br><span class="line">-&gt;0.5894737</span><br><span class="line">-&gt;0.6631579</span><br><span class="line">-&gt;0.7368421</span><br><span class="line">-&gt;0.7859649</span><br><span class="line">-&gt;0.8350877</span><br><span class="line">..............</span><br><span class="line">-&gt;0.9824561</span><br><span class="line">-&gt;1.031579</span><br><span class="line">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>知道的数据，接下来就是对数据的分析了，看了数据我们都知道是从0到7，别问我为什么知道。但是我们的需求的分段的标度尺的值都是不一样的，比如第一段：0~10万元，间隔是1万元。那么第二段：10~100万元，间隔是10万元。第三段：100~1000万元，间隔是100万元。。。</p>
+<p>如果是统一的间隔，那是分分钟的事情，但是间隔不一样怎么办呢？<br>唯有分析数据了，比前面的<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-&gt;<span class="number">0</span></span><br><span class="line">-&gt;<span class="number">0.2947368</span></span><br><span class="line">-&gt;<span class="number">0.2947368</span></span><br><span class="line">-&gt;<span class="number">0.368421</span></span><br><span class="line">-&gt;<span class="number">0.4421053</span></span><br><span class="line">-&gt;<span class="number">0.4912281</span></span><br><span class="line">-&gt;<span class="number">0.5526316</span></span><br><span class="line">..........</span><br><span class="line">-&gt;<span class="number">1.0000</span></span><br><span class="line">我先获取前面的一个小数点，那就变成 <span class="number">0.1</span> <span class="number">0.2</span> <span class="number">0.3</span>...<span class="number">.1</span><span class="number">.0</span></span><br><span class="line">这些数乘以<span class="number">10</span>，就变成了从<span class="number">1</span>到<span class="number">10</span>，OK，完成第一分段</span><br><span class="line">同样的，第二段的数据是 <span class="number">1.1</span> <span class="number">1.2</span> <span class="number">1.3</span> <span class="number">1.4</span>...<span class="number">.2</span><span class="number">.0</span> <span class="number">1.3</span>....，吧这些数据减去<span class="number">1</span>，再成<span class="number">100</span>，那么就变成<span class="number">10</span>~<span class="number">100</span>,以此类推，每一分段减去前面的分段值再乘以相对应的倍数</span><br><span class="line">注意：有几个值是比较特殊的，<span class="number">0</span>、<span class="number">4</span>、<span class="number">7</span>。<span class="number">0</span>代表的是<span class="number">0</span>元，不是<span class="number">0</span>万元，<span class="number">4</span>是万跟亿之间的跨度，<span class="number">7</span>是其他值。都要做特殊处理</span><br></pre></td></tr></table></figure></p>
+<p>但是有这么一个事情，滑动的幅度是慢慢的，中间的值控不能精确匹配到，比如100这个数，可能匹配到的是99.99999，但是这不是很好的体验，我最终想到了 四舍五入的方法。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//格式话小数 四舍五入类型 “0.000”</span></span><br><span class="line">- (<span class="built_in">NSString</span> *) decimalwithFormat:(<span class="built_in">NSString</span> *)format  numberValue:(<span class="built_in">NSNumber</span> *)numberValue</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">float</span> value = [numberValue floatValue];</span><br><span class="line"><span class="built_in">NSNumberFormatter</span> *numberFormatter = [[<span class="built_in">NSNumberFormatter</span> alloc] init];</span><br><span class="line"></span><br><span class="line">[numberFormatter setPositiveFormat:format];</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span>  [numberFormatter stringFromNumber:[<span class="built_in">NSNumber</span> numberWithFloat:value]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们从监听他的值那里做处理<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)sliderValueChanged:(<span class="built_in">UISlider</span> *)slider&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *numStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%2.1f"</span>,slider.value];</span><br><span class="line"><span class="keyword">float</span> num = [numStr floatValue];</span><br><span class="line"><span class="built_in">NSString</span> *result = <span class="string">@""</span>;</span><br><span class="line"><span class="keyword">if</span> (num == <span class="number">0</span>) &#123;</span><br><span class="line">result = <span class="string">@"0元"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num&gt;<span class="number">0</span> &amp;&amp; num &lt;= <span class="number">1</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@万元"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@(num * <span class="number">10</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num&gt;<span class="number">1</span> &amp;&amp; num &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@万元"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@((num - <span class="number">1</span>) * <span class="number">100</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num&gt;<span class="number">2</span> &amp;&amp; num &lt;= <span class="number">3</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@万元"</span>,[<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@((num - <span class="number">2</span>) * <span class="number">1000</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num&gt;<span class="number">3</span> &amp;&amp; num &lt; <span class="number">4</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@万元"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@((num - <span class="number">3</span>) * <span class="number">10000</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num == <span class="number">4</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@亿元"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@(num - <span class="number">3</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num&gt;<span class="number">4</span> &amp;&amp; num &lt;= <span class="number">5</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@亿元"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@((num - <span class="number">4</span>) * <span class="number">10</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num&gt;<span class="number">5</span> &amp;&amp; num &lt;= <span class="number">6</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@亿元"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@((num - <span class="number">5</span>) * <span class="number">100</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num&gt;<span class="number">6</span> &amp;&amp; num &lt; <span class="number">7</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@亿元"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@((num - <span class="number">6</span>) * <span class="number">1000</span>)]];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num == <span class="number">7</span>)&#123;</span><br><span class="line">result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@亿元以上"</span>, [<span class="keyword">self</span> decimalwithFormat:<span class="string">@"0"</span> numberValue:@((num - <span class="number">6</span>) * <span class="number">1000</span>)]];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>分段值，设置完毕。</p>
+<h2 id="设置标尺和标注"><a href="#设置标尺和标注" class="headerlink" title="设置标尺和标注"></a>设置标尺和标注</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">标尺文字</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *rulerArr;</span><br></pre></td></tr></table></figure>
+<p>在.m文件中方法<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)layoutSubviews&#123;</span><br><span class="line">[<span class="keyword">super</span> layoutSubviews];</span><br><span class="line"><span class="comment">// 移除所有控件</span></span><br><span class="line">[<span class="keyword">self</span> removeAllSubviews];</span><br><span class="line"><span class="comment">// 添加slider</span></span><br><span class="line">[<span class="keyword">self</span> addSubview:<span class="keyword">self</span>.slider];</span><br><span class="line">[<span class="keyword">self</span>.slider setFrame:<span class="number">0</span> y:<span class="number">0</span> w:<span class="keyword">self</span>.width h:<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line">[<span class="keyword">self</span> bringSubviewToFront:<span class="keyword">self</span>.slider];</span><br><span class="line"></span><br><span class="line">__<span class="keyword">weak</span> PriceSliderView *weakSelf = <span class="keyword">self</span>;</span><br><span class="line"><span class="comment">// 计算平均每个分段的饿宽度</span></span><br><span class="line"><span class="built_in">CGFloat</span> width = <span class="keyword">self</span>.slider.width / <span class="keyword">self</span>.slider.maximumValue;</span><br><span class="line"><span class="comment">// 遍历标注数组</span></span><br><span class="line">[<span class="keyword">self</span>.rulerArr enumerateObjectsUsingBlock:^(<span class="built_in">NSString</span> *title, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">idx++;</span><br><span class="line"><span class="comment">// 竖线</span></span><br><span class="line"><span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc] init];</span><br><span class="line">label.backgroundColor = [ZKBTools TColor:<span class="string">@"#33aacc"</span>];</span><br><span class="line">[label setFrame:idx * width + <span class="number">10</span> y:weakSelf.slider.botm - <span class="number">12</span> w:<span class="number">1</span> h:<span class="number">17</span>];</span><br><span class="line">[weakSelf insertSubview:label belowSubview:weakSelf.slider];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 标注</span></span><br><span class="line"><span class="built_in">UILabel</span> *titleLabel = [[<span class="built_in">UILabel</span> alloc] init];</span><br><span class="line">[titleLabel setFrame:(idx * width - width/<span class="number">2</span> - <span class="number">5</span>)+<span class="number">10</span> y:label.botm+<span class="number">2</span> w:width+<span class="number">10</span> h:<span class="number">20</span>];</span><br><span class="line">titleLabel.text = title;</span><br><span class="line">titleLabel.textAlignment = <span class="built_in">NSTextAlignmentCenter</span>;</span><br><span class="line">titleLabel.textColor = [ZKBTools TColor:<span class="string">@"#33aacc"</span>];</span><br><span class="line">titleLabel.font = TGSystemFontText;</span><br><span class="line">[weakSelf insertSubview:titleLabel belowSubview:weakSelf.slider];</span><br><span class="line">&#125;</span><br><span class="line">&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>OK，完成<br><img src="http://obyghtd4m.bkt.clouddn.com/sliderslide.jpg" alt=""></p>
+<h2 id="代理回调"><a href="#代理回调" class="headerlink" title="代理回调"></a>代理回调</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@optional</span></span><br><span class="line">- (<span class="keyword">void</span>)priceSliderView:(TGPriceSliderView *)sliderView sliderValueChanged:(<span class="built_in">UISlider</span> *)slider priceStr:(<span class="built_in">NSString</span> *)priceStr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(priceSliderView:sliderValueChanged:priceStr:)]) &#123;</span><br><span class="line">[<span class="keyword">self</span>.delegate priceSliderView:<span class="keyword">self</span> sliderValueChanged:slider priceStr:result];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="设置默认值"><a href="#设置默认值" class="headerlink" title="设置默认值"></a>设置默认值</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">设置默认选中的值，只能判断万跟亿(暂时没做)</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *strValue;</span><br></pre></td></tr></table></figure>
+<p>在.m文件中重写set方法<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setStrValue:(<span class="built_in">NSString</span> *)strValue&#123;</span><br><span class="line">_strValue = strValue;</span><br><span class="line"><span class="keyword">if</span> (strValue.length &lt; <span class="number">2</span>) <span class="keyword">return</span>;</span><br><span class="line"><span class="built_in">NSString</span> *subStr = <span class="string">@""</span>;</span><br><span class="line"><span class="keyword">float</span> result = <span class="number">0.0</span>;</span><br><span class="line"><span class="keyword">if</span> ([strValue containsString:<span class="string">@"万"</span>]) &#123;</span><br><span class="line"><span class="built_in">NSRange</span> rang = [strValue rangeOfString:<span class="string">@"万"</span>];</span><br><span class="line">subStr = [strValue substringToIndex:rang.location];</span><br><span class="line"><span class="keyword">if</span> (subStr.length == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line"><span class="built_in">NSInteger</span> num = [subStr integerValue];</span><br><span class="line"><span class="keyword">if</span> (num&gt;<span class="number">0</span> &amp;&amp; num &lt;= <span class="number">10</span>) &#123; <span class="comment">//0-10万</span></span><br><span class="line">result = (num / <span class="number">10.0</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; <span class="number">10</span> &amp;&amp; num&lt;= <span class="number">100</span>)&#123;<span class="comment">//10-100万</span></span><br><span class="line">result = (num / <span class="number">100.0</span>);</span><br><span class="line">result += <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; <span class="number">100</span> &amp;&amp; num&lt;= <span class="number">1000</span>)&#123;<span class="comment">//100-1000万</span></span><br><span class="line">result = (num / <span class="number">1000.0</span>);</span><br><span class="line">result += <span class="number">2</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; <span class="number">1000</span> &amp;&amp; num&lt; <span class="number">10000</span>)&#123;<span class="comment">//1000万-1亿</span></span><br><span class="line">result = (num / <span class="number">10000.0</span>);</span><br><span class="line">result += <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span> ([strValue containsString:<span class="string">@"亿以上"</span>])&#123;</span><br><span class="line"><span class="comment">//1000亿以上</span></span><br><span class="line">result = <span class="number">7.0</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ([strValue containsString:<span class="string">@"亿"</span>])&#123;</span><br><span class="line"><span class="built_in">NSRange</span> rang = [strValue rangeOfString:<span class="string">@"亿"</span>];</span><br><span class="line">subStr = [strValue substringToIndex:rang.location];</span><br><span class="line"><span class="keyword">if</span> (subStr.length == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line"><span class="built_in">NSInteger</span> num = [subStr integerValue];</span><br><span class="line"><span class="keyword">if</span> (num&gt;<span class="number">0</span> &amp;&amp; num &lt;= <span class="number">10</span>) &#123; <span class="comment">//0-10亿</span></span><br><span class="line">result = num / <span class="number">10.0</span>;</span><br><span class="line">result += <span class="number">4</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; <span class="number">10</span> &amp;&amp; num&lt;= <span class="number">100</span>)&#123;<span class="comment">//10-100亿</span></span><br><span class="line">result = num / <span class="number">100.0</span>;</span><br><span class="line">result += <span class="number">5</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; <span class="number">100</span> &amp;&amp; num&lt; <span class="number">1000</span>)&#123;<span class="comment">//100-900亿</span></span><br><span class="line">result = num / <span class="number">1000.0</span>;</span><br><span class="line">result += <span class="number">6</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">result = <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[_slider setValue:result animated:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>完成！</p>
+<p><img src="http://obyghtd4m.bkt.clouddn.com/slider%20sliderGIF.gif" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/27/MyWeiBoProjectForSwift/" itemprop="url">
                   MyWeiBoProjectForSwift
                 </a>
@@ -1438,143 +1594,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/14/Swift-控制符/" itemprop="url">
-                  Swift-控制符
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-06-14T19:26:42+08:00" content="2016-06-14">
-              2016-06-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/14/Swift-控制符/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/14/Swift-控制符/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/14/Swift-控制符/" class="leancloud_visitors" data-flag-title="Swift-控制符">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>文章是根据The Swift Programming Language 来总结的，今天就学习一下最基础的控制符，本文总结的是<code>if</code>、<code>switch</code>、<code>for-in</code>、<code>for</code>、<code>while</code>、<code>repeat-while</code></p>
-<p><strong> 首先注意的是：条件语句括号<code>()</code>可以省略，跟其他编程语言有很大的差别，但是语句体的大括号<code>{}</code>是必须的，下面会有demo展示 </strong></p>
-</blockquote>
-<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><p><strong> 基本语法 </strong></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OC: </span><br><span class="line">Bool flag = <span class="literal">YES</span>;</span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">        <span class="comment">// TODO</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Swift</span>:</span><br><span class="line"><span class="keyword">let</span> flag = <span class="literal">true</span>      </span><br><span class="line"><span class="keyword">if</span> flag &#123;</span><br><span class="line">   <span class="comment">// TODO</span></span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">   <span class="comment">// TODO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/14/Swift-控制符/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1620,7 +1639,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1637,7 +1656,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
