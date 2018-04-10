@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="UITableView, 导向" />
+  <meta name="keywords" content="Swift, lazy" />
 
 
 
@@ -84,26 +84,16 @@
 
 
 
-<meta name="description" content="一个有趣的TableView
- 今天看到一个人的文章说美团的订单表格很好看，看了一下他的代码，具体不知道在哪里里，然后自己去美团看了一下结果是这样的">
+<meta name="description" content="懒加载：通俗来讲就是需要的时候才需要加载（创建）。怎么理解呢？比如一个数组或者一个控件，init的时候根本不要对他们进行初始化or创建，我们需要使用的时候再初始化or创建，那么起到延迟作用了。也避免了类初始化的时候就要加载他们">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FTYGuideTableView">
-<meta property="og:url" content="http://yoursite.com/2016/06/08/FTYGuideTableView/index.html">
+<meta property="og:title" content="Swift-懒加载(lazy)">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/Swift-懒加载-lazy/index.html">
 <meta property="og:site_name" content="DaiSuke">
-<meta property="og:description" content="一个有趣的TableView
- 今天看到一个人的文章说美团的订单表格很好看，看了一下他的代码，具体不知道在哪里里，然后自己去美团看了一下结果是这样的">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/IMG_3026.PNG">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/2016-06-08%2021_58_19.gif">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/D7AAE873-5F6F-477A-A6D4-1171FC91A735.png">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/222.png">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/44.png">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/2016-06-08%2021_58_19.gif">
-<meta property="og:updated_time" content="2016-11-22T13:45:47.000Z">
+<meta property="og:description" content="懒加载：通俗来讲就是需要的时候才需要加载（创建）。怎么理解呢？比如一个数组或者一个控件，init的时候根本不要对他们进行初始化or创建，我们需要使用的时候再初始化or创建，那么起到延迟作用了。也避免了类初始化的时候就要加载他们">
+<meta property="og:updated_time" content="2018-04-10T09:29:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FTYGuideTableView">
-<meta name="twitter:description" content="一个有趣的TableView
- 今天看到一个人的文章说美团的订单表格很好看，看了一下他的代码，具体不知道在哪里里，然后自己去美团看了一下结果是这样的">
-<meta name="twitter:image" content="http://7xv233.com1.z0.glb.clouddn.com/IMG_3026.PNG">
+<meta name="twitter:title" content="Swift-懒加载(lazy)">
+<meta name="twitter:description" content="懒加载：通俗来讲就是需要的时候才需要加载（创建）。怎么理解呢？比如一个数组或者一个控件，init的时候根本不要对他们进行初始化or创建，我们需要使用的时候再初始化or创建，那么起到延迟作用了。也避免了类初始化的时候就要加载他们">
 
 
 
@@ -121,7 +111,7 @@
   };
 </script>
 
-  <title> FTYGuideTableView | DaiSuke </title>
+  <title> Swift-懒加载(lazy) | DaiSuke </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -261,7 +251,7 @@
             
             
               
-                FTYGuideTableView
+                Swift-懒加载(lazy)
               
             
           </h1>
@@ -273,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-06-08T23:12:04+08:00" content="2016-06-08">
-              2016-06-08
+            <time itemprop="dateCreated" datetime="2018-04-10T17:25:23+08:00" content="2018-04-10">
+              2018-04-10
             </time>
           </span>
 
@@ -287,8 +277,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
                   </a>
                 </span>
 
@@ -303,8 +293,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/08/FTYGuideTableView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/08/FTYGuideTableView/" itemprop="commentsCount"></span>
+                <a href="/2018/04/10/Swift-懒加载-lazy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/10/Swift-懒加载-lazy/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -314,7 +304,7 @@
 
           
           
-             <span id="/2016/06/08/FTYGuideTableView/" class="leancloud_visitors" data-flag-title="FTYGuideTableView">
+             <span id="/2018/04/10/Swift-懒加载-lazy/" class="leancloud_visitors" data-flag-title="Swift-懒加载(lazy)">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -336,71 +326,24 @@
       
 
       
-        <h2 id="一个有趣的TableView"><a href="#一个有趣的TableView" class="headerlink" title="一个有趣的TableView"></a>一个有趣的TableView</h2><blockquote>
-<p><strong> 今天看到一个人的文章说美团的订单表格很好看，看了一下他的代码，具体不知道在哪里里，然后自己去美团看了一下结果是这样的 </strong></p>
+        <blockquote>
+<p>懒加载：通俗来讲就是需要的时候才需要加载（创建）。怎么理解呢？比如一个数组或者一个控件，init的时候根本不要对他们进行初始化or创建，我们需要使用的时候再初始化or创建，那么起到延迟作用了。也避免了类初始化的时候就要加载他们</p>
 </blockquote>
-<p> <img src="http://7xv233.com1.z0.glb.clouddn.com/IMG_3026.PNG" alt=""></p>
 <a id="more"></a>
-<hr>
-<p><strong> 大家看了这个，估计难点在与cell这一块吧。其实也不是很难，估计是计算控件的frame的时候难一点。以为有些控件的高度是根据内容的来变化的。<br>下面我就简单的实现一下，可能稍微有点不一样。 </strong></p>
-<hr>
+<h4 id="懒加载OC-amp-Swift的区别"><a href="#懒加载OC-amp-Swift的区别" class="headerlink" title="懒加载OC&amp;Swift的区别"></a>懒加载OC&amp;Swift的区别</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSArray</span> *array</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSArray</span> *)array&#123;</span><br><span class="line">    <span class="keyword">if</span> (_array == <span class="literal">nil</span>)&#123;</span><br><span class="line">        _array = @[];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> array: [<span class="type">String</span>] = &#123;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<h4 id="Swift-lazy格式"><a href="#Swift-lazy格式" class="headerlink" title="Swift-lazy格式"></a>Swift-lazy格式</h4><p>格式：定义变量时前面使用lazy来修饰变量，后面通过等号赋值一个闭包，如果不知道闭包是什么，请看<a href="http://daisuke.cn/2016/07/18/Swift-闭包/" target="_blank" rel="external">Swift-闭包</a></p>
+<p>应用场景：</p>
 <ul>
-<li>来个展示图look一look先</li>
+<li>延迟对象的创建</li>
+<li>当属性的值依赖其他未知类</li>
 </ul>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/2016-06-08%2021_58_19.gif" alt=""></p>
-<ul>
-<li><p>其实这个效果也是很简单的（怪我咯，技术渣渣/(ㄒoㄒ)/~~）</p>
-</li>
-<li><p>好吧，废话不多说，说说怎样实现的</p>
-</li>
-<li><p>上干货</p>
-</li>
-</ul>
-<hr>
-<h3 id="第一步：创建cell"><a href="#第一步：创建cell" class="headerlink" title="第一步：创建cell"></a>第一步：创建cell</h3><ul>
-<li>有两种方式</li>
-<li>第一种可能很多人用吧，用xib。加载就完事，不用计算它的frame，而且* 拖拖控件就行</li>
-</ul>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/D7AAE873-5F6F-477A-A6D4-1171FC91A735.png" alt=""></p>
-<ul>
-<li>第二种就是纯属代码了，而我就是用这一种</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 左边</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIImageView</span> *guideIcon; <span class="comment">// 左边图标</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIView</span> *leftBgView; <span class="comment">// 左边父视图</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UILabel</span> *topLine; <span class="comment">// 左边图标上线</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UILabel</span> *bottomLine; <span class="comment">// 左边图标下线</span></span><br><span class="line"><span class="comment">// 右边</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIImageView</span> *bubbleImgeView; <span class="comment">// 右边背景图</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UILabel</span> *titleLabel; <span class="comment">// 右边标题</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UILabel</span> *contentLabel; <span class="comment">// 右边内容</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIView</span> *rightBgView; <span class="comment">// 右边父视图</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>然后就是计算各种的frame了，这里的控件不多，其实也可以不像我那样添加那么多，父视图可有可无。</li>
-</ul>
-<hr>
-<h3 id="第二步就是创建tableview了"><a href="#第二步就是创建tableview了" class="headerlink" title="第二步就是创建tableview了"></a>第二步就是创建tableview了</h3><ul>
-<li>实现代理和数据源之后，我们尝试赋值给cell</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath&#123;</span><br><span class="line">    FTYGuideCell *cell = [FTYGuideCell cellWithTableView:tableView];</span><br><span class="line">    cell.lineColor = <span class="keyword">self</span>.lineColor;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.objectModelArr.count &gt; indexPath.row) &#123;</span><br><span class="line">        FTYObjectModel *object = <span class="keyword">self</span>.objectModelArr[indexPath.row];</span><br><span class="line">        [cell setDataWithLeftIcon:<span class="keyword">self</span>.leftIconArr[indexPath.row] title:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@%@"</span>, object.title, @(indexPath.row)] content:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@%@"</span>, object.content, @(indexPath.row)]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>出来的效果就是这个了</li>
-</ul>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/222.png" alt=""></p>
-<ul>
-<li>当然也可以传个下标，让第一个cell的上面那一条线不显示,最后一个cell的下一条线不显示</li>
-</ul>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/44.png" alt=""></p>
-<ul>
-<li><p>好了，美团那个基本实现了，但是想不想额外加一下功能呢，像刚开始的时候，每一次拖动，就上下有一条线在跟随者tableview的滚动。</p>
-</li>
-<li><p>下面就实现以下吧</p>
-</li>
-<li><p>首先每条横线是label也可以是view</p>
-</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tableview上面的线</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIView</span> *topLine;</span><br><span class="line"><span class="comment">// tableview下面的线</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIView</span> *bottomLine;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>核心代码</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> *  当cell将要出现的时候获取cell线的frame，因为x和width都一样的，所以取一个就行了</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)tableView:(<span class="built_in">UITableView</span> *)tableView willDisplayCell:(<span class="built_in">UITableViewCell</span> *)cell forRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath&#123;</span><br><span class="line">    <span class="keyword">if</span> ([cell isKindOfClass:[FTYGuideCell class]]) &#123;</span><br><span class="line">        FTYGuideCell *_cell = (FTYGuideCell *)cell;</span><br><span class="line">        <span class="keyword">self</span>.lineFrame = _cell.topLine.frame;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 取到frame后，模拟滚动，设置跟着滚动线的frame</span></span><br><span class="line">    [<span class="keyword">self</span> scrollViewDidScroll:tableView];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView&#123;</span><br><span class="line">    <span class="comment">// 计算滚动的幅度，设置两条线的frame</span></span><br><span class="line">    <span class="built_in">CGFloat</span> lineWidth = <span class="keyword">self</span>.lineFrame.size.width;</span><br><span class="line">    <span class="built_in">CGFloat</span> lineX = <span class="keyword">self</span>.lineFrame.origin.x;</span><br><span class="line">    <span class="keyword">self</span>.topLine.frame = <span class="built_in">CGRectMake</span>(lineX, <span class="number">0</span>, lineWidth, -scrollView.contentOffset.y);</span><br><span class="line">    <span class="built_in">CGFloat</span> yOffset = scrollView.frame.size.height - scrollView.contentSize.height + scrollView.contentOffset.y;</span><br><span class="line">    <span class="keyword">self</span>.bottomLine.frame = <span class="built_in">CGRectMake</span>(lineX, <span class="keyword">self</span>.frame.size.height-yOffset, lineWidth, <span class="keyword">self</span>.frame.size.height);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>然后结果就变成这样了</li>
-</ul>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/2016-06-08%2021_58_19.gif" alt=""></p>
-<hr>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p><a href="https://github.com/DaisukeZJY/FTYGuideTableView" target="_blank" rel="external">DEMO</a></p>
+<p>注意点：</p>
+<ol>
+<li>必须使用var声明变量，不能使用let(因为属性的值在实例构造完成之前可能无法得到，而常量属性在构造过程完成之前必须有初始值，因此无法声明成延迟属性)</li>
+<li>闭包后面必须跟上()</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> `property name`: `type name` = &#123;</span><br><span class="line">    `statements`</span><br><span class="line">    <span class="keyword">return</span> `value`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> array: [<span class="type">String</span>] = &#123;</span><br><span class="line">    () -&gt; [<span class="type">String</span>]</span><br><span class="line">    <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"数组被创建了"</span>)</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>]</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> array: [<span class="type">String</span>] = &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"数组被创建了"</span>)</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>]</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果闭包用于懒加载，那么in之前的代码都可以删除包括in在内</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> label: <span class="type">UILabel</span> = &#123;</span><br><span class="line">    <span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">    label.text = <span class="string">"daisuke"</span></span><br><span class="line">    label.textColor = <span class="type">UIColor</span>.red</span><br><span class="line">    label.textAlignment = <span class="type">NSTextAlignment</span>.center</span><br><span class="line">    <span class="keyword">return</span> label</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以简写成这样</span></span><br><span class="line"><span class="keyword">let</span> labelClosures = &#123;</span><br><span class="line">    () -&gt; <span class="type">UILabel</span></span><br><span class="line">    <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">    label.text = <span class="string">"daisuke"</span></span><br><span class="line">    label.textColor = <span class="type">UIColor</span>.red</span><br><span class="line">    label.textAlignment = <span class="type">NSTextAlignment</span>.center</span><br><span class="line">    <span class="keyword">return</span> label</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> label: <span class="type">UILabel</span> = <span class="keyword">self</span>.labelClosures()</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -422,7 +365,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
           
         </div>
       
@@ -431,17 +374,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/06/OneYearAnniversary/" rel="next" title="OneYearAnniversary">
-                <i class="fa fa-chevron-left"></i> OneYearAnniversary
+              <a href="/2018/04/10/Swift-类/" rel="next" title="Swift-类">
+                <i class="fa fa-chevron-left"></i> Swift-类
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/14/Swift-简单值/" rel="prev" title="Swift-简单值">
-                Swift-简单值 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -467,8 +406,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/08/FTYGuideTableView/"
-           data-title="FTYGuideTableView" data-url="http://yoursite.com/2016/06/08/FTYGuideTableView/">
+      <div class="ds-thread" data-thread-key="2018/04/10/Swift-懒加载-lazy/"
+           data-title="Swift-懒加载(lazy)" data-url="http://yoursite.com/2018/04/10/Swift-懒加载-lazy/">
       </div>
     
   </div>
@@ -588,7 +527,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个有趣的TableView"><span class="nav-number">1.</span> <span class="nav-text">一个有趣的TableView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：创建cell"><span class="nav-number">1.1.</span> <span class="nav-text">第一步：创建cell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步就是创建tableview了"><span class="nav-number">1.2.</span> <span class="nav-text">第二步就是创建tableview了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#懒加载OC-amp-Swift的区别"><span class="nav-number">1.</span> <span class="nav-text">懒加载OC&Swift的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Swift-lazy格式"><span class="nav-number">2.</span> <span class="nav-text">Swift-lazy格式</span></a></li></ol></div>
             
           </div>
         </section>
