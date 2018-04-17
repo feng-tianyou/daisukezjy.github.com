@@ -253,6 +253,144 @@
             
               
                 
+                <a class="post-title-link" href="/2018/04/17/Swift-析构过程/" itemprop="url">
+                  Swift-析构过程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-04-17T22:52:46+08:00" content="2018-04-17">
+              2018-04-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/17/Swift-析构过程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/17/Swift-析构过程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/17/Swift-析构过程/" class="leancloud_visitors" data-flag-title="Swift-析构过程">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>在一个类的实例被释放之前，析构函数被立即调用。用关键字deinit来表示析构函数，析构函数只适用于类类型（对象的内存被回收之前被隐式调用，对应OC的dealloc方法，主要执行一些额外操作，例如释放一些持有资源，关闭文件，断开网络等）</p>
+</blockquote>
+<h4 id="析构方法原理"><a href="#析构方法原理" class="headerlink" title="析构方法原理"></a>析构方法原理</h4><p>Swift会自动释放不在需要的实例以释放资源。</p>
+<p>Swift通过自动引用计数（ARC）处理实例的内存管理</p>
+<p>通常当你的实例被释放时不需要手动去清理，但是，当使用自己的资源时，可能需要进行一些额外的清理。例如：如果创建了一个自定义的类来打开一个文件，并写入一些数据，可能需要在类实例被释放之前关闭改文件</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">deinit</span> &#123;</span><br><span class="line">    <span class="comment">// 执行析构过程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fd: <span class="type">Int32</span>? <span class="comment">// 文件描述符</span></span><br><span class="line">    <span class="keyword">init</span>(path:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="comment">// 需要打开文件路径，打开方式（只读）</span></span><br><span class="line">        <span class="keyword">let</span> ret = open(path, <span class="type">O_RDONLY</span>)</span><br><span class="line">        <span class="keyword">if</span> ret == -<span class="number">1</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"读取失败"</span>)</span><br><span class="line">            fd = <span class="literal">nil</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"读取成功"</span>)</span><br><span class="line">            fd = ret</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"对象被创建"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 析构方法</span></span><br><span class="line">    <span class="keyword">deinit</span> &#123;</span><br><span class="line">        <span class="comment">// 关闭文件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> ofd = fd &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"文件关闭"</span>)</span><br><span class="line">            close(ofd)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"对象被销毁"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fh:<span class="type">FileHandler</span>? = <span class="type">FileHandler</span>(path: <span class="string">"/Users/fty/Downloads/接口签名算法.txt"</span>)</span><br><span class="line"><span class="comment">//读取成功</span></span><br><span class="line"><span class="comment">//对象被创建</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当对象没有任何强引用时会被销毁</span></span><br><span class="line">fh = <span class="literal">nil</span></span><br><span class="line"><span class="comment">//文件关闭</span></span><br><span class="line"><span class="comment">//对象被销毁</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fh1:<span class="type">FileHandler</span>? = <span class="type">FileHandler</span>(path: <span class="string">""</span>)</span><br><span class="line">fh1 = <span class="literal">nil</span></span><br><span class="line"><span class="comment">//读取失败</span></span><br><span class="line"><span class="comment">//对象被创建</span></span><br><span class="line"><span class="comment">//对象被销毁</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"person init"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">deinit</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"person deinit"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span>: <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: <span class="string">"daisuke"</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"son init"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">deinit</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"son deinit"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> son:<span class="type">Son</span>? = <span class="type">Son</span>(age: <span class="number">26</span>)</span><br><span class="line">son = <span class="literal">nil</span></span><br><span class="line"><span class="comment">//person init</span></span><br><span class="line"><span class="comment">//son init</span></span><br><span class="line"><span class="comment">//son deinit</span></span><br><span class="line"><span class="comment">//person deinit</span></span><br><span class="line"><span class="comment">// 父类的析构方法会被自动调用，不需要子类管理</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/04/16/Swift-构造方法/" itemprop="url">
                   Swift-构造方法
                 </a>
@@ -331,7 +469,8 @@
 
       
         
-          <blockquote>
+          
+            <blockquote>
 <p>构造方法是为了使用某个类、结构体和枚举类型的实例而进行的准备过程。这个过程包含了为实例中的每个属性设置初始值和为其执行必要的准备和初始化任务。Swift构造方法使用init()方法</p>
 </blockquote>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">init</span>(参数列表)&#123; 初始化代码 &#125;</span><br></pre></td></tr></table></figure>
@@ -340,15 +479,96 @@
 <ul>
 <li>在Swift中类/结构体/枚举都需要构造方法</li>
 <li>构造方法的作用仅仅是用于初始化属性，而不是分配内存，分配内存是系统帮我们做的</li>
-<li>构造方法是隐式吊桶的，通过<code>类名称()</code>形式创建一个对象就会隐式调用init()构造方法</li>
+<li>构造方法是隐式调用的，通过<code>类名称()</code>形式创建一个对象就会隐式调用init()构造方法</li>
 <li>如果所有的存储属性都有默认值，可以不提供构造方法，系统会提供一个隐式的构造方法</li>
-<li>如果村塾属性可以提供缺省，那么提倡大家使用设置缺省值得方式，这样可以简化代码（不用自定义构造法，不用写存储属性类型）</li>
+<li>如果存储属性可以提供缺省，那么提倡大家使用设置缺省值得方式，这样可以简化代码（不用自定义构造法，不用写存储属性类型）</li>
 </ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/04/16/Swift-构造方法/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+<h4 id="存储属性的初始赋值"><a href="#存储属性的初始赋值" class="headerlink" title="存储属性的初始赋值"></a>存储属性的初始赋值</h4><ol>
+<li>类和结构体在实例创建是，必须为所有存储属性设置合适的初始值。</li>
+<li>存储属性在构造器中赋值是，它们的值是被直接设置的，不会触发任何属性观测器</li>
+</ol>
+<p>存储属性在构造器中的赋值流程：</p>
+<ul>
+<li>创建初始值</li>
+<li>在属性定义中指定默认属性值</li>
+<li>初始化实例，并调用init()方法</li>
+</ul>
+<h4 id="不带参数构造方法"><a href="#不带参数构造方法" class="headerlink" title="不带参数构造方法"></a>不带参数构造方法</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"><span class="keyword">var</span> name:<span class="type">String</span> = <span class="string">"daisuke"</span></span><br><span class="line"><span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line"><span class="comment">/*</span><br><span class="line">var age:Int</span><br><span class="line">// Stored property 'age' without initial value prevents synthesized initializers</span><br><span class="line">这样声明属性，会报这样的一个错误，必须有初始值。</span><br><span class="line">当然如果你非要这样写，那么就要在init方法中给属性赋值</span><br><span class="line">init() &#123;</span><br><span class="line">age = 10</span><br><span class="line">&#125;</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    var age:Int = 0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">description</span><span class="params">()</span></span> -&gt;<span class="type">String</span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="string">"name = \(name) age = \(age)"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">init</span>() &#123;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"init"</span>)</span><br><span class="line">age = <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1.分配内存 2.初始化name和age 3.构造方法是隐式调用的</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="type">Person</span>()</span><br><span class="line"><span class="built_in">print</span>(person.description())</span><br><span class="line"><span class="comment">// init</span></span><br><span class="line"><span class="comment">// name = daisuke age = 10</span></span><br></pre></td></tr></table></figure>
+<h4 id="带参数构造方法"><a href="#带参数构造方法" class="headerlink" title="带参数构造方法"></a>带参数构造方法</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span> = <span class="string">"daisuke"</span></span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">description</span><span class="params">()</span></span> -&gt;<span class="type">String</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"name = \(name) age = \(age)"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//    init(name:String, age:Int) &#123;</span></span><br><span class="line">    <span class="comment">//        self.name = name;</span></span><br><span class="line">    <span class="comment">//        self.age = age;</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">    <span class="comment">// 构造方法对属性的顺序没有要求, 只要保证对象构造完时所有存储属性被初始化即可</span></span><br><span class="line">    <span class="keyword">init</span>(age:<span class="type">Int</span>,name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name;</span><br><span class="line">        <span class="keyword">self</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">(name:String, age:Int)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"name is \(name) and age is \(age) running"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    内部和外部参数名</span><br><span class="line">    跟函数和方法相同，构造参数也存在一个在构造器内部使用的参数名称和一个在调用构造器时使用的外部参数名字</span><br><span class="line">    然而，构造器并不想函数和方法那样在括号前有一个可辨别的名字。所以在调用构造器时，主要通过构造器的参数名和类型类确定需要调用的构造器。</span><br><span class="line">    如果你在定义构造器时没有提供参数的外部名字，Swift会为每个构造器的参数自动生成一个跟内部名字相同的外部名</span><br><span class="line"></span><br><span class="line">    没有外部名称参数</span><br><span class="line">    如果你不希望在构造的某个参数提供外部名字，可以使用下划线_来显示描述他的外部名</span><br><span class="line">    */</span></span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span> name:<span class="type">String</span>, age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name;</span><br><span class="line">        <span class="keyword">self</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//var person1 = Person1(name: "hello", age: 26)</span></span><br><span class="line"><span class="keyword">var</span> person1 = <span class="type">Person1</span>(age: <span class="number">26</span>, name: <span class="string">"hello"</span>)</span><br><span class="line"><span class="built_in">print</span>(person1.description())</span><br><span class="line"><span class="comment">// name = hello age = 26</span></span><br><span class="line"></span><br><span class="line">person1.run(name: <span class="string">"haha"</span>, age: <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person2 = <span class="type">Person1</span>(<span class="string">"world"</span>, age: <span class="number">45</span>)</span><br><span class="line"><span class="built_in">print</span>(person2.description())</span><br><span class="line"><span class="comment">// name = world age = 45</span></span><br></pre></td></tr></table></figure>
+<h4 id="常量属性-amp-构造方法"><a href="#常量属性-amp-构造方法" class="headerlink" title="常量属性&amp;构造方法"></a>常量属性&amp;构造方法</h4><p>常量存储属性只能通过缺省值或在构造方法中被修改，其他任何地方都不能修改</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>, age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="comment">// name是尽管是let声明，可以在构造方法中修改</span></span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">description</span><span class="params">()</span></span> -&gt;<span class="type">String</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"name = \(name) age = \(age)"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person2 = <span class="type">Person2</span>(name: <span class="string">"new name"</span>, age: <span class="number">45</span>)</span><br><span class="line"><span class="built_in">print</span>(person2.description())</span><br><span class="line">person2.age = <span class="number">77</span></span><br><span class="line"><span class="comment">// 常量存储属性初始化之后不允许被修改</span></span><br><span class="line"><span class="comment">//person2.name = "haha"</span></span><br><span class="line"><span class="built_in">print</span>(person2.description())</span><br></pre></td></tr></table></figure>
+<h4 id="可选属性-amp-构造方法"><a href="#可选属性-amp-构造方法" class="headerlink" title="可选属性&amp;构造方法"></a>可选属性&amp;构造方法</h4><p>如果属性是可选类型，那么可选值存储属性可以不在构造方法中初始化，也就是说可选值在对象构造完毕后不用初始化，其实如果不对可选存储属性进行初始化，默认就是nil</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person3</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> car:<span class="type">Car</span>?</span><br><span class="line">    <span class="comment">// car是可选值类型，可以不需要再构造方法中初始化，默认赋值为nil</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>, age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">description</span><span class="params">()</span></span> -&gt;<span class="type">String</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"name = \(name) age = \(age) car = \(String(describing: car))"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person3 = <span class="type">Person3</span>(name: <span class="string">"daisuke"</span>, age: <span class="number">26</span>)</span><br><span class="line"><span class="built_in">print</span>(person3.description())</span><br><span class="line"><span class="comment">// name = daisuke age = 26 car = nil</span></span><br></pre></td></tr></table></figure>
+<h4 id="结构体构造方法"><a href="#结构体构造方法" class="headerlink" title="结构体构造方法"></a>结构体构造方法</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Rect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> width:<span class="type">Double</span> = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">var</span> height:<span class="type">Double</span> = <span class="number">0.0</span></span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    此时既没有提供缺省值，也没有提供构造方法，但是编译通过</span><br><span class="line">    因为默认情况下，结构体会给结构体提供一个默认的成员逐一构造器</span><br><span class="line">    init(width:Double, height:Double) &#123;</span><br><span class="line">        self.width = width</span><br><span class="line">        self.height = height</span><br><span class="line">    &#125;</span><br><span class="line">    */</span></span><br><span class="line">    <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.width = <span class="number">0.0</span></span><br><span class="line">        <span class="keyword">self</span>.height = <span class="number">0.0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> r = <span class="type">Rect</span>()</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>在类中默认是没有逐一构造器的</li>
+<li>如果在结构体中自定义了构造方法，那么系统不会生成默认的逐一构造器</li>
+<li>如果给存储属性提供缺省值，系统还是会提供默认的逐一构造器</li>
+<li>如果给存储属性提供缺省值，可以使用不带参数的方法初始化结构体</li>
+</ol>
+<h4 id="构造器代理"><a href="#构造器代理" class="headerlink" title="构造器代理"></a>构造器代理</h4><p>构造器代理：构造方法可以调用其他构造方法来完成实例的构造，称之为构造器代理（构造方法之间互相调用）<br>好处：减少构造方法之间的重复代码</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Rect1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> width:<span class="type">Double</span> = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">var</span> height:<span class="type">Double</span> = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(width:<span class="type">Double</span>, height:<span class="type">Double</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.width = width</span><br><span class="line">        <span class="keyword">self</span>.height = height</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="comment">//        self.width = 0.0</span></span><br><span class="line">        <span class="comment">//        self.height = 0.0</span></span><br><span class="line">        <span class="comment">// 调用其他构造器</span></span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(width: <span class="number">0.0</span>, height: <span class="number">0.0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"width = \(width) height = \(height)"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> r1 = <span class="type">Rect1</span>()</span><br><span class="line">r1.show()</span><br><span class="line"><span class="comment">// width = 0.0 height = 0.0</span></span><br><span class="line"><span class="keyword">var</span> r2 = <span class="type">Rect1</span>(width: <span class="number">0.2</span>, height: <span class="number">0.3</span>)</span><br><span class="line">r2.show()</span><br><span class="line"><span class="comment">// width = 0.2 height = 0.3</span></span><br></pre></td></tr></table></figure>
+<p>构造器代理规则</p>
+<table>
+<thead>
+<tr>
+<th>值类型</th>
+<th>类类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不支持继承，所以构造器代理的过程相对简单，因为他们只能代理本身提供的其他构造器。你可以使用self.init在自定义的构造器中引用其他的属于相同值类型的构造器</td>
+<td>他可以继承自其他类，这意味着类有责任保证其所有继承的存储属性在构造时也能正确初始化</td>
+</tr>
+</tbody>
+</table>
+<h4 id="继承与构造方法"><a href="#继承与构造方法" class="headerlink" title="继承与构造方法"></a>继承与构造方法</h4><h5 id="指定构造方法-amp-便利构造方法"><a href="#指定构造方法-amp-便利构造方法" class="headerlink" title="指定构造方法&amp;便利构造方法"></a>指定构造方法&amp;便利构造方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person4</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="comment">// 指定构造方法都是init开头的</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>, age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 被convenience关键字修饰的构造方法称之为便利构造器，通过调用它构造方法来初始化</span></span><br><span class="line">    <span class="comment">// 反而言之，便利构造器中一定要调用其他构造方法初始化的，一定要出现self.init</span></span><br><span class="line">    <span class="comment">// 否则会报错：self.init' isn't called on all paths before returning from initializer</span></span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="comment">//        self.name = "haha"</span></span><br><span class="line">        <span class="comment">// self' used in property access 'name' before 'self.init' call</span></span><br><span class="line">        <span class="comment">// 给属性赋值，在self.init之前会报错，在self.init之后就可以</span></span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">"daisuke"</span>, age: <span class="number">26</span>)</span><br><span class="line">        <span class="keyword">self</span>.name = <span class="string">"haha"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">description</span><span class="params">()</span></span> -&gt;<span class="type">String</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"name = \(name) age = \(age)"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// =============================</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 类可以拥有多个构造方法</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">        <span class="keyword">self</span>.age = <span class="number">0</span></span><br><span class="line">        <span class="comment">// self.init()</span></span><br><span class="line">        <span class="comment">// 不能在指定构造方法中调用便利构造方法，也就是说在指定构造方法中不能出现self.init。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="comment">// 可以在便利构造器中调用指定构造器</span></span><br><span class="line">        <span class="comment">//        self.init(name: "daisuke", age: 26)</span></span><br><span class="line">        <span class="comment">// 可以在便利构造器中调用便利构造器</span></span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 便利构造器不能和指定构造器同名</span></span><br><span class="line">    <span class="comment">//    convenience init(name:String) &#123;</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person4 = <span class="type">Person4</span>()</span><br><span class="line"><span class="built_in">print</span>(person4.description())</span><br><span class="line"><span class="comment">// name = haha age = 26</span></span><br><span class="line"><span class="keyword">var</span> person44 = <span class="type">Person4</span>(age: <span class="number">22</span>)</span><br><span class="line"><span class="built_in">print</span>(person4.description())</span><br><span class="line"><span class="comment">// name = haha age = 26</span></span><br></pre></td></tr></table></figure>
+<h5 id="派生类的构造方法"><a href="#派生类的构造方法" class="headerlink" title="派生类的构造方法"></a>派生类的构造方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="comment">// 指定构造方法</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 便利构造方法</span></span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">"person"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span>: <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="comment">/*</span><br><span class="line">        注意：</span><br><span class="line">        1、默认情况构造方法不会被继承</span><br><span class="line">        2、基类的存储属性只能通过基类的构造方法初始化</span><br><span class="line">        3、初始化存储属性必须先初始化当前类在初始化父类</span><br><span class="line">        4、不能通过便利构造方法初始化父类，只能通过指定构造方法初始化父类</span><br><span class="line">        */</span></span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: <span class="string">"daisuke"</span>)</span><br><span class="line">        <span class="comment">//        super.init() Must call a designated initializer of the superclass 'Person5'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="构造器间的调用规则"><a href="#构造器间的调用规则" class="headerlink" title="构造器间的调用规则"></a>构造器间的调用规则</h5><ol>
+<li>子类指定构造器必须调用其直接父类的“指定构造器”</li>
+<li>便利构造器必须调用同类中的其他构造器（指定或便利）</li>
+<li>便利构造器必须最终以调用一个指定构造器结束（无论调用是指定还是便利，最终肯定会调用一个指定构造器）</li>
+</ol>
+<p>Tip：</p>
+<ul>
+<li>指定构造器总是向上代理（父类）</li>
+<li>便利构造器总是横向代理（当前类）</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="comment">// 指定构造方法</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 便利构造方法</span></span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">"person"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son1</span>: <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: <span class="string">"daisuke"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(age: <span class="number">26</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(name:<span class="type">String</span>, age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="comment">// 调用子类构造器一定能够初始化所有属性</span></span><br><span class="line">        <span class="comment">//        self.init(age: 26)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span><br><span class="line">        报错：Convenience initializer for 'Son1' must delegate (with 'self.init') rather than chaining to a superclass initializer (with 'super.init')</span><br><span class="line">        便利构造器中只能通过self.init来初始化，不能使用super.init。</span><br><span class="line">        因为调用父类构造器不一定能完全初始化所有属性（子类特有的）</span><br><span class="line">        */</span></span><br><span class="line">        <span class="comment">//        super.init(name: "daisuke")</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="两段式构造"><a href="#两段式构造" class="headerlink" title="两段式构造"></a>两段式构造</h5><p>构造过程可以分为两个阶段：</p>
+<ol>
+<li>确保当前类和父类所有存储属性都被初始化</li>
+<li>做一些其他初始化操作</li>
+</ol>
+<p>好处：</p>
+<ol>
+<li>可以防止属性在被初始化之前访问</li>
+<li>可以防止属性被另外一个构造器意外赋值</li>
+</ol>
+<blockquote>
+<p>注意：构造器的初始化永远是在所有类的第一阶段初始化之后开始第二阶段</p>
+</blockquote>
+<p>编译器安全检查：</p>
+<ol>
+<li>必须先初始化子类特有属性，再向上代理父类指定构造方法初始化父类属性</li>
+<li>只能在调用完父类指定构造器后才能访问父类属性</li>
+<li>在便利构造器中，必须先调用同类其他构造方法后才能访问属性</li>
+<li>第一阶段完成前不能访问父类属性，也不能引用self和调用任何实例方法</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="comment">// 指定构造方法</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 便利构造方法</span></span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">"person"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son2</span>: <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"第一阶段"</span>)</span><br><span class="line">        <span class="comment">// 对子类引入的属性初始化</span></span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span><br><span class="line">        报错：'self' used in property access 'name' before 'super.init' call</span><br><span class="line">        因为调用self.name之前还没有对父类的name进行初始化，即便在这个地方修改，也会被后面的初始化语句覆盖</span><br><span class="line">        */</span></span><br><span class="line">        <span class="comment">//        self.name = "daisuke"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对父类引入的属性进行初始化</span></span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: <span class="string">"daisuke"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"第二阶段"</span>)</span><br><span class="line">        <span class="keyword">if</span> age &gt; <span class="number">26</span> &#123;</span><br><span class="line">            <span class="keyword">self</span>.name = <span class="string">"老油条"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">description</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"name:\(super.name), age:\(age)"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> son2 = <span class="type">Son2</span>(age: <span class="number">26</span>)</span><br><span class="line">son2.description()</span><br><span class="line"><span class="comment">//第一阶段</span></span><br><span class="line"><span class="comment">//第二阶段</span></span><br><span class="line"><span class="comment">//name:daisuke, age:26</span></span><br></pre></td></tr></table></figure>
+<h5 id="重写构造方法"><a href="#重写构造方法" class="headerlink" title="重写构造方法"></a>重写构造方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="comment">// 指定构造方法</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 便利构造方法</span></span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">"person"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son3</span>: <span class="title">Person5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: <span class="string">"daisuek"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果子类中的构造器和父类一模一样，必须加上override关键字，便是重写父类方法。</span></span><br><span class="line">    <span class="comment">// 在老版本的swift语言中是不需要override关键字的。新版本才需要</span></span><br><span class="line">    <span class="comment">//    override init(name: String) &#123;</span></span><br><span class="line">    <span class="comment">//        self.age = 26</span></span><br><span class="line">    <span class="comment">//        super.init(name: name)</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将父类的指定构造器重写成一个便利构造器，也必须加上override关键字，表示重写父类方法</span></span><br><span class="line">    <span class="comment">//    convenience override init(name: String) &#123;</span></span><br><span class="line">    <span class="comment">//        self.init(name: "daisuke")</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    Swift中便利构造方法不存在重写，如果加上override关键字，系统会去查找父类中有没有和便利构造方法一样的指定构造方法，有旧不报错，没有就报错</span><br><span class="line">    为什么便利构造器不能重写呢？因为便利构造器只能横向代理，只能调用当前类的其他构造方法或指定方法，不可能调用super，所以不存在重写</span><br><span class="line">    也就是说子类的便利构造方法不能直接访问父类的便利构造方法，所以不存在重写的概念</span><br><span class="line">    */</span></span><br><span class="line">    <span class="comment">//    convenience override init() &#123;</span></span><br><span class="line">    <span class="comment">//        self.init(name: "daisuke")</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="构造方法的自动继承"><a href="#构造方法的自动继承" class="headerlink" title="构造方法的自动继承"></a>构造方法的自动继承</h5><ol>
+<li>如果子类中没有定义任何构造器，且子类中所有的存储属性都有缺省值，会继承父类中所有的构造方法（包括便利构造器）</li>
+<li>如果子类只是重写了父类中的某些指定构造器，不管子类中的存储舒心是否有缺省值，都不会继承父类中的其他构造器</li>
+<li>如果子类重写了父类中所有的指定构造器，不管子类中的存储属性是否有缺省值，都会同事继承父类中的所有便利构造方法</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person6</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>, age:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">        <span class="keyword">self</span>.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">        <span class="keyword">self</span>.age = <span class="number">26</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">"daisuke"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//class Son6: Person6 &#123;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">// 如果子类中没有定义任何构造器, 且子类中所有的存储属性都有缺省值, 会继承父类中所有的构造方法(包括便利构造器)</span></span><br><span class="line"><span class="comment">// 父类的存储属性是由父类的构造器初始化, 子类的存储属性是由缺省值初始化的</span></span><br><span class="line"><span class="comment">//var son6 = Son6(name: "daisuke", age:88)</span></span><br><span class="line"><span class="comment">//var son66 = Son6(name: "daisuke")</span></span><br><span class="line"><span class="comment">//var son666 = Son6()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//class Son6: Person6 &#123;</span></span><br><span class="line"><span class="comment">//    var height:Double</span></span><br><span class="line"><span class="comment">//    init(height:Double) &#123;</span></span><br><span class="line"><span class="comment">//        self.height = height</span></span><br><span class="line"><span class="comment">//        super.init(name: "daisuke", age: 88)</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    override init(name: String, age: Int) &#123;</span></span><br><span class="line"><span class="comment">//        self.height = 99</span></span><br><span class="line"><span class="comment">//        super.init(name: name, age: age)</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">// 如果子类中只是重写了父类中的某些指定构造器, 不管子类中的存储属性是否有缺省值, 都不会继承父类中的其它构造方法</span></span><br><span class="line"><span class="comment">//var son6 = Son6(name: "daisuke")</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son6</span>: <span class="title">Person6</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> height:<span class="type">Double</span></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.height = <span class="number">99</span></span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name, age: <span class="number">66</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">init</span>(name: <span class="type">String</span>, age: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.height = <span class="number">99</span></span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name, age: age)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 如果子类重写了父类中所有的指定构造器, 不管子类中的存储属性是否有缺省值, 都会同时继承父类中的所有便利方法</span></span><br><span class="line"><span class="keyword">var</span> son6 = <span class="type">Son6</span>()</span><br></pre></td></tr></table></figure>
+<h5 id="required构造方法"><a href="#required构造方法" class="headerlink" title="required构造方法"></a>required构造方法</h5><p>只要在构造方法前面加上一个required关键字，那么所有的子类（后续子类）只要定义了构造方法都必须实现该构造方法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person7</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="comment">// 早期Swift版本中没有这个语法</span></span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son7</span>: <span class="title">Person7</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span> = <span class="number">26</span></span><br><span class="line">    <span class="comment">// 如果子类没有定义构造方法，可以不用重写</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义构造方法</span></span><br><span class="line">    <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.age = <span class="number">30</span></span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: <span class="string">"daisuke"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义了就会报错：'required' initializer 'init(name:)' must be provided by subclass of 'Person7'</span></span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.age = <span class="number">33</span></span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    1、如果子类自定义了构造器，就必须重写“必须构造器”，因为如果子类没有子类没有自定义任何构造器，默认会继承父类的构造器，所以不用重写</span><br><span class="line">    2、重写必须构造器不用加override关键字，因为系统看到required关键字就会自动查看父类</span><br><span class="line">    3、为什么重写了还需要加上required关键字，因为给后续子类都必须重写</span><br><span class="line">    */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> son7 = <span class="type">Son7</span>(name: <span class="string">"daisuke"</span>)</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1458,147 +1678,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/10/CustomSlider/" itemprop="url">
-                  CustomSlider
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-12-10T12:23:54+08:00" content="2016-12-10">
-              2016-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/10/CustomSlider/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/10/CustomSlider/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/10/CustomSlider/" class="leancloud_visitors" data-flag-title="CustomSlider">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>公司有这么一个需求，滑动滑竿选择项目的造价值。第一反应应该是使用UISlider了，但是设计这边给我一个设计图之后，我觉得没那么简单了。</p>
-</blockquote>
-<p><img src="http://obyghtd4m.bkt.clouddn.com/slider.png" alt=""></p>
-<p><img src="http://obyghtd4m.bkt.clouddn.com/slider%20sliderGIF.gif" alt=""></p>
-<ul>
-<li>分析主要的几点</li>
-<li>滑竿跟按钮</li>
-<li>尺度</li>
-<li>标注(麻烦的地方)</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/10/CustomSlider/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1644,7 +1723,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
