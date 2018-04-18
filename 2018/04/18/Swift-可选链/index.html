@@ -1,0 +1,859 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift, 可选链" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="可选类型可选类型的本质其实就是一个枚举，
+
+
+
+None
+Some
+
+
+
+
+没有值
+有值
+
+
+
+格式：Optional&amp;lt;类型&amp;gt; 或 在类型后面加上?号
+由于可选类型在Swift随处可见，所以系统做了一个语法糖，在类型后面加上?
+具体介绍可看之前的文章Swift-元祖、可选值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-可选链">
+<meta property="og:url" content="http://yoursite.com/2018/04/18/Swift-可选链/index.html">
+<meta property="og:site_name" content="DaiSuke">
+<meta property="og:description" content="可选类型可选类型的本质其实就是一个枚举，
+
+
+
+None
+Some
+
+
+
+
+没有值
+有值
+
+
+
+格式：Optional&amp;lt;类型&amp;gt; 或 在类型后面加上?号
+由于可选类型在Swift随处可见，所以系统做了一个语法糖，在类型后面加上?
+具体介绍可看之前的文章Swift-元祖、可选值">
+<meta property="og:updated_time" content="2018-04-18T14:19:07.628Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-可选链">
+<meta name="twitter:description" content="可选类型可选类型的本质其实就是一个枚举，
+
+
+
+None
+Some
+
+
+
+
+没有值
+有值
+
+
+
+格式：Optional&amp;lt;类型&amp;gt; 或 在类型后面加上?号
+由于可选类型在Swift随处可见，所以系统做了一个语法糖，在类型后面加上?
+具体介绍可看之前的文章Swift-元祖、可选值">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Swift-可选链 | DaiSuke </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c9ee80663574cfe4141f5d6a33812bb8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">DaiSuke</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Who am I</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift-可选链
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-04-18T22:16:57+08:00" content="2018-04-18">
+              2018-04-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/18/Swift-可选链/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/18/Swift-可选链/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/18/Swift-可选链/" class="leancloud_visitors" data-flag-title="Swift-可选链">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="可选类型"><a href="#可选类型" class="headerlink" title="可选类型"></a>可选类型</h4><p>可选类型的本质其实就是一个枚举，</p>
+<table>
+<thead>
+<tr>
+<th>None</th>
+<th>Some</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>没有值</td>
+<td>有值</td>
+</tr>
+</tbody>
+</table>
+<p>格式：Optional&lt;类型&gt; 或 在类型后面加上?号</p>
+<p>由于可选类型在Swift随处可见，所以系统做了一个语法糖，在类型后面加上?</p>
+<p>具体介绍可看之前的文章<a href="http://daisuke.cn/2016/07/14/Swift-元祖、可选值/" target="_blank" rel="external">Swift-元祖、可选值</a></p>
+<a id="more"></a>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> opa: <span class="type">Optional</span>&lt;<span class="type">Int</span>&gt;</span><br><span class="line"><span class="keyword">var</span> opb: <span class="type">Int</span>?</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nora: <span class="type">Int</span></span><br><span class="line">nora = <span class="number">11</span></span><br><span class="line"><span class="comment">/*</span><br><span class="line">基本类型变量，在使用之前必须进行初始化，否则报错</span><br><span class="line">目的：安全，不管在什么时候访问都是有意义的</span><br><span class="line">普通变量和可选类型的区别，普通变量只有一种状态，有值</span><br><span class="line">注意：Swift的变量和C/OC的不一样，C/OC可以没有值，是一个随机值</span><br><span class="line">*/</span></span><br><span class="line"><span class="built_in">print</span>(nora)</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line">由于普通变量只有一种状态，有局限性，所以Swift设计了可选类型</span><br><span class="line">可选类型是安全的么？是，可以通过可选绑定判断后再使用</span><br><span class="line">Swift的发明者完全是基于安全的考虑，当我们使用基本类型时完全不用考虑是否有值</span><br><span class="line">当我们使用可选类型时，总会记得先判断再使用，让程序时刻了解那些有值哪些没有值</span><br><span class="line">*/</span></span><br><span class="line">opb = <span class="number">26</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> b = opb&#123;</span><br><span class="line"><span class="comment">//    print(opb!)</span></span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Swift中的可选类型变量更贴近OC中的普通变量</span></span><br><span class="line"><span class="comment">//NSData *data = [NSData dataWithContentsOfMappedFile:@"/Users/fty/Downloads/接口签名算法.txt"];</span></span><br><span class="line"><span class="comment">//NSLog("%@", data);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> data:<span class="type">NSData</span>? = <span class="type">NSData</span>(contentsOfFile: <span class="string">"/Users/fty/Downloads/接口签名算法.txt"</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> da = data &#123;</span><br><span class="line"><span class="built_in">print</span>(da)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="可选链"><a href="#可选链" class="headerlink" title="可选链"></a>可选链</h4><p>可选链(Optional Chinaning)是一种可以请求和调用属性、方法和子脚本的过程，用于请求或调用的目标可能为nil</p>
+<p>可选链返回有两个值：</p>
+<ul>
+<li>如果目标有值，调用将返回该值</li>
+<li>如果目标为nil，嗲用将返回nil</li>
+</ul>
+<p>多次请求或调用可以被链接成一个链，如果任意一个节点为nil将导致整条链失效。</p>
+<blockquote>
+<p>注意：可选链的返回值是一个可选值</p>
+</blockquote>
+<p>格式：</p>
+<ul>
+<li>可选值?.属性</li>
+<li>可选值?.方法</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line"><span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line"><span class="keyword">self</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">description</span><span class="params">()</span></span> -&gt;<span class="type">String</span>&#123;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"my name is \(self.name)"</span>)</span><br><span class="line"><span class="keyword">return</span> name</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p1: <span class="type">Person</span>?</span><br><span class="line"><span class="keyword">var</span> p2: <span class="type">Person</span> = <span class="type">Person</span>(name: <span class="string">"daisuke"</span>)</span><br><span class="line"></span><br><span class="line">p2.name = <span class="string">"alex"</span></span><br><span class="line">p2.description()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如何通过可选类型来调用对应的方法和属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1、通过强制解包（但是强制解包非常危险，如果可选类型没有值，会引发运行时错误）</span></span><br><span class="line"><span class="comment">//p1!.name = "rose"</span></span><br><span class="line"><span class="comment">//p1!.description()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2、通过可选绑定，代码繁琐</span></span><br><span class="line"><span class="comment">//if let p = p1&#123;</span></span><br><span class="line"><span class="comment">//    p.name = "rose"</span></span><br><span class="line"><span class="comment">//    p.description()</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3、通过可选链，如果问号前面的变量没有值，整个可选链会失效（代码更加简洁，有利于使用可选类型）</span></span><br><span class="line">p1 = p2</span><br><span class="line">p1?.name = <span class="string">"rose"</span></span><br><span class="line">p1?.description()</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line">可选链的返回值会自动包装成一个可选值</span><br><span class="line">因为可选链可能失效，所以返回值可能有值也可能没有值，要想表达有值或者没有值只能用可选值，所以返回值会自动包装成一个可选值</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = p1?.name&#123;</span><br><span class="line"><span class="built_in">print</span>(name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> description = p1?.description()&#123;</span><br><span class="line"><span class="built_in">print</span>(description)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="可选链调用下标索引"><a href="#可选链调用下标索引" class="headerlink" title="可选链调用下标索引"></a>可选链调用下标索引</h4><p>格式：可选值?[]</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"><span class="keyword">var</span> name:<span class="type">String</span> = <span class="string">"daisuke"</span></span><br><span class="line"><span class="keyword">var</span> math:<span class="type">Double</span> = <span class="number">99.3</span></span><br><span class="line"><span class="keyword">var</span> chinese:<span class="type">Double</span> = <span class="number">100.0</span></span><br><span class="line"><span class="keyword">var</span> english:<span class="type">Double</span> = <span class="number">83.3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line">要想实现下标访问，必须实现subscript方法</span><br><span class="line">如果想要通过下标访问，必须实现get方法</span><br><span class="line">如果想要通过下标赋值，必须实现set方法</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">subscript</span>(course:<span class="type">String</span>) -&gt;<span class="type">Double</span>?&#123;</span><br><span class="line"><span class="keyword">get</span>&#123;</span><br><span class="line"><span class="keyword">switch</span> course&#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">"math"</span>:</span><br><span class="line"><span class="keyword">return</span> math</span><br><span class="line"><span class="keyword">case</span> <span class="string">"chinese"</span>:</span><br><span class="line"><span class="keyword">return</span> chinese</span><br><span class="line"><span class="keyword">case</span> <span class="string">"english"</span>:</span><br><span class="line"><span class="keyword">return</span> english</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">set</span>&#123;</span><br><span class="line"><span class="keyword">switch</span> course&#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">"math"</span>:</span><br><span class="line"><span class="comment">// 因为返回的是可选类型</span></span><br><span class="line">math = newValue!</span><br><span class="line"><span class="keyword">case</span> <span class="string">"chinese"</span>:</span><br><span class="line">chinese = newValue!</span><br><span class="line"><span class="keyword">case</span> <span class="string">"english"</span>:</span><br><span class="line">english = newValue!</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"not found"</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> stu:<span class="type">Student</span>? = <span class="type">Student</span>()</span><br><span class="line"><span class="comment">// 可选链调用下标索引不需要.，直接在问号后面写上[]即可</span></span><br><span class="line"><span class="built_in">print</span>(stu?[<span class="string">"math"</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">//var arr:Array? = [1,2,3,4,5]</span></span><br><span class="line"><span class="comment">//print(arr?[2])</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 利用可选链赋值，注意：早版本中不能使用可选链赋值</span></span><br><span class="line">stu?.name = <span class="string">"daisukeiti"</span></span><br><span class="line"><span class="built_in">print</span>(stu?.name)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 利用可选链给下标赋值</span></span><br><span class="line">stu?[<span class="string">"math"</span>] = <span class="number">99.9</span></span><br><span class="line"><span class="built_in">print</span>(stu?[<span class="string">"math"</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断赋值操作是否成功，可选链的赋值操作也有返回值</span></span><br><span class="line"><span class="comment">// 如果赋值成功返回一个可选类型，返回()? 也就是Viod? 代表成功。返回nil代表失败</span></span><br><span class="line"><span class="keyword">let</span> res1: ()? = stu?.name = <span class="string">"alex"</span></span><br><span class="line"><span class="built_in">print</span>(res1) <span class="comment">// Optional(())</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> res2: <span class="type">Void</span>? = stu?.name = <span class="string">"alex"</span></span><br><span class="line"><span class="built_in">print</span>(res2) <span class="comment">// Optional(())</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 把stu赋值nil</span></span><br><span class="line">stu = <span class="literal">nil</span></span><br><span class="line"><span class="keyword">let</span> res3: <span class="type">Void</span>? = stu?.name = <span class="string">"alex"</span></span><br><span class="line"><span class="built_in">print</span>(res3) <span class="comment">// nil</span></span><br></pre></td></tr></table></figure>
+<h4 id="多层可选链"><a href="#多层可选链" class="headerlink" title="多层可选链"></a>多层可选链</h4><p>单层：可选值?.属性</p>
+<p>多层：可选值?.属性.属性?.属性 or 可选值?.属性?.属性?.属性</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line"><span class="keyword">var</span> name:<span class="type">String</span> = <span class="string">"daisuke"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line"><span class="keyword">var</span> a:<span class="type">A</span>?</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line"><span class="keyword">var</span> b:<span class="type">B</span> = <span class="type">B</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">c</span>:<span class="type">C</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a1 = <span class="type">A</span>()</span><br><span class="line"><span class="keyword">var</span> b1 = <span class="type">B</span>()</span><br><span class="line"><span class="keyword">var</span> c1 = <span class="type">C</span>()</span><br><span class="line"><span class="keyword">var</span> d1 = <span class="type">D</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// d1访问c，由于c没有赋值，那么c=nil</span></span><br><span class="line"><span class="built_in">print</span>(d1.<span class="built_in">c</span>) <span class="comment">// nil</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给c赋值</span></span><br><span class="line">d1.<span class="built_in">c</span> = c1</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可选链赋值</span></span><br><span class="line"><span class="comment">// 由于D中的C是可选值，所以需要在C后面加上?</span></span><br><span class="line">d1.<span class="built_in">c</span>?.b.a = a1</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过d1直接获取a1中的name</span></span><br><span class="line"><span class="comment">// 其实只需要在可选值后面加上问号即可，如果可选值不存在，那么后面的链就会失效</span></span><br><span class="line"><span class="built_in">print</span>(d1.<span class="built_in">c</span>?.b.a?.name)<span class="comment">// Optional("daisuke")</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/17/Swift-析构过程/" rel="next" title="Swift-析构过程">
+                <i class="fa fa-chevron-left"></i> Swift-析构过程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/04/18/Swift-可选链/"
+           data-title="Swift-可选链" data-url="http://yoursite.com/2018/04/18/Swift-可选链/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="DaiSuke" />
+          <p class="site-author-name" itemprop="name">DaiSuke</p>
+          <p class="site-description motion-element" itemprop="description">just's like IT</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/527447678/home" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#可选类型"><span class="nav-number">1.</span> <span class="nav-text">可选类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可选链"><span class="nav-number">2.</span> <span class="nav-text">可选链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可选链调用下标索引"><span class="nav-number">3.</span> <span class="nav-text">可选链调用下标索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多层可选链"><span class="nav-number">4.</span> <span class="nav-text">多层可选链</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiSuke</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"daisukecn"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EHtYvSIfNxQXWTd66LKTOamk-gzGzoHsz", "QmOk07bceNRvEUFI2Wxs2R0n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
