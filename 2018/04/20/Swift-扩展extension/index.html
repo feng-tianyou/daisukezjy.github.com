@@ -1,0 +1,835 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift, extension, 扩展" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="扩展就是向一个已有的类、结构体和枚举类型添加新功能。扩展可以对一个类型添加新的功能，但是不能重写已有的功能。
+Swift中扩展可以：
+
+添加计算型属性和计算型静态属性
+定义实例方法和类型方法
+提供新的构造器
+定义下标
+定义和使用新的嵌套类型
+使一个已有类型符合某个协议
+
+语法：扩展声明使用关键字extension
+123extension SomeType&amp;#123;    // 加到SomeTy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-扩展extension">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/Swift-扩展extension/index.html">
+<meta property="og:site_name" content="DaiSuke">
+<meta property="og:description" content="扩展就是向一个已有的类、结构体和枚举类型添加新功能。扩展可以对一个类型添加新的功能，但是不能重写已有的功能。
+Swift中扩展可以：
+
+添加计算型属性和计算型静态属性
+定义实例方法和类型方法
+提供新的构造器
+定义下标
+定义和使用新的嵌套类型
+使一个已有类型符合某个协议
+
+语法：扩展声明使用关键字extension
+123extension SomeType&amp;#123;    // 加到SomeTy">
+<meta property="og:updated_time" content="2018-04-20T12:43:24.957Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-扩展extension">
+<meta name="twitter:description" content="扩展就是向一个已有的类、结构体和枚举类型添加新功能。扩展可以对一个类型添加新的功能，但是不能重写已有的功能。
+Swift中扩展可以：
+
+添加计算型属性和计算型静态属性
+定义实例方法和类型方法
+提供新的构造器
+定义下标
+定义和使用新的嵌套类型
+使一个已有类型符合某个协议
+
+语法：扩展声明使用关键字extension
+123extension SomeType&amp;#123;    // 加到SomeTy">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Swift-扩展extension | DaiSuke </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c9ee80663574cfe4141f5d6a33812bb8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">DaiSuke</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Who am I</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift-扩展extension
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-04-20T20:40:36+08:00" content="2018-04-20">
+              2018-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/20/Swift-扩展extension/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/20/Swift-扩展extension/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/20/Swift-扩展extension/" class="leancloud_visitors" data-flag-title="Swift-扩展extension">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>扩展就是向一个已有的类、结构体和枚举类型添加新功能。扩展可以对一个类型添加新的功能，但是不能重写已有的功能。</p>
+<p>Swift中扩展可以：</p>
+<ul>
+<li>添加计算型属性和计算型静态属性</li>
+<li>定义实例方法和类型方法</li>
+<li>提供新的构造器</li>
+<li>定义下标</li>
+<li>定义和使用新的嵌套类型</li>
+<li>使一个已有类型符合某个协议</li>
+</ul>
+<p>语法：扩展声明使用关键字extension</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">SomeType</span></span>&#123;</span><br><span class="line">    <span class="comment">// 加到SomeType的新功能</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个扩展可以扩展一个已有尅性，使其能够适配一个或多个协议，语法格式：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">SomeType</span>: <span class="title">SomeProtocol</span>, <span class="title">AnotherProtocol</span></span>&#123;</span><br><span class="line">    <span class="comment">// 协议实现写到这里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="计算型属性"><a href="#计算型属性" class="headerlink" title="计算型属性"></a>计算型属性</h4><p>扩展可以向已有类型添加计算型实例属性和计算型类型属性。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 扩展Int类型，添加属性</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> autoAdd: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span> + <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> autoSub: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span> - <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> autoMul: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span> * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> autoDiv: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span> / <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> addition = <span class="number">3</span>.autoAdd</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"加法：\(addition)"</span>) <span class="comment">// 加法：5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> subtraction = <span class="number">3</span>.autoSub</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"减法：\(subtraction)"</span>) <span class="comment">// 减法：1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> multiplication = <span class="number">3</span>.autoMul</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"乘法：\(multiplication)"</span>) <span class="comment">// 乘法：6</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> division = <span class="number">3</span>.autoDiv</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"除法：\(division)"</span>) <span class="comment">// 除法：1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mix = <span class="number">3</span>.autoDiv + <span class="number">5</span>.autoAdd</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"除法：\(mix)"</span>) <span class="comment">// 除法：8</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>扩展可以添加新的计算型属性，但是不可以添加存储型属性，也不可以为已有属性添加属性观察器</p>
+</blockquote>
+<h4 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h4><ul>
+<li>扩展可以向已有类型添加新的构造器。</li>
+<li>扩展可以定制类型作为构造器参数，或者提供该类型的原始实现中没有包含的额外初始化选项。</li>
+<li>扩展可以向类中添加新的便利构造器init()，但是不能向类中添加新的指定构造器或析构函数deinit()</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Size</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> width = <span class="number">0.0</span>, height = <span class="number">0.0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">0.0</span>, y = <span class="number">0.0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Rect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> origin = <span class="type">Point</span>()</span><br><span class="line">    <span class="keyword">var</span> size = <span class="type">Size</span>()</span><br><span class="line">    <span class="comment">//    init(origin:Point) &#123;</span></span><br><span class="line">    <span class="comment">//        self.origin = origin</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Rect</span></span>&#123;</span><br><span class="line">    <span class="comment">// 添加一个额外的接收指定中心点和大小的构造器来扩展Rect结构体</span></span><br><span class="line">    <span class="keyword">init</span>(center:<span class="type">Point</span>, size:<span class="type">Size</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> x = center.x - (size.width / <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">let</span> y = center.y - (size.height / <span class="number">2</span>)</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    因为结构体没有提供定制的构造器，因此扩展会获得一个逐一成员构造器，又因为结构体所有的存储属性提供了默认值，又会获得一个默认构造器。</span><br><span class="line">    所以如果Rect提供了定制构造器：</span><br><span class="line">    init(origin:Point) &#123;</span><br><span class="line">        self.origin = center</span><br><span class="line">    &#125;</span><br><span class="line">    那么self.init(origin: Point(x: x, y: y), size: size)就会报错</span><br><span class="line">    */</span></span><br><span class="line">    <span class="keyword">self</span>.<span class="keyword">init</span>(origin: <span class="type">Point</span>(x: x, y: y), size: size)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> centerRect = <span class="type">Rect</span>(center: <span class="type">Point</span>(x: <span class="number">4</span>, y: <span class="number">4</span>), size: <span class="type">Size</span>(width: <span class="number">3</span>, height: <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"centerRect center:\(centerRect.origin.x), \(centerRect.origin.y). size:\(centerRect.size.width), \(centerRect.size.height)"</span>)</span><br><span class="line"><span class="comment">// centerRect center:2.5, 2.5. size:3.0, 3.0</span></span><br></pre></td></tr></table></figure>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>扩展可以为已有类型添加实例方法和类型方法</p>
+<h5 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">repetition</span><span class="params">(task: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="keyword">self</span> &#123;</span><br><span class="line">            task()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>.repetition &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"repetition 3次"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//repetition 3次</span></span><br><span class="line"><span class="comment">//repetition 3次</span></span><br><span class="line"><span class="comment">//repetition 3次</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.repetition &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"repetition 2次"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//repetition 2次</span></span><br><span class="line"><span class="comment">//repetition 2次</span></span><br></pre></td></tr></table></figure>
+<h5 id="类型方法"><a href="#类型方法" class="headerlink" title="类型方法"></a>类型方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">Square</span><span class="params">(<span class="number">_</span> number:Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> number * number</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> number = <span class="type">Int</span>.<span class="type">Square</span>(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(number) <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<h5 id="可变实例方法"><a href="#可变实例方法" class="headerlink" title="可变实例方法"></a>可变实例方法</h5><p>通过扩展添加的实例方法也可以修改该实例本身。结构体和枚举类型中修改self或其他属性的方法必须将该方法标注为<strong>mutating</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">square</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">self</span> = <span class="keyword">self</span> * <span class="keyword">self</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> number = <span class="number">5</span></span><br><span class="line"><span class="built_in">print</span>(number) <span class="comment">// 5</span></span><br><span class="line">number.square()</span><br><span class="line"><span class="built_in">print</span>(number) <span class="comment">// 25</span></span><br></pre></td></tr></table></figure>
+<h4 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h4><p>扩展可以为已有类型添加新下标，该下标返回十进制数字从右到左数的第n个数字</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="keyword">subscript</span>(index:<span class="type">Int</span>) -&gt; <span class="type">Int</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> value = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;index&#123;</span><br><span class="line">            value *= <span class="number">10</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">self</span>/value) % <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="number">44558</span>[<span class="number">0</span>]) <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">44558</span>[<span class="number">1</span>]) <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">44558</span>[<span class="number">2</span>]) <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">44558</span>[<span class="number">3</span>]) <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果该Int值没有足够的位数，即下标越界，那么上述下标实现会返回0，像似在数字左边自动补0：044558</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">44558</span>[<span class="number">5</span>]) <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<h4 id="嵌套类型"><a href="#嵌套类型" class="headerlink" title="嵌套类型"></a>嵌套类型</h4><p>扩展可以为已有的类、结构体和枚举添加新的嵌套类型</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Kind</span> </span>&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="type">Negative</span>, <span class="type">Zero</span>, <span class="type">Posttive</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> kind:<span class="type">Kind</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> .<span class="type">Zero</span></span><br><span class="line">        <span class="keyword">case</span> <span class="keyword">let</span> x <span class="keyword">where</span> x &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> .<span class="type">Posttive</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> .<span class="type">Negative</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> kingArray = [<span class="number">3</span>, <span class="number">0</span>, -<span class="number">4</span>, <span class="number">88</span>, <span class="number">74</span>, <span class="number">0</span>, -<span class="number">9</span>]</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> kingArray &#123;</span><br><span class="line">    <span class="keyword">switch</span> item.kind &#123;</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Negative</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"\(item):负数"</span>)</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Zero</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"\(item):0"</span>)</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Posttive</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"\(item):正数"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//3:正数</span></span><br><span class="line"><span class="comment">//0:0</span></span><br><span class="line"><span class="comment">//-4:负数</span></span><br><span class="line"><span class="comment">//88:正数</span></span><br><span class="line"><span class="comment">//74:正数</span></span><br><span class="line"><span class="comment">//0:0</span></span><br><span class="line"><span class="comment">//-9:负数</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/20/Swift-类型转换/" rel="next" title="Swift-类型转换">
+                <i class="fa fa-chevron-left"></i> Swift-类型转换
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/04/20/Swift-扩展extension/"
+           data-title="Swift-扩展extension" data-url="http://yoursite.com/2018/04/20/Swift-扩展extension/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="DaiSuke" />
+          <p class="site-author-name" itemprop="name">DaiSuke</p>
+          <p class="site-description motion-element" itemprop="description">just's like IT</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/527447678/home" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算型属性"><span class="nav-number">1.</span> <span class="nav-text">计算型属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造器"><span class="nav-number">2.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例方法"><span class="nav-number">3.1.</span> <span class="nav-text">实例方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类型方法"><span class="nav-number">3.2.</span> <span class="nav-text">类型方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可变实例方法"><span class="nav-number">3.3.</span> <span class="nav-text">可变实例方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下标"><span class="nav-number">4.</span> <span class="nav-text">下标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌套类型"><span class="nav-number">5.</span> <span class="nav-text">嵌套类型</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiSuke</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"daisukecn"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EHtYvSIfNxQXWTd66LKTOamk-gzGzoHsz", "QmOk07bceNRvEUFI2Wxs2R0n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
