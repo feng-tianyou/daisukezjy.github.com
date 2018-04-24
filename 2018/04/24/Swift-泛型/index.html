@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS , Unsplash" />
+  <meta name="keywords" content="Swift, 泛型" />
 
 
 
@@ -84,28 +84,22 @@
 
 
 
-<meta name="description" content="最近整理文章的时候发现自己的一个旧项目，原来已经一年时间没有完善了，现在有时间顺便完善一点再写个文章描述一下吧！
-
-图享APP是基于Unsplash外国一个网站的API完成的，Unsplash是分享图片为主要的一个网站，网站上的图片是可以任意使用的，不受侵权限制。当然为了不必要的纷争还是慎用吧。从2017/2/16开始到2017/4/19利用晚上时间完成大部分功能，目前是没有上线的，因为是使用第三">
+<meta name="description" content="Swift提供了泛型，可以写出灵活且可重用的函数和类型
+Swift标准库是通过了泛型代码构建出来的
+Swift的数组和字典类型都是泛型集">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图享APP">
-<meta property="og:url" content="http://yoursite.com/2018/04/15/图享APP/index.html">
+<meta property="og:title" content="Swift-泛型">
+<meta property="og:url" content="http://yoursite.com/2018/04/24/Swift-泛型/index.html">
 <meta property="og:site_name" content="DaiSuke">
-<meta property="og:description" content="最近整理文章的时候发现自己的一个旧项目，原来已经一年时间没有完善了，现在有时间顺便完善一点再写个文章描述一下吧！
-
-图享APP是基于Unsplash外国一个网站的API完成的，Unsplash是分享图片为主要的一个网站，网站上的图片是可以任意使用的，不受侵权限制。当然为了不必要的纷争还是慎用吧。从2017/2/16开始到2017/4/19利用晚上时间完成大部分功能，目前是没有上线的，因为是使用第三">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5.gif">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E5%90%AF%E5%8A%A8.gif">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5.gif">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E5%88%86%E7%B1%BB.gif">
-<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5%E5%B7%A6%E4%BE%A7%E6%A0%8F.gif">
-<meta property="og:updated_time" content="2018-04-16T14:23:52.829Z">
+<meta property="og:description" content="Swift提供了泛型，可以写出灵活且可重用的函数和类型
+Swift标准库是通过了泛型代码构建出来的
+Swift的数组和字典类型都是泛型集">
+<meta property="og:updated_time" content="2018-04-24T14:08:46.870Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图享APP">
-<meta name="twitter:description" content="最近整理文章的时候发现自己的一个旧项目，原来已经一年时间没有完善了，现在有时间顺便完善一点再写个文章描述一下吧！
-
-图享APP是基于Unsplash外国一个网站的API完成的，Unsplash是分享图片为主要的一个网站，网站上的图片是可以任意使用的，不受侵权限制。当然为了不必要的纷争还是慎用吧。从2017/2/16开始到2017/4/19利用晚上时间完成大部分功能，目前是没有上线的，因为是使用第三">
-<meta name="twitter:image" content="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5.gif">
+<meta name="twitter:title" content="Swift-泛型">
+<meta name="twitter:description" content="Swift提供了泛型，可以写出灵活且可重用的函数和类型
+Swift标准库是通过了泛型代码构建出来的
+Swift的数组和字典类型都是泛型集">
 
 
 
@@ -123,7 +117,7 @@
   };
 </script>
 
-  <title> 图享APP | DaiSuke </title>
+  <title> Swift-泛型 | DaiSuke </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -263,7 +257,7 @@
             
             
               
-                图享APP
+                Swift-泛型
               
             
           </h1>
@@ -275,8 +269,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2018-04-15T12:30:16+08:00" content="2018-04-15">
-              2018-04-15
+            <time itemprop="dateCreated" datetime="2018-04-24T22:00:10+08:00" content="2018-04-24">
+              2018-04-24
             </time>
           </span>
 
@@ -289,8 +283,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
                   </a>
                 </span>
 
@@ -305,8 +299,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2018/04/15/图享APP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/15/图享APP/" itemprop="commentsCount"></span>
+                <a href="/2018/04/24/Swift-泛型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/24/Swift-泛型/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -316,7 +310,7 @@
 
           
           
-             <span id="/2018/04/15/图享APP/" class="leancloud_visitors" data-flag-title="图享APP">
+             <span id="/2018/04/24/Swift-泛型/" class="leancloud_visitors" data-flag-title="Swift-泛型">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -338,38 +332,19 @@
       
 
       
-        <p>最近整理文章的时候发现自己的一个旧项目，原来已经一年时间没有完善了，现在有时间顺便完善一点再写个文章描述一下吧！</p>
-<blockquote>
-<p>图享APP是基于<a href="https://unsplash.com/" target="_blank" rel="external">Unsplash</a>外国一个网站的API完成的，Unsplash是分享图片为主要的一个网站，网站上的图片是可以任意使用的，不受侵权限制。当然为了不必要的纷争还是慎用吧。从<code>2017/2/16</code>开始到<code>2017/4/19</code>利用晚上时间完成大部分功能，目前是没有上线的，因为是使用第三方API。</p>
-</blockquote>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5.gif" alt="首页"></p>
-<a id="more"></a>
-<h4 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h4><p>当初为什么想要做这个APP呢，主要是因为刚毕业不久参加工作之后，觉得要更加锻炼自己的技术，另外也想做一个属于自己的APP。既然我喜欢摄影，那干脆做一个分享图片的APP，奈何没有服务器，只能找找有没有第三方的API了。也找到了相关的API，比如:<a href="www.tngou.net">天狗</a>（现在天狗访问不了，应该是被封了，因为API全都是美女图片😆😆）、<a href="https://www.showapi.com" target="_blank" rel="external">ShowAPI</a> 、<a href="https://unsplash.com/" target="_blank" rel="external">Unsplash</a>等等。最后选择<a href="https://unsplash.com/" target="_blank" rel="external">Unsplash</a>，可能是比较健全的一个API，另外其他几乎都是美女图片感情不是很合适，虽然我也喜欢美女😆😆。既然决定要做了，就从起名字开始。<code>图享</code>这个诞生了，做交互稿、找图切图….</p>
-<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>APP主要有两个大板块：首页和分类。</p>
-<ul>
-<li>首页主要浏览每个用户发布的图片。</li>
-<li>分类是把相关分类的图片整理。</li>
+        <ul>
+<li>Swift提供了泛型，可以写出灵活且可重用的函数和类型</li>
+<li>Swift标准库是通过了泛型代码构建出来的</li>
+<li>Swift的数组和字典类型都是泛型集</li>
 </ul>
-<h4 id="第三方框架"><a href="#第三方框架" class="headerlink" title="第三方框架"></a>第三方框架</h4><p>AFNetworking、DACircularProgress、DKNightVersion、MBProgressHUD、MJRefresh、MWPhotoBrowser、PSTCollectionView、SDAutoLayout、SDWebImage、SVProgressHUD、TZImagePickerController、UMengUShare/UShareSDK、YYKit、FSActionSheet、LLSlideMenu、EGOCache、ZBarSDK、Reachability</p>
-<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><p>Widget、OAuth2.0、3DTouch、国际化、皮肤</p>
-<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>注册Unsplash，然后登陆网页版授权即可</p>
-<h4 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h4><p>功能上可能不尽人意，各位看官有建议可以联系我<code>feng.daisuke@gmail.com</code>。可能存在诸多bug，欢迎提出来<a href="https://github.com/DaisukeZJY/ShareImage/issues" target="_blank" rel="external">issues</a>。APP还在努力完善中，也欢迎<a href="https://github.com/DaisukeZJY/ShareImage/pulls" target="_blank" rel="external">pull request</a>。如果对你有帮助，也可以点个<strong>Star</strong></p>
-<h4 id="APP截图"><a href="#APP截图" class="headerlink" title="APP截图"></a>APP截图</h4><table>
-<thead>
-<tr>
-<th><img src="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E5%90%AF%E5%8A%A8.gif" alt="启动页"></th>
-<th><img src="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5.gif" alt="首页"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E5%88%86%E7%B1%BB.gif" alt="分类"></td>
-<td><img src="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5%E5%B7%A6%E4%BE%A7%E6%A0%8F.gif" alt="首页左侧"></td>
-</tr>
-</tbody>
-</table>
-<h4 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h4><p><a href="https://github.com/DaisukeZJY/ShareImage" target="_blank" rel="external">GitHub</a></p>
-
+<a id="more"></a>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>1、创建一个非泛型函数exchange用来交换两个Int值</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// inout将一个值类型参数以引用方式传递</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swapTwoInts</span><span class="params">(<span class="number">_</span> a:<span class="keyword">inout</span> Int, <span class="number">_</span> b:<span class="keyword">inout</span> Int)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> temp = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temp</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> number1 = <span class="number">33</span></span><br><span class="line"><span class="keyword">var</span> number2 = <span class="number">55</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"交换前数据：number1:\(number1), number2:\(number2)"</span>)</span><br><span class="line"><span class="comment">// 交换前数据：number1:33, number2:55</span></span><br><span class="line">swapTwoInts(&amp;number1, &amp;number2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"交换后数据：number1:\(number1), number2:\(number2)"</span>)</span><br><span class="line"><span class="comment">// 交换后数据：number1:55, number2:33</span></span><br></pre></td></tr></table></figure>
+<p>同理，交换两个String值和Double值的函数，对应如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swapTwoStrings</span><span class="params">(<span class="number">_</span> a:<span class="keyword">inout</span> String, <span class="number">_</span> b:<span class="keyword">inout</span> String)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> temp = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temp</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swapTwoDoubles</span><span class="params">(<span class="number">_</span> a:<span class="keyword">inout</span> Double, <span class="number">_</span> b:<span class="keyword">inout</span> Double)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> temp = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temp</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的代码中可以看出，功能是一样的，只是交换的类型不一样。那么就可以使用泛型，从而避免重复的代码。<br>泛型使用了占位类型名（T表示）来代替实际类型名（如：Int, String, Double…）</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swapTwoValues</span>&lt;T&gt;<span class="params">(<span class="number">_</span> a:<span class="keyword">inout</span> T, <span class="number">_</span> b:<span class="keyword">inout</span> T)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> temp = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temp</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> number1 = <span class="number">33</span></span><br><span class="line"><span class="keyword">var</span> number2 = <span class="number">55</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"交换前数据：number1:\(number1), number2:\(number2)"</span>)</span><br><span class="line"><span class="comment">// 交换前数据：number1:33, number2:55</span></span><br><span class="line">swapTwoValues(&amp;number1, &amp;number2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"交换后数据：number1:\(number1), number2:\(number2)"</span>)</span><br><span class="line"><span class="comment">// 交换后数据：number1:55, number2:33</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> string1 = <span class="string">"hello"</span></span><br><span class="line"><span class="keyword">var</span> string2 = <span class="string">"world"</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"交换前数据：string1:\(string1), number2:\(string2)"</span>)</span><br><span class="line"><span class="comment">// 交换前数据：string1:hello, number2:world</span></span><br><span class="line">swapTwoValues(&amp;string1, &amp;string2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"交换后数据：string1:\(string1), number2:\(string2)"</span>)</span><br><span class="line"><span class="comment">// 交换后数据：string1:world, number2:hello</span></span><br></pre></td></tr></table></figure>
+<h4 id="泛型类型"><a href="#泛型类型" class="headerlink" title="泛型类型"></a>泛型类型</h4>
       
     </div>
 
@@ -390,7 +365,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
           
         </div>
       
@@ -399,17 +374,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/11/Swift-继承/" rel="next" title="Swift-继承">
-                <i class="fa fa-chevron-left"></i> Swift-继承
+              <a href="/2018/04/20/Swift-扩展extension/" rel="next" title="Swift-扩展extension">
+                <i class="fa fa-chevron-left"></i> Swift-扩展extension
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/16/Swift-构造方法/" rel="prev" title="Swift-构造方法">
-                Swift-构造方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -435,8 +406,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2018/04/15/图享APP/"
-           data-title="图享APP" data-url="http://yoursite.com/2018/04/15/图享APP/">
+      <div class="ds-thread" data-thread-key="2018/04/24/Swift-泛型/"
+           data-title="Swift-泛型" data-url="http://yoursite.com/2018/04/24/Swift-泛型/">
       </div>
     
   </div>
@@ -556,7 +527,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#缘由"><span class="nav-number">1.</span> <span class="nav-text">缘由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描述"><span class="nav-number">2.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三方框架"><span class="nav-number">3.</span> <span class="nav-text">第三方框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拓展"><span class="nav-number">4.</span> <span class="nav-text">拓展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用方法"><span class="nav-number">5.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不足"><span class="nav-number">6.</span> <span class="nav-text">不足</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#APP截图"><span class="nav-number">7.</span> <span class="nav-text">APP截图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目地址"><span class="nav-number">8.</span> <span class="nav-text">项目地址</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型类型"><span class="nav-number">2.</span> <span class="nav-text">泛型类型</span></a></li></ol></div>
             
           </div>
         </section>
