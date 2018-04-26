@@ -1,0 +1,869 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift, 访问控制" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="访问控制可以限定其他源文件或模块中的代码对代码的访问级别
+
+可以明确地给单个类型（类、结构体、枚举）设置访问级别，也可以给这些类型的属性、函数、基本类型、下标索引等设置访问级别
+可以限定协议在一定的范围内使用，包括协议里的全局变量、变量和函数
+
+访问控制基于模块与源文件之间：
+
+模块指的是以独立单元构建和发布的framework或application。在Swift中的一个模块可以使用import">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-访问控制">
+<meta property="og:url" content="http://yoursite.com/2018/04/26/Swift-访问控制/index.html">
+<meta property="og:site_name" content="DaiSuke">
+<meta property="og:description" content="访问控制可以限定其他源文件或模块中的代码对代码的访问级别
+
+可以明确地给单个类型（类、结构体、枚举）设置访问级别，也可以给这些类型的属性、函数、基本类型、下标索引等设置访问级别
+可以限定协议在一定的范围内使用，包括协议里的全局变量、变量和函数
+
+访问控制基于模块与源文件之间：
+
+模块指的是以独立单元构建和发布的framework或application。在Swift中的一个模块可以使用import">
+<meta property="og:updated_time" content="2018-04-26T10:01:36.935Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-访问控制">
+<meta name="twitter:description" content="访问控制可以限定其他源文件或模块中的代码对代码的访问级别
+
+可以明确地给单个类型（类、结构体、枚举）设置访问级别，也可以给这些类型的属性、函数、基本类型、下标索引等设置访问级别
+可以限定协议在一定的范围内使用，包括协议里的全局变量、变量和函数
+
+访问控制基于模块与源文件之间：
+
+模块指的是以独立单元构建和发布的framework或application。在Swift中的一个模块可以使用import">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Swift-访问控制 | DaiSuke </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c9ee80663574cfe4141f5d6a33812bb8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">DaiSuke</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Who am I</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift-访问控制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-04-26T10:43:20+08:00" content="2018-04-26">
+              2018-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/26/Swift-访问控制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/26/Swift-访问控制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/26/Swift-访问控制/" class="leancloud_visitors" data-flag-title="Swift-访问控制">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>访问控制可以限定其他源文件或模块中的代码对代码的访问级别</p>
+<ul>
+<li>可以明确地给单个类型（类、结构体、枚举）设置访问级别，也可以给这些类型的属性、函数、基本类型、下标索引等设置访问级别</li>
+<li>可以限定协议在一定的范围内使用，包括协议里的全局变量、变量和函数</li>
+</ul>
+<p>访问控制基于模块与源文件之间：</p>
+<ul>
+<li>模块指的是以独立单元构建和发布的framework或application。在Swift中的一个模块可以使用import关键字引入另外一个模块</li>
+<li>源文件是单个源码文件，它通常属于一个模块，源文件可以包含多个类、函数和属性的定义。</li>
+</ul>
+<p>Swift为代码中的实体提供了四种不同的访问级别：public、internal、fileprivate、private。</p>
+<a id="more"></a>
+<blockquote>
+<p>注释：属性、基本类型、函数等称之为<code>实体</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>访问级别</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public</td>
+<td>可以访问自己模块中源文件里的任何实体，别人也可以通过引入该模块来访问源文件里的所有实体。</td>
+</tr>
+<tr>
+<td>internal</td>
+<td>可以访问自己模块中源文件里的任何实体，但是别人不能访问该模块中源文件里的实体。</td>
+</tr>
+<tr>
+<td>fileprivate</td>
+<td>文件内私有，只能在当前文件中使用。</td>
+</tr>
+<tr>
+<td>private</td>
+<td>只能在类中访问，离开了这个类或者结构体的作用域外面就无法访问。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>public为最高级访问级别，private为最低级访问级别</p>
+</blockquote>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomePublicClass</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeInternalClass</span> </span>&#123;&#125;</span><br><span class="line">fileprivate <span class="class"><span class="keyword">class</span> <span class="title">SomeFileprivateClass</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SomePrivateClass</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">var</span> somePublicVariable = <span class="number">0</span></span><br><span class="line"><span class="keyword">internal</span> <span class="keyword">let</span> someInternalConstant = <span class="number">0</span></span><br><span class="line">fileprivate <span class="function"><span class="keyword">func</span> <span class="title">someFilePrivateFunc</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">somePrivateFunc</span><span class="params">()</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>除非有特出的说明，否则实体都使用默认的访问级别internal</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeInternalClass</span> </span>&#123;&#125; <span class="comment">// internal</span></span><br><span class="line"><span class="keyword">let</span> someInternalConstant = <span class="number">0</span> <span class="comment">// internal</span></span><br></pre></td></tr></table></figure>
+<h4 id="函数类型访问权限"><a href="#函数类型访问权限" class="headerlink" title="函数类型访问权限"></a>函数类型访问权限</h4><p>函数的访问级别需要根据函数的参数类型和返回类型的访问级别得出。例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Function must be declared private or fileprivate because its result uses a private type</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">someFunction</span><span class="params">()</span></span> -&gt; (<span class="type">SomeInternalClass</span>, <span class="type">SomePrivateClass</span>) &#123;</span><br><span class="line">    <span class="comment">// 函数实现部分</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数中其中一个类SomeInternalClass的访问级别是internal，另外一个SomePrivateClass的访问级别是private。所以根据元祖访问级别的原则，该元祖的访问级别是private（元祖的访问级别与元祖中访问级别最低的类型一致）。因为该函数返回类型的访问级别是private，所以必须使用private修饰符，明确的声明函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">someFunction</span><span class="params">()</span></span> -&gt; (<span class="type">SomeInternalClass</span>, <span class="type">SomePrivateClass</span>) &#123;</span><br><span class="line">    <span class="comment">// 函数实现部分</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将该函数申明为public或internal，或者使用默认的访问级别internal都是错误的，因为这样就无法访问private级别的返回值。</p>
+<h4 id="枚举类型访问权限"><a href="#枚举类型访问权限" class="headerlink" title="枚举类型访问权限"></a>枚举类型访问权限</h4><p>枚举中成员的访问级别继承自该枚举，不能为枚举中的成员单独声明不同的访问级别。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Name</span>(<span class="type">String</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Mark</span>(<span class="type">Int</span>,<span class="type">Int</span>,<span class="type">Int</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> stu = <span class="type">Student</span>.<span class="type">Mark</span>(<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>)</span><br><span class="line"><span class="keyword">switch</span> stu &#123;</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Name</span>(<span class="keyword">let</span> name):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"stu name:\(name)"</span>)</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Mark</span>(<span class="keyword">let</span> m1, <span class="keyword">let</span> m2, <span class="keyword">let</span> m3):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"stu mark m1:\(m1), m2:\(m2), m3:\(m3)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// stu mark m1:7, m2:8, m3:9</span></span><br></pre></td></tr></table></figure>
+<p>枚举Student被明确地申明为public级别，那么它的成员Name,Mark的访问级别同样也是public</p>
+<h4 id="子类访问权限"><a href="#子类访问权限" class="headerlink" title="子类访问权限"></a>子类访问权限</h4><p>子类的访问级别不得高于父类的访问级别。比如说：父类的访问级别是internal，子类的访问级别就不能申明为public</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuperClass</span></span>&#123;</span><br><span class="line">    fileprivate <span class="function"><span class="keyword">func</span> <span class="title">show</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"SuperClass"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">SubClass</span>: <span class="title">SuperClass</span></span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">internal</span> <span class="function"><span class="keyword">func</span> <span class="title">show</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"SubClass"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sup = <span class="type">SuperClass</span>()</span><br><span class="line">sup.show()</span><br><span class="line"><span class="comment">// SuperClass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sub = <span class="type">SubClass</span>()</span><br><span class="line">sub.show()</span><br><span class="line"><span class="comment">// SubClass</span></span><br></pre></td></tr></table></figure>
+<h4 id="常量、变量、属性、下标访问权限"><a href="#常量、变量、属性、下标访问权限" class="headerlink" title="常量、变量、属性、下标访问权限"></a>常量、变量、属性、下标访问权限</h4><p>常量、变量、属性不能拥有比它们的类型更高的访问级别。比如说：你定义了一个public级别的属性，但是它的类型是private级别的，这是编译器所不允许的。同样，下标也不能拥有比索引值类型或返回类型更高的访问级别。</p>
+<p>如果常量、变量、属性、下标索引的定义类型是private级别的，那么它们必须要明确的申明访问级别为private</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> privateInstance = <span class="type">SomePrivateClass</span>()</span><br></pre></td></tr></table></figure>
+<h4 id="Getter和Setter访问权限"><a href="#Getter和Setter访问权限" class="headerlink" title="Getter和Setter访问权限"></a>Getter和Setter访问权限</h4><p>常量、变量、属性、下标索引的Getter和Setter的访问界别继承自它们所属成员的访问级别。Setter的访问级别可以低于对应的Getter的访问级别，这样就可以控制变量、属性或下标索引的读写权限。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Samplepgm</span> </span>&#123;</span><br><span class="line">    fileprivate <span class="keyword">var</span> counter:<span class="type">Int</span> = <span class="number">0</span>&#123;</span><br><span class="line">        <span class="keyword">willSet</span>(newValue)&#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"计数器：\(newValue)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">didSet</span>&#123;</span><br><span class="line">            <span class="keyword">if</span> counter &gt; oldValue &#123;</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"新增数量：\(counter - oldValue)"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sample = <span class="type">Samplepgm</span>()</span><br><span class="line">sample.counter = <span class="number">200</span></span><br><span class="line"><span class="comment">//计数器：200</span></span><br><span class="line"><span class="comment">//新增数量：200</span></span><br><span class="line">sample.counter = <span class="number">800</span></span><br><span class="line"><span class="comment">//计数器：800</span></span><br><span class="line"><span class="comment">//新增数量：600</span></span><br></pre></td></tr></table></figure>
+<h4 id="构造器和默认构造器访问权限"><a href="#构造器和默认构造器访问权限" class="headerlink" title="构造器和默认构造器访问权限"></a>构造器和默认构造器访问权限</h4><h5 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h5><p>可以给自定义的初始化方法声明访问级别，但是不要高于它所属类的访问级别。但必要构造器例外，它的访问级别必须和所属类的访问级别相同。</p>
+<p>如同函数或方法参数，初始化方法参数的访问级别不能低于初始化的访问级别。</p>
+<h5 id="默认初始化方法"><a href="#默认初始化方法" class="headerlink" title="默认初始化方法"></a>默认初始化方法</h5><p>Swift为结构体、类都提供了一个默认的无参初始化方法，用于给它们的所有属性提供赋值操作，但不会给具体值。默认初始化方法的访问级别与所属类型的访问级别相同。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"ClassA"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassB</span>: <span class="title">ClassA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"ClassB"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="type">ClassA</span>()</span><br><span class="line"><span class="keyword">let</span> b = <span class="type">ClassB</span>()</span><br><span class="line"><span class="comment">//ClassA</span></span><br><span class="line"><span class="comment">//ClassB</span></span><br><span class="line"><span class="comment">//ClassA</span></span><br></pre></td></tr></table></figure>
+<p>在每个子类的init()方法前使用required关键字声明访问权限。</p>
+<h4 id="协议访问权限"><a href="#协议访问权限" class="headerlink" title="协议访问权限"></a>协议访问权限</h4><p>如果想为一个协议明确的声明访问级别，那么需要注意一点，就是要确保该协议只在你申明的访问级别作用域中使用。</p>
+<p>如果你定义了一个public访问级别的协议，那么实现该协议提供的必要函数也会是public的访问级别。这一点不同于其他类型，比如：public访问级别的其他类型，他们成员的访问级别为internal</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">protocol</span> <span class="title">TcpProtocol</span></span>&#123;</span><br><span class="line">    <span class="keyword">init</span>(no1:<span class="type">Int</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> no1:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(no1:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.no1 = no1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SubClass</span>: <span class="title">MainClass</span>, <span class="title">TcpProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> no2:<span class="type">Int</span></span><br><span class="line">    <span class="keyword">init</span>(no1:<span class="type">Int</span>, no2:<span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.no2 = no2</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(no1: no1)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 因为遵循协议，必须有required</span></span><br><span class="line">    <span class="comment">// 因为重写父类，必须有override</span></span><br><span class="line">    <span class="comment">// 因为调用self.init(no1: no1, no2: 0)，必须是便利构造器</span></span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">override</span> <span class="keyword">convenience</span> <span class="keyword">init</span>(no1: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(no1: no1, no2: <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sub = <span class="type">SubClass</span>(no1: <span class="number">22</span>, no2: <span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(sub.no2) <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<h4 id="扩展访问权限"><a href="#扩展访问权限" class="headerlink" title="扩展访问权限"></a>扩展访问权限</h4><p>可以在条件允许的情况下对类、结构体、枚举进行扩展。扩展成员应该具有和原始类成员一致的访问级别。比如你扩展额一个公共类型，那么你添加的成员应该具有和原始成员一样的默认internal访问级别。</p>
+<p>或者，你可以明确申明扩展的访问级别（比如使用private extension）给该扩展内所有成员申明一个新的默认访问级别。这个新的默认访问级别仍然可以被单独成员所申明的访问级别所覆盖。</p>
+<h4 id="泛型访问权限"><a href="#泛型访问权限" class="headerlink" title="泛型访问权限"></a>泛型访问权限</h4><p>泛型类型或泛型函数的访问级别取泛型类型、函数本身、泛型类型参数三者中的最低访问级别。</p>
+<h4 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h4><p>任何定义的类型别名都会被当作不同的类型，以便于进行访问控制。一个类型别名的访问级别不可高于原类型的访问级别。比如说：一个private级别的类型别名可以设定给一个public、internal、private的类型，但是一个public级别的类型别名只能设定给一个public级别的类型，不能设定给internal或private级别的类型。</p>
+<blockquote>
+<p>这条规则也适用于为满足协议一致性而给相关类型命名别名的情况。</p>
+</blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.runoob.com/swift/swift-access-control.html" target="_blank" rel="external">菜鸟教程</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/24/Swift-泛型/" rel="next" title="Swift-泛型">
+                <i class="fa fa-chevron-left"></i> Swift-泛型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/04/26/Swift-访问控制/"
+           data-title="Swift-访问控制" data-url="http://yoursite.com/2018/04/26/Swift-访问控制/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="DaiSuke" />
+          <p class="site-author-name" itemprop="name">DaiSuke</p>
+          <p class="site-description motion-element" itemprop="description">just's like IT</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DaisukeZJY" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/527447678/home" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数类型访问权限"><span class="nav-number">2.</span> <span class="nav-text">函数类型访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#枚举类型访问权限"><span class="nav-number">3.</span> <span class="nav-text">枚举类型访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子类访问权限"><span class="nav-number">4.</span> <span class="nav-text">子类访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量、变量、属性、下标访问权限"><span class="nav-number">5.</span> <span class="nav-text">常量、变量、属性、下标访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Getter和Setter访问权限"><span class="nav-number">6.</span> <span class="nav-text">Getter和Setter访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造器和默认构造器访问权限"><span class="nav-number">7.</span> <span class="nav-text">构造器和默认构造器访问权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初始化"><span class="nav-number">7.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#默认初始化方法"><span class="nav-number">7.2.</span> <span class="nav-text">默认初始化方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协议访问权限"><span class="nav-number">8.</span> <span class="nav-text">协议访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展访问权限"><span class="nav-number">9.</span> <span class="nav-text">扩展访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型访问权限"><span class="nav-number">10.</span> <span class="nav-text">泛型访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型别名"><span class="nav-number">11.</span> <span class="nav-text">类型别名</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiSuke</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"daisukecn"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EHtYvSIfNxQXWTd66LKTOamk-gzGzoHsz", "QmOk07bceNRvEUFI2Wxs2R0n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

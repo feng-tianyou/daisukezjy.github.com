@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="web java" />
+  <meta name="keywords" content="Daisuke" />
 
 
 
@@ -84,16 +84,15 @@
 
 
 
-<meta name="description" content="web 入门笔记。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Web Java Base Lean">
-<meta property="og:url" content="http://yoursite.com/2017/06/05/Web-Java-Base-Lean/index.html">
+<meta name="description" content="just&apos;s like IT">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DaiSuke">
+<meta property="og:url" content="http://yoursite.com/tags/Swift/page/3/index.html">
 <meta property="og:site_name" content="DaiSuke">
-<meta property="og:description" content="web 入门笔记。">
-<meta property="og:updated_time" content="2017-06-05T14:55:09.000Z">
+<meta property="og:description" content="just&apos;s like IT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web Java Base Lean">
-<meta name="twitter:description" content="web 入门笔记。">
+<meta name="twitter:title" content="DaiSuke">
+<meta name="twitter:description" content="just&apos;s like IT">
 
 
 
@@ -111,7 +110,7 @@
   };
 </script>
 
-  <title> Web Java Base Lean | DaiSuke </title>
+  <title> Tag: Swift | DaiSuke </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -142,7 +141,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -230,205 +229,50 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Web Java Base Lean
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-06-05T22:07:11+08:00" content="2017-06-05">
-              2017-06-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/05/Web-Java-Base-Lean/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/05/Web-Java-Base-Lean/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/06/05/Web-Java-Base-Lean/" class="leancloud_visitors" data-flag-title="Web Java Base Lean">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <blockquote>
-<p>web 入门笔记。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="web开发入门"><a href="#web开发入门" class="headerlink" title="web开发入门"></a>web开发入门</h2><p>必须掌握</p>
-<ul>
-<li>Tomcat的作用：web服务器，是一个Java开发的软件，可以解析静态网页和动态网页。</li>
-<li>Tomcat的基本使用：启动和关闭，配置端口</li>
-<li>web应用的结构：<ul>
-<li>WebRoot（网站的根目录）<ul>
-<li>WEB-INF<ul>
-<li>classes 动态网页的字节码文件</li>
-<li>lib 存放第三方jar包（dom4j、xpath、junit）</li>
-<li>web.xml  配置首页，配置动态网页</li>
-</ul>
-</li>
-<li>other 静态网页（html,css,images）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>注意：WEB-INF目录下面的资源是不能直接被浏览器访问到的，WEB-INF的资源需要通过web.xml的配置后<br>才能被访问到。</p>
-</blockquote>
-<h2 id="如果将web应用部署到Tomcat中"><a href="#如果将web应用部署到Tomcat中" class="headerlink" title="如果将web应用部署到Tomcat中"></a>如果将web应用部署到Tomcat中</h2><ul>
-<li><p>方式一：直接把项目拷贝到%tomcat%/webapps目录下即可！（web应用一定放在Tomcat下）</p>
-<blockquote>
-<p>注意：ROOT是Tomcat的默认网站，我们web应用名称如果改为ROOT，则这个应用将设置为Tomcat的默认网站，可以直接通过主机（+端口）访问，不需要使用项目名称即可访问</p>
-</blockquote>
-</li>
-<li><p>方式二：修改%tomcat%/conf/server.xml（web应用和Tomcat可以不再同一个盘符中）<br>在<host>标签内加上以下配置：<context docbase="e:/myweb" path="/网站名称"></context></host></p>
-<blockquote>
-<p>注意：docBase表示web应用的路径。path表示浏览器访问web应用的名称，可以修改的</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>如果server.xml的web应用配置成 path=”” ，且webapps下也存在ROOT，那么server.xml重配置的web应用 会有限被调用。</p>
-</blockquote>
-<ul>
-<li>方式三：添加xml文件（在生产环境下，推荐使用这种）<br>在%tomcat%/conf/Catalina/localhost下添加xml文件，内容如下：<context docbase="网站路径"></context></li>
-</ul>
-<blockquote>
-<p>注意：这里不用配置path，因为浏览器访问网站的名称就是xml的文件名称</p>
-</blockquote>
-
-      
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        Swift
+        <small>Tag</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-      
-    </div>
-
-    <div>
-      
+            <a class="post-title-link" href="/2016/06/14/Swift-简单值/" itemprop="url">
+              
+                <span itemprop="name">Swift-简单值</span>
+              
+            </a>
         
+      </h1>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-06-14T13:14:47+08:00"
+              content="2016-06-14" >
+          06-14
+        </time>
+      </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/java/" rel="tag">#java</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/12/10/CustomSlider/" rel="next" title="CustomSlider">
-                <i class="fa fa-chevron-left"></i> CustomSlider
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/16/多按钮-移动小控件/" rel="prev" title="多按钮-移动小控件">
-                多按钮-移动小控件 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/tags/Swift/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/tags/Swift/">1</a><a class="page-number" href="/tags/Swift/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -436,14 +280,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2017/06/05/Web-Java-Base-Lean/"
-           data-title="Web Java Base Lean" data-url="http://yoursite.com/2017/06/05/Web-Java-Base-Lean/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -463,17 +299,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -552,17 +379,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#web开发入门"><span class="nav-number">1.</span> <span class="nav-text">web开发入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果将web应用部署到Tomcat中"><span class="nav-number">2.</span> <span class="nav-text">如果将web应用部署到Tomcat中</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -666,10 +482,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 
