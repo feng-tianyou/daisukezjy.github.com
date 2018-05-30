@@ -123,7 +123,7 @@
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%A7%A3%E5%86%B3podinit%E9%94%99%E8%AF%AF.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F1.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F2.png">
-<meta property="og:updated_time" content="2018-05-30T02:45:51.112Z">
+<meta property="og:updated_time" content="2018-05-30T02:46:57.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于CocoaPods实现组件化">
 <meta name="twitter:description" content="emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;amp;思路自己也跟着实现一下。
@@ -450,6 +450,7 @@ daovoice('update');
         <p>emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;思路自己也跟着实现一下。</p>
 <h3 id="什么是组件化？"><a href="#什么是组件化？" class="headerlink" title="什么是组件化？"></a>什么是组件化？</h3><p>对于什么是组件化，我的概念其实是模糊的，不敢说大话，怕误人子弟，只能按照自己的理解说说：组件化跟模块化有着本质的相似，模块化又是什么呢？举个例子，例如微信，有<code>微信</code>、<code>通讯录</code>、<code>发现</code>、<code>我</code>四个业务大模块。那么模块化就是根据业务的不同一个一个来划分模块。每个程序员单独开发一个模块，其他模块不需要他管理维护甚至开发，提供个接口就可以了，这样就简单实现模块化了。模块也有大模块和小模块之分，不仅仅表现于大模块，每一个view或者每一个功能都是模块。</p>
 <p>组件化的思想也是一样的，组件化也是根据业务或者功能来划分的，例如：工程上的请求库，如果使用是AFN，必然要封装多几层吧，这样既解耦又容易抽取第三方库。把封装的代码与第三方库集成一起作为请求网络数据的组件。上述例子是按照功能划分的，也可以往大的方向划分，例如苹果公司：Mac是一个组件、iPhone是一个组件、iPod是一个组件等等。</p>
+<a id="more"></a>
 <h3 id="为什么要组件化？"><a href="#为什么要组件化？" class="headerlink" title="为什么要组件化？"></a>为什么要组件化？</h3><ul>
 <li>提高开发效率，快速编译</li>
 <li>功能业务划分清晰</li>
