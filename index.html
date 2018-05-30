@@ -299,6 +299,285 @@ daovoice('update');
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/基于CocoaPods实现组件化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiSuke">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiSuke">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/基于CocoaPods实现组件化/" itemprop="url">基于CocoaPods实现组件化</a></h1>
+        
+
+        <div class="post-meta">
+
+<i class="fa fa-thumb-tack"></i>
+<font color=7CCD7C>置顶</font>
+<span class="post-meta-divider">|</span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T10:40:17+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/30/基于CocoaPods实现组件化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/30/基于CocoaPods实现组件化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/30/基于CocoaPods实现组件化/" class="leancloud_visitors" data-flag-title="基于CocoaPods实现组件化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;思路自己也跟着实现一下。</p>
+<h3 id="什么是组件化？"><a href="#什么是组件化？" class="headerlink" title="什么是组件化？"></a>什么是组件化？</h3><p>对于什么是组件化，我的概念其实是模糊的，不敢说大话，怕误人子弟，只能按照自己的理解说说：组件化跟模块化有着本质的相似，模块化又是什么呢？举个例子，例如微信，有<code>微信</code>、<code>通讯录</code>、<code>发现</code>、<code>我</code>四个业务大模块。那么模块化就是根据业务的不同一个一个来划分模块。每个程序员单独开发一个模块，其他模块不需要他管理维护甚至开发，提供个接口就可以了，这样就简单实现模块化了。模块也有大模块和小模块之分，不仅仅表现于大模块，每一个view或者每一个功能都是模块。</p>
+<p>组件化的思想也是一样的，组件化也是根据业务或者功能来划分的，例如：工程上的请求库，如果使用是AFN，必然要封装多几层吧，这样既解耦又容易抽取第三方库。把封装的代码与第三方库集成一起作为请求网络数据的组件。上述例子是按照功能划分的，也可以往大的方向划分，例如苹果公司：Mac是一个组件、iPhone是一个组件、iPod是一个组件等等。</p>
+<h3 id="为什么要组件化？"><a href="#为什么要组件化？" class="headerlink" title="为什么要组件化？"></a>为什么要组件化？</h3><ul>
+<li>提高开发效率，快速编译</li>
+<li>功能业务划分清晰</li>
+<li>有效地针对性测试</li>
+<li>复用性好</li>
+</ul>
+<p>想想，工程业务增多、开发人员增多，项目变得冗肿庞大，单单拿编译来讲，编译运行极其的费时，有没有想过仅仅是调整一下view的背景颜色，都需要编译整个项目？有没有想过开发的模块其实跟其他模块一点都没关系的，而我又需要编译其他模块？所以实现组件化还是必要的，这样即避免上述问题又有效解决代码合并的冲突。</p>
+<p>这里可能会有一个疑问？组件化是根据业务功能划分的，还是在工程内还是需要编译的啊，怎么提高编译速度了呢？CocoaPods的相关好处就体现了，这篇文章就是基于CocoaPods来实现组件化的，使用过CocoaPods的都知道，项目需要引用哪些库，只要<code>pod install</code>相关的库就好了。因为是静态库，也不要重复编译，所以提高编译速度。</p>
+<h3 id="如何使用CocoaPods来组件化？"><a href="#如何使用CocoaPods来组件化？" class="headerlink" title="如何使用CocoaPods来组件化？"></a>如何使用CocoaPods来组件化？</h3><h4 id="创建索引库"><a href="#创建索引库" class="headerlink" title="创建索引库"></a>创建索引库</h4><p>为什么要创建索引库？起作用是起索引的作用，为真正代码库的做索引标志的。本文介绍也是使用国内的代码管理仓库是<a href="https://gitee.com/" target="_blank" rel="external">码云</a>作为代码库的存放。</p>
+<h5 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%BA%931.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%BA%932.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%BA%933.png" alt="image"></p>
+<h5 id="把索引库添加到本地CocoaPods仓库"><a href="#把索引库添加到本地CocoaPods仓库" class="headerlink" title="把索引库添加到本地CocoaPods仓库"></a>把索引库添加到本地CocoaPods仓库</h5><h6 id="查看本地的CocoaPods仓库"><a href="#查看本地的CocoaPods仓库" class="headerlink" title="查看本地的CocoaPods仓库"></a>查看本地的CocoaPods仓库</h6><ul>
+<li>可以使用路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.cocoapods/repos</span><br></pre></td></tr></table></figure>
+<p>进入文件查看本地的CocoaPods仓库，如下图：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%89%8D%E5%BE%80%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<ul>
+<li>可以在终端使用命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo</span><br></pre></td></tr></table></figure>
+<p>查看本地的CocoaPods仓库，如下图：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png" alt="image"></p>
+<h5 id="添加远程索引库"><a href="#添加远程索引库" class="headerlink" title="添加远程索引库"></a>添加远程索引库</h5><p>把刚才创建的索引库添加到CocoaPods仓库中，使用的命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod repo add 索引库名称 索引库地址 </span><br><span class="line">pod repo add DDCategorySpecs https://gitee.com/DaisukeIT/DDCategorySpecs.git</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png" alt="image"></p>
+<p>可以通过上述查看索引库是否被添加到本地的CocoaPods仓库中，如果看到命令完成或者CocoaPods仓库中有，就证明是添加成功了。</p>
+<p>到这里，先把索引库放在一边。开始真正的组件库，也就是存放你要存放代码的库中。</p>
+<h4 id="创建私有的组件库"><a href="#创建私有的组件库" class="headerlink" title="创建私有的组件库"></a>创建私有的组件库</h4><p>过程是创建索引库一样的，如图显示：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%A7%81%E6%9C%89%E5%BA%931.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%A7%81%E6%9C%89%E5%BA%932.png" alt="image"></p>
+<h5 id="创建模板库"><a href="#创建模板库" class="headerlink" title="创建模板库"></a>创建模板库</h5><p>首先在在你要存放这个私有库的地方新建一个文件夹，例如我在桌面上新建一个文件夹名称叫：DDCategory。这个名字你可以自定义，不一定是根据库名来，当然按照组件库的名称最好，方便管理。<br>使用命令进入刚创建的文件夹中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/fty/Desktop/DDCategory</span><br></pre></td></tr></table></figure>
+<p>然后在终端执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod lib create 组件名 </span><br><span class="line">pod lib create DDCategory</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%931.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%932.png" alt="image"></p>
+<p>上述配置可自由选择，执行命令后会自动打开工程，如下图所示：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%934.png" alt="image"></p>
+<h5 id="删除ReplaceMe文件"><a href="#删除ReplaceMe文件" class="headerlink" title="删除ReplaceMe文件"></a>删除ReplaceMe文件</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%BB%84%E4%BB%B6%E5%8C%96%E5%88%A0%E9%99%A4replaceme%E6%96%87%E4%BB%B6.png" alt="image"></p>
+<h5 id="添加内容到模板库上"><a href="#添加内容到模板库上" class="headerlink" title="添加内容到模板库上"></a>添加内容到模板库上</h5><p>进入组件库的路径：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<p>添加内容：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B90.png" alt="image"></p>
+<h4 id="修改Spec文件"><a href="#修改Spec文件" class="headerlink" title="修改Spec文件"></a>修改Spec文件</h4><p>在DDCategory.podspec文件中修改一下内容</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E4%BF%AE%E6%94%B9podspec%E6%96%87%E4%BB%B6.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.summary          = &apos;DDCategory是分类工具组件&apos;</span><br><span class="line">s.homepage         = &apos;https://gitee.com/DaisukeIT&apos;</span><br><span class="line">s.author           = &#123; &apos;著作者名称&apos; =&gt; &apos;著作者名称&apos; &#125;</span><br><span class="line">s.source           = &#123; :git =&gt; &apos;https://gitee.com/DaisukeIT/DDCategory.git&apos;, :tag =&gt; s.version.to_s &#125;</span><br></pre></td></tr></table></figure>
+<p>为什么要修改呢，因为生成的可能跟你本地CocoaPods保存的账号绑定了，默认使用，例如我是github的账号和GitHub地址，所以要改成对应的。</p>
+<h4 id="上传组件代码到码云上"><a href="#上传组件代码到码云上" class="headerlink" title="上传组件代码到码云上"></a>上传组件代码到码云上</h4><h5 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h5><p>使用一下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add . git commit -m &apos;第一次提交（自定义）&apos; </span><br><span class="line">git remote add origin https://gitee.com/DaisukeIT/DDCategory.git</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// 第一次push如果报错的话可以加上-f // git push -f origin master git push origin master</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%BC%BA%E5%88%B6push%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<h5 id="打分支标签"><a href="#打分支标签" class="headerlink" title="打分支标签"></a>打分支标签</h5><p>使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &apos;0.1.0&apos; </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<p>0.1.0要跟DDCategory.podspec文件中的s.version对应。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%89%93%E6%A0%87%E7%AD%BE.png" alt="image"></p>
+<h4 id="提交podspec到私有索引库"><a href="#提交podspec到私有索引库" class="headerlink" title="提交podspec到私有索引库"></a>提交podspec到私有索引库</h4><h5 id="验证spec文件"><a href="#验证spec文件" class="headerlink" title="验证spec文件"></a>验证spec文件</h5><ul>
+<li><p>进入DDCategory路径中<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%BF%9B%E5%85%A5DDCategory%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+</li>
+<li><p>本地验证<br>执行命令：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 本地验证不会验证 s.source 中的tag </span><br><span class="line">pod lib lint</span><br></pre></td></tr></table></figure>
+<ul>
+<li>远程验证</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 远程验证会验证 s.source中的tag，如果此时没有打上相应的标签则会报错 </span><br><span class="line">pod spec lint</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E9%AA%8C%E8%AF%81Spec.png" alt="image"></p>
+<p>之所以出现警告是因为DDCategory.podspec没有配置好，当然你可以在命令后面加上<code>--allow-warnings</code>。但是这样不好，上面的配置是已经消除了警告的，按照上面的配置，这个是不会出现的。</p>
+<h6 id="提交podspec"><a href="#提交podspec" class="headerlink" title="提交podspec"></a>提交podspec</h6><p>执行命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod repo push 私有索引库名称 spec名称.podspec </span><br><span class="line">pod repo push DDCategorySpecs  DDCategory.podspec</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%8F%90%E4%BA%A4podspec.png" alt="image"></p>
+<p>这样就提交成功了，现在去码云上看看是否真的提交成功了</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%9F%A5%E7%9C%8B%E7%B4%A2%E5%BC%95%E5%BA%93%E6%98%AF%E5%90%A6%E6%8F%90%E4%BA%A4%E6%88%90%E5%8A%9F.png" alt="image"></p>
+<p>看到这里证明是提交成功了。</p>
+<h4 id="使用自己的组件库"><a href="#使用自己的组件库" class="headerlink" title="使用自己的组件库"></a>使用自己的组件库</h4><h5 id="创建工程-amp-创建Profile文件"><a href="#创建工程-amp-创建Profile文件" class="headerlink" title="创建工程&amp;创建Profile文件"></a>创建工程&amp;创建Profile文件</h5><ul>
+<li>创建工程</li>
+<li>创建Profile文件</li>
+</ul>
+<p>进入工程路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/fty/Desktop/Test</span><br></pre></td></tr></table></figure>
+<p>然后执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod init</span><br></pre></td></tr></table></figure>
+<p>OMG,出现错误了。。。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinit%E9%94%99%E8%AF%AF0.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinit%E9%94%99%E8%AF%AF.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinit%E9%94%99%E8%AF%AF1.png" alt="image"></p>
+<p>按照提示找到对应的issues,基本尝试过了，只有这个方法解决的上述问题：<a href="https://github.com/CocoaPods/CocoaPods/issues/7697" target="_blank" rel="external">https://github.com/CocoaPods/CocoaPods/issues/7697</a></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%A7%A3%E5%86%B3podinit%E9%94%99%E8%AF%AF.png" alt="image"></p>
+<p>这样我pod init就成功了。</p>
+<h5 id="编辑Podfile文件"><a href="#编辑Podfile文件" class="headerlink" title="编辑Podfile文件"></a>编辑Podfile文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br><span class="line">source &apos;https://gitee.com/DaisukeIT/DDCategorySpecs.git&apos; </span><br><span class="line"></span><br><span class="line"># Uncomment the next line to define a global platform for your project</span><br><span class="line">platform :ios, &apos;9.0&apos;</span><br><span class="line"></span><br><span class="line">target &apos;Test&apos; do</span><br><span class="line"># Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</span><br><span class="line"># use_frameworks!</span><br><span class="line"></span><br><span class="line">pod &apos;DDCategory&apos;, &apos;~&gt; 0.1.0&apos;</span><br><span class="line"></span><br><span class="line">target &apos;TestTests&apos; do</span><br><span class="line">inherit! :search_paths</span><br><span class="line"># Pods for testing</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">target &apos;TestUITests&apos; do</span><br><span class="line">inherit! :search_paths</span><br><span class="line"># Pods for testing</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 第一行是为了保证公有库的正常使用 source</span><br><span class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br><span class="line">source &apos;https://gitee.com/DaisukeIT/DDCategorySpecs.git&apos;</span><br></pre></td></tr></table></figure>
+<h5 id="pod-install"><a href="#pod-install" class="headerlink" title="pod install"></a>pod install</h5><p>可能出现错误：</p>
+<blockquote>
+<p>Test.xcodeproj Couldn’t load Test.xcodeproj because it is already opened from another project or workspace</p>
+</blockquote>
+<p>退出xcode，重新打开工程即可。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F1.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F2.png" alt="image"></p>
+<p>到这里就完成了私有库的组件化。如有侵权请联系删除！</p>
+<p>参考文章：</p>
+<ul>
+<li><a href="https://juejin.im/post/5ac5d5abf265da2396129e63" target="_blank" rel="external">iOS 组件化开发（一）：远程私有库的基本使用</a></li>
+<li><a href="https://mp.weixin.qq.com/s/xmJfpigZwJNjMQbdRwXrEQ" target="_blank" rel="external">iOS组件化探究之私有库的创建</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/Swift-微博/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1855,176 +2134,6 @@ daovoice('update');
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/Swift-自动引用计数-ARC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/18/Swift-自动引用计数-ARC/" itemprop="url">Swift-自动引用计数(ARC)</a></h1>
-        
-
-        <div class="post-meta">
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T22:24:46+08:00">
-                2018-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/18/Swift-自动引用计数-ARC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/18/Swift-自动引用计数-ARC/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/18/Swift-自动引用计数-ARC/" class="leancloud_visitors" data-flag-title="Swift-自动引用计数(ARC)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Swift内存管理：管理引用类型的内存，不会管理值类型，值类型不需要管理。</p>
-<p>内存管理原则：当没有任何强引用指向对象，系统会自动销毁对象（默认情况下所有的引用都是强引用）</p>
-<p>通常情况下我们不需要去手动释放内存，因为ARC会在对象不再被引用，会自动销毁对象，但是有些时候还是需要在代码中实现内存管理</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/18/Swift-自动引用计数-ARC/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2079,7 +2188,7 @@ daovoice('update');
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2101,7 +2210,7 @@ daovoice('update');
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
