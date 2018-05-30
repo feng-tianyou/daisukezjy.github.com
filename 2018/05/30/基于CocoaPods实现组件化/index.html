@@ -89,7 +89,7 @@
 <meta name="description" content="emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;amp;思路自己也跟着实现一下。
 什么是组件化？对于什么是组件化，我的概念其实是模糊的，不敢说大话，怕误人子弟，只能按照自己的理解说说：组件化跟模块化有着本质的相似，模块化又是什么呢？举个例子，例如微信，有微信、通讯录、发现、我四个业务大模块。那么模块化就是根据业务的不同一个一个来划分模块。每个程序员单独开发一个模块，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于CocoaPods实现组件化">
+<meta property="og:title" content="基于CocoaPods实现私有库的组件化">
 <meta property="og:url" content="http://yoursite.com/2018/05/30/基于CocoaPods实现组件化/index.html">
 <meta property="og:site_name" content="DaiSuke">
 <meta property="og:description" content="emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;amp;思路自己也跟着实现一下。
@@ -102,6 +102,7 @@
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%A7%81%E6%9C%89%E5%BA%931.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%A7%81%E6%9C%89%E5%BA%932.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BFGIF.gif">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%931.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%932.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%934.png">
@@ -110,6 +111,7 @@
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B90.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E4%BF%AE%E6%94%B9podspec%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%BF%9B%E5%85%A5DDCategory%E8%B7%AF%E5%BE%84.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%BC%BA%E5%88%B6push%E4%BB%A3%E7%A0%81.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%89%93%E6%A0%87%E7%AD%BE.png">
@@ -123,9 +125,9 @@
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%A7%A3%E5%86%B3podinit%E9%94%99%E8%AF%AF.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F1.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F2.png">
-<meta property="og:updated_time" content="2018-05-30T02:46:57.007Z">
+<meta property="og:updated_time" content="2018-05-30T07:36:49.139Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于CocoaPods实现组件化">
+<meta name="twitter:title" content="基于CocoaPods实现私有库的组件化">
 <meta name="twitter:description" content="emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;amp;思路自己也跟着实现一下。
 什么是组件化？对于什么是组件化，我的概念其实是模糊的，不敢说大话，怕误人子弟，只能按照自己的理解说说：组件化跟模块化有着本质的相似，模块化又是什么呢？举个例子，例如微信，有微信、通讯录、发现、我四个业务大模块。那么模块化就是根据业务的不同一个一个来划分模块。每个程序员单独开发一个模块，">
 <meta name="twitter:image" content="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%BA%931.png">
@@ -175,7 +177,7 @@ daovoice('update');
 
 
 
-  <title>基于CocoaPods实现组件化 | DaiSuke</title>
+  <title>基于CocoaPods实现私有库的组件化 | DaiSuke</title>
   
 
 
@@ -349,7 +351,7 @@ daovoice('update');
 
         
         
-          <h1 class="post-title" itemprop="name headline">基于CocoaPods实现组件化</h1>
+          <h1 class="post-title" itemprop="name headline">基于CocoaPods实现私有库的组件化</h1>
         
 
         <div class="post-meta">
@@ -416,7 +418,7 @@ daovoice('update');
 
           
           
-             <span id="/2018/05/30/基于CocoaPods实现组件化/" class="leancloud_visitors" data-flag-title="基于CocoaPods实现组件化">
+             <span id="/2018/05/30/基于CocoaPods实现组件化/" class="leancloud_visitors" data-flag-title="基于CocoaPods实现私有库的组件化">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -477,6 +479,7 @@ daovoice('update');
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png" alt="image"></p>
 <h5 id="添加远程索引库"><a href="#添加远程索引库" class="headerlink" title="添加远程索引库"></a>添加远程索引库</h5><p>把刚才创建的索引库添加到CocoaPods仓库中，使用的命令是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod repo add 索引库名称 索引库地址 </span><br><span class="line">pod repo add DDCategorySpecs https://gitee.com/DaisukeIT/DDCategorySpecs.git</span><br></pre></td></tr></table></figure>
+<p>期间会让你输入账号密码，是你的码云账号和密码，依次输入回车即可。</p>
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png" alt="image"></p>
 <p>可以通过上述查看索引库是否被添加到本地的CocoaPods仓库中，如果看到命令完成或者CocoaPods仓库中有，就证明是添加成功了。</p>
 <p>到这里，先把索引库放在一边。开始真正的组件库，也就是存放你要存放代码的库中。</p>
@@ -487,6 +490,7 @@ daovoice('update');
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/fty/Desktop/DDCategory</span><br></pre></td></tr></table></figure>
 <p>然后在终端执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod lib create 组件名 </span><br><span class="line">pod lib create DDCategory</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BFGIF.gif" alt="image"></p>
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%931.png" alt="image"></p>
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%932.png" alt="image"></p>
 <p>上述配置可自由选择，执行命令后会自动打开工程，如下图所示：</p>
@@ -501,11 +505,13 @@ daovoice('update');
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E4%BF%AE%E6%94%B9podspec%E6%96%87%E4%BB%B6.png" alt="image"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.summary          = &apos;DDCategory是分类工具组件&apos;</span><br><span class="line">s.homepage         = &apos;https://gitee.com/DaisukeIT&apos;</span><br><span class="line">s.author           = &#123; &apos;著作者名称&apos; =&gt; &apos;著作者名称&apos; &#125;</span><br><span class="line">s.source           = &#123; :git =&gt; &apos;https://gitee.com/DaisukeIT/DDCategory.git&apos;, :tag =&gt; s.version.to_s &#125;</span><br></pre></td></tr></table></figure>
 <p>为什么要修改呢，因为生成的可能跟你本地CocoaPods保存的账号绑定了，默认使用，例如我是github的账号和GitHub地址，所以要改成对应的。</p>
-<h4 id="上传组件代码到码云上"><a href="#上传组件代码到码云上" class="headerlink" title="上传组件代码到码云上"></a>上传组件代码到码云上</h4><h5 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h5><p>使用一下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add . git commit -m &apos;第一次提交（自定义）&apos; </span><br><span class="line">git remote add origin https://gitee.com/DaisukeIT/DDCategory.git</span><br></pre></td></tr></table></figure>
+<h4 id="上传组件代码到码云上"><a href="#上传组件代码到码云上" class="headerlink" title="上传组件代码到码云上"></a>上传组件代码到码云上</h4><h5 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h5><p>进入DDCategroty路径：</p>
+<p>使用一下命令：<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%BF%9B%E5%85%A5DDCategory%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br><span class="line">git commit -m &apos;第一次提交（自定义）&apos; </span><br><span class="line">git remote add origin https://gitee.com/DaisukeIT/DDCategory.git</span><br></pre></td></tr></table></figure>
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81.png" alt="image"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// 第一次push如果报错的话可以加上-f // git push -f origin master git push origin master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 第一次push如果报错的话可以加上-f </span><br><span class="line">// git push -f origin master </span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%BC%BA%E5%88%B6push%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<p>期间有可能出现输入码云的账号密码，依次输入回车即可。</p>
 <h5 id="打分支标签"><a href="#打分支标签" class="headerlink" title="打分支标签"></a>打分支标签</h5><p>使用命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &apos;0.1.0&apos; </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
 <p>0.1.0要跟DDCategory.podspec文件中的s.version对应。</p>
@@ -529,6 +535,9 @@ daovoice('update');
 <p>这样就提交成功了，现在去码云上看看是否真的提交成功了</p>
 <p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%9F%A5%E7%9C%8B%E7%B4%A2%E5%BC%95%E5%BA%93%E6%98%AF%E5%90%A6%E6%8F%90%E4%BA%A4%E6%88%90%E5%8A%9F.png" alt="image"></p>
 <p>看到这里证明是提交成功了。</p>
+<p>在我实践的过程经常遇到这个错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[!] The spec did not pass validation, due to 2 warnings (but you can use `--allow-warnings` to ignore them).</span><br></pre></td></tr></table></figure>
+<p>我按照警告检查我的代码，但是并没有警告的错误，至少本地验证是通过的。我尝试过把相关代码完全删除了，再提交也是报同样的错误，崩溃了。代码都没有了，你还报这样的错误。好吧，使用–verbose看看具体的错误是什么，结果没有。只有强制忽略了，加上<code>--allow-warnings</code>。最后命令变成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push DDCategorySpecs  DDCategory.podspec --allow-warnings</span><br></pre></td></tr></table></figure></p>
 <h4 id="使用自己的组件库"><a href="#使用自己的组件库" class="headerlink" title="使用自己的组件库"></a>使用自己的组件库</h4><h5 id="创建工程-amp-创建Profile文件"><a href="#创建工程-amp-创建Profile文件" class="headerlink" title="创建工程&amp;创建Profile文件"></a>创建工程&amp;创建Profile文件</h5><ul>
 <li>创建工程</li>
 <li>创建Profile文件</li>
@@ -647,7 +656,7 @@ daovoice('update');
   
     <div class="comments" id="comments">
       <div class="ds-thread" data-thread-key="2018/05/30/基于CocoaPods实现组件化/"
-           data-title="基于CocoaPods实现组件化" data-url="http://yoursite.com/2018/05/30/基于CocoaPods实现组件化/">
+           data-title="基于CocoaPods实现私有库的组件化" data-url="http://yoursite.com/2018/05/30/基于CocoaPods实现组件化/">
       </div>
     </div>
 
