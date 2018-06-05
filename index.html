@@ -417,16 +417,308 @@ daovoice('update');
 
       
         
-          <p>emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;思路自己也跟着实现一下。</p>
-<h3 id="什么是组件化？"><a href="#什么是组件化？" class="headerlink" title="什么是组件化？"></a>什么是组件化？</h3><p>对于什么是组件化，我的概念其实是模糊的，不敢说大话，怕误人子弟，只能按照自己的理解说说：组件化跟模块化有着本质的相似，模块化又是什么呢？举个例子，例如微信，有<code>微信</code>、<code>通讯录</code>、<code>发现</code>、<code>我</code>四个业务大模块。那么模块化就是根据业务的不同一个一个来划分模块。每个程序员单独开发一个模块，其他模块不需要他管理维护甚至开发，提供个接口就可以了，这样就简单实现模块化了。模块也有大模块和小模块之分，不仅仅表现于大模块，每一个view或者每一个功能都是模块。</p>
+          
+            <p>emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;思路自己也跟着实现一下。</p>
+<h2 id="什么是组件化？"><a href="#什么是组件化？" class="headerlink" title="什么是组件化？"></a>什么是组件化？</h2><p>对于什么是组件化，我的概念其实是模糊的，不敢说大话，怕误人子弟，只能按照自己的理解说说：组件化跟模块化有着本质的相似，模块化又是什么呢？举个例子，例如微信，有<code>微信</code>、<code>通讯录</code>、<code>发现</code>、<code>我</code>四个业务大模块。那么模块化就是根据业务的不同一个一个来划分模块。每个程序员单独开发一个模块，其他模块不需要他管理维护甚至开发，提供个接口就可以了，这样就简单实现模块化了。模块也有大模块和小模块之分，不仅仅表现于大模块，每一个view或者每一个功能都是模块。</p>
 <p>组件化的思想也是一样的，组件化也是根据业务或者功能来划分的，例如：工程上的请求库，如果使用是AFN，必然要封装多几层吧，这样既解耦又容易抽取第三方库。把封装的代码与第三方库集成一起作为请求网络数据的组件。上述例子是按照功能划分的，也可以往大的方向划分，例如苹果公司：Mac是一个组件、iPhone是一个组件、iPod是一个组件等等。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/30/基于CocoaPods实现组件化/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<h2 id="为什么要组件化？"><a href="#为什么要组件化？" class="headerlink" title="为什么要组件化？"></a>为什么要组件化？</h2><ul>
+<li>提高开发效率，快速编译</li>
+<li>功能业务划分清晰</li>
+<li>有效地针对性测试</li>
+<li>复用性好</li>
+</ul>
+<p>想想，工程业务增多、开发人员增多，项目变得冗肿庞大，单单拿编译来讲，编译运行极其的费时，有没有想过仅仅是调整一下view的背景颜色，都需要编译整个项目？有没有想过开发的模块其实跟其他模块一点都没关系的，而我又需要编译其他模块？所以实现组件化还是必要的，这样即避免上述问题又有效解决代码合并的冲突。</p>
+<p>这里可能会有一个疑问？组件化是根据业务功能划分的，还是在工程内还是需要编译的啊，怎么提高编译速度了呢？CocoaPods的相关好处就体现了，这篇文章就是基于CocoaPods来实现组件化的，使用过CocoaPods的都知道，项目需要引用哪些库，只要<code>pod install</code>相关的库就好了。因为是静态库，也不要重复编译，所以提高编译速度。</p>
+<h2 id="如何使用CocoaPods来组件化？"><a href="#如何使用CocoaPods来组件化？" class="headerlink" title="如何使用CocoaPods来组件化？"></a>如何使用CocoaPods来组件化？</h2><p>组件化分为：私有的、公开的。一般私有的是公司内部自己的库，不对外开放。而公开的就想GitHub上的，都是公开的库。</p>
+<h3 id="私有库组件化"><a href="#私有库组件化" class="headerlink" title="私有库组件化"></a>私有库组件化</h3><h4 id="创建索引库"><a href="#创建索引库" class="headerlink" title="创建索引库"></a>创建索引库</h4><p>为什么要创建索引库？起作用是起索引的作用，为真正代码库的做索引标志的。本文介绍也是使用国内的代码管理仓库是<a href="https://gitee.com/" target="_blank" rel="external">码云</a>作为代码库的存放。</p>
+<h5 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%BA%931.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%BA%932.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%BA%933.png" alt="image"></p>
+<h5 id="把索引库添加到本地CocoaPods仓库"><a href="#把索引库添加到本地CocoaPods仓库" class="headerlink" title="把索引库添加到本地CocoaPods仓库"></a>把索引库添加到本地CocoaPods仓库</h5><h6 id="查看本地的CocoaPods仓库"><a href="#查看本地的CocoaPods仓库" class="headerlink" title="查看本地的CocoaPods仓库"></a>查看本地的CocoaPods仓库</h6><ul>
+<li>可以使用路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.cocoapods/repos</span><br></pre></td></tr></table></figure>
+<p>进入文件查看本地的CocoaPods仓库，如下图：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%89%8D%E5%BE%80%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<ul>
+<li>可以在终端使用命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo</span><br></pre></td></tr></table></figure>
+<p>查看本地的CocoaPods仓库，如下图：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png" alt="image"></p>
+<h5 id="添加远程索引库"><a href="#添加远程索引库" class="headerlink" title="添加远程索引库"></a>添加远程索引库</h5><p>把刚才创建的索引库添加到CocoaPods仓库中，使用的命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod repo add 索引库名称 索引库地址 </span><br><span class="line">pod repo add DDCategorySpecs https://gitee.com/DaisukeIT/DDCategorySpecs.git</span><br></pre></td></tr></table></figure>
+<p>期间会让你输入账号密码，是你的码云账号和密码，依次输入回车即可。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png" alt="image"></p>
+<p>可以通过上述查看索引库是否被添加到本地的CocoaPods仓库中，如果看到命令完成或者CocoaPods仓库中有，就证明是添加成功了。</p>
+<p>到这里，先把索引库放在一边。开始真正的组件库，也就是存放你要存放代码的库中。</p>
+<h4 id="创建私有的组件库"><a href="#创建私有的组件库" class="headerlink" title="创建私有的组件库"></a>创建私有的组件库</h4><p>过程是创建索引库一样的，如图显示：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%A7%81%E6%9C%89%E5%BA%931.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%A7%81%E6%9C%89%E5%BA%932.png" alt="image"></p>
+<h5 id="创建模板库"><a href="#创建模板库" class="headerlink" title="创建模板库"></a>创建模板库</h5><p>首先在在你要存放这个私有库的地方新建一个文件夹，例如我在桌面上新建一个文件夹名称叫：DDCategory。这个名字你可以自定义，不一定是根据库名来，当然按照组件库的名称最好，方便管理。<br>使用命令进入刚创建的文件夹中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/fty/Desktop/DDCategory</span><br></pre></td></tr></table></figure>
+<p>然后在终端执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod lib create 组件名 </span><br><span class="line">pod lib create DDCategory</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BFGIF.gif" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%931.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%932.png" alt="image"></p>
+<p>上述配置可自由选择，执行命令后会自动打开工程，如下图所示：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%BA%934.png" alt="image"></p>
+<h5 id="删除ReplaceMe文件"><a href="#删除ReplaceMe文件" class="headerlink" title="删除ReplaceMe文件"></a>删除ReplaceMe文件</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E7%BB%84%E4%BB%B6%E5%8C%96%E5%88%A0%E9%99%A4replaceme%E6%96%87%E4%BB%B6.png" alt="image"></p>
+<h5 id="添加内容到模板库上"><a href="#添加内容到模板库上" class="headerlink" title="添加内容到模板库上"></a>添加内容到模板库上</h5><p>进入组件库的路径：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<p>添加内容：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%90%91%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B90.png" alt="image"></p>
+<h4 id="修改Spec文件"><a href="#修改Spec文件" class="headerlink" title="修改Spec文件"></a>修改Spec文件</h4><p>在DDCategory.podspec文件中修改一下内容</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E4%BF%AE%E6%94%B9podspec%E6%96%87%E4%BB%B6.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.summary          = &apos;DDCategory是分类工具组件&apos;</span><br><span class="line">s.homepage         = &apos;https://gitee.com/DaisukeIT&apos;</span><br><span class="line">s.author           = &#123; &apos;著作者名称&apos; =&gt; &apos;著作者名称&apos; &#125;</span><br><span class="line">s.source           = &#123; :git =&gt; &apos;https://gitee.com/DaisukeIT/DDCategory.git&apos;, :tag =&gt; s.version.to_s &#125;</span><br></pre></td></tr></table></figure>
+<p>为什么要修改呢，因为生成的可能跟你本地CocoaPods保存的账号绑定了，默认使用，例如我是github的账号和GitHub地址，所以要改成对应的。</p>
+<h4 id="上传组件代码到码云上"><a href="#上传组件代码到码云上" class="headerlink" title="上传组件代码到码云上"></a>上传组件代码到码云上</h4><h5 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h5><p>进入DDCategroty路径：</p>
+<p>使用一下命令：<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%BF%9B%E5%85%A5DDCategory%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br><span class="line">git commit -m &apos;第一次提交（自定义）&apos; </span><br><span class="line">git remote add origin https://gitee.com/DaisukeIT/DDCategory.git</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 第一次push如果报错的话可以加上-f </span><br><span class="line">// git push -f origin master </span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E5%BC%BA%E5%88%B6push%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<p>期间有可能出现输入码云的账号密码，依次输入回车即可。</p>
+<h5 id="打分支标签"><a href="#打分支标签" class="headerlink" title="打分支标签"></a>打分支标签</h5><p>使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &apos;0.1.0&apos; </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<p>0.1.0要跟DDCategory.podspec文件中的s.version对应。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%89%93%E6%A0%87%E7%AD%BE.png" alt="image"></p>
+<h4 id="提交podspec到私有索引库"><a href="#提交podspec到私有索引库" class="headerlink" title="提交podspec到私有索引库"></a>提交podspec到私有索引库</h4><h5 id="验证spec文件"><a href="#验证spec文件" class="headerlink" title="验证spec文件"></a>验证spec文件</h5><ul>
+<li><p>进入DDCategory路径中<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%BF%9B%E5%85%A5DDCategory%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+</li>
+<li><p>本地验证<br>执行命令：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 本地验证不会验证 s.source 中的tag </span><br><span class="line">pod lib lint</span><br></pre></td></tr></table></figure>
+<ul>
+<li>远程验证</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 远程验证会验证 s.source中的tag，如果此时没有打上相应的标签则会报错 </span><br><span class="line">pod spec lint</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E9%AA%8C%E8%AF%81Spec.png" alt="image"></p>
+<p>之所以出现警告是因为DDCategory.podspec没有配置好，当然你可以在命令后面加上<code>--allow-warnings</code>。但是这样不好，上面的配置是已经消除了警告的，按照上面的配置，这个是不会出现的。</p>
+<h6 id="提交podspec"><a href="#提交podspec" class="headerlink" title="提交podspec"></a>提交podspec</h6><p>执行命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod repo push 私有索引库名称 spec名称.podspec </span><br><span class="line">pod repo push DDCategorySpecs  DDCategory.podspec</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%8F%90%E4%BA%A4podspec.png" alt="image"></p>
+<p>这样就提交成功了，现在去码云上看看是否真的提交成功了</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E6%9F%A5%E7%9C%8B%E7%B4%A2%E5%BC%95%E5%BA%93%E6%98%AF%E5%90%A6%E6%8F%90%E4%BA%A4%E6%88%90%E5%8A%9F.png" alt="image"></p>
+<p>看到这里证明是提交成功了。</p>
+<p>在我实践的过程经常遇到这个错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[!] The spec did not pass validation, due to 2 warnings (but you can use `--allow-warnings` to ignore them).</span><br></pre></td></tr></table></figure>
+<p>我按照警告检查我的代码，但是并没有警告的错误，至少本地验证是通过的。我尝试过把相关代码完全删除了，再提交也是报同样的错误，崩溃了。代码都没有了，你还报这样的错误。好吧，使用–verbose看看具体的错误是什么，结果没有。只有强制忽略了，加上<code>--allow-warnings</code>。最后命令变成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push DDCategorySpecs  DDCategory.podspec --allow-warnings</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用自己的组件库"><a href="#使用自己的组件库" class="headerlink" title="使用自己的组件库"></a>使用自己的组件库</h4><h5 id="创建工程-amp-创建Profile文件"><a href="#创建工程-amp-创建Profile文件" class="headerlink" title="创建工程&amp;创建Profile文件"></a>创建工程&amp;创建Profile文件</h5><ul>
+<li>创建工程</li>
+<li>创建Profile文件</li>
+</ul>
+<p>进入工程路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/fty/Desktop/Test</span><br></pre></td></tr></table></figure>
+<p>然后执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod init</span><br></pre></td></tr></table></figure>
+<p>OMG,出现错误了。。。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinit%E9%94%99%E8%AF%AF0.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinit%E9%94%99%E8%AF%AF.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinit%E9%94%99%E8%AF%AF1.png" alt="image"></p>
+<p>按照提示找到对应的issues,基本尝试过了，只有这个方法解决的上述问题：<a href="https://github.com/CocoaPods/CocoaPods/issues/7697" target="_blank" rel="external">https://github.com/CocoaPods/CocoaPods/issues/7697</a></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%A7%A3%E5%86%B3podinit%E9%94%99%E8%AF%AF.png" alt="image"></p>
+<p>这样我pod init就成功了。</p>
+<h5 id="编辑Podfile文件"><a href="#编辑Podfile文件" class="headerlink" title="编辑Podfile文件"></a>编辑Podfile文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br><span class="line">source &apos;https://gitee.com/DaisukeIT/DDCategorySpecs.git&apos; </span><br><span class="line"></span><br><span class="line"># Uncomment the next line to define a global platform for your project</span><br><span class="line">platform :ios, &apos;9.0&apos;</span><br><span class="line"></span><br><span class="line">target &apos;Test&apos; do</span><br><span class="line"># Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</span><br><span class="line"># use_frameworks!</span><br><span class="line"></span><br><span class="line">pod &apos;DDCategory&apos;, &apos;~&gt; 0.1.0&apos;</span><br><span class="line"></span><br><span class="line">target &apos;TestTests&apos; do</span><br><span class="line">inherit! :search_paths</span><br><span class="line"># Pods for testing</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">target &apos;TestUITests&apos; do</span><br><span class="line">inherit! :search_paths</span><br><span class="line"># Pods for testing</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 第一行是为了保证公有库的正常使用 source</span><br><span class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br><span class="line">source &apos;https://gitee.com/DaisukeIT/DDCategorySpecs.git&apos;</span><br></pre></td></tr></table></figure>
+<h5 id="pod-install"><a href="#pod-install" class="headerlink" title="pod install"></a>pod install</h5><p>可能出现错误：</p>
+<blockquote>
+<p>Test.xcodeproj Couldn’t load Test.xcodeproj because it is already opened from another project or workspace</p>
+</blockquote>
+<p>退出xcode，重新打开工程即可。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F1.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhuapodinstall%E6%88%90%E5%8A%9F2.png" alt="image"></p>
+<p>到这里就完成了私有库的组件化。</p>
+<h4 id="更新远程私有库"><a href="#更新远程私有库" class="headerlink" title="更新远程私有库"></a>更新远程私有库</h4><p>作为一个好的组件，不可能一劳永逸，需要不断地修复优化。当业务增多或者功能拓展。也需要不断地进行升级维护。</p>
+<p>cd进入本地库DDCategory路径中</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua%E8%BF%9B%E5%85%A5DDCategory%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<p>这里以添加时间分类为例，添加一个时间分类到仓库中，如图所示：<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua1%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<p>终端执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br><span class="line">git commit -m &apos;更新描述&apos; </span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua2%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua4%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0.png" alt="image"><br>这样我们就把新的代码提交到仓库了。</p>
+<h4 id="版本更新"><a href="#版本更新" class="headerlink" title="版本更新"></a>版本更新</h4><p>版本更新是作为当前仓库操作的一个标志，之前是0.1.0版本，只有NSString分类，现在要更新一个新的版本，作为NSDate、NSString两个分类的版本。当有人不需要NSDate分类这部分的代码，只需要指引到0.1.0版本即可。所以更新版本很重要。</p>
+<p>执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &apos;新版本号&apos; -m &apos;注释&apos; </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua3%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0%E6%A0%87%E7%AD%BE.png" alt="image"></p>
+<p>通过查看码云上的代码库看到有两个标签，说明更新完成：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua5%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0.png" alt="image"></p>
+<h4 id="修改Sepc文件"><a href="#修改Sepc文件" class="headerlink" title="修改Sepc文件"></a>修改Sepc文件</h4><ul>
+<li>修改podspec文件<br>打开DDCategory.podspec文件，修改版本号（版本号要与刚才添加的标签一致）：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.version          = &apos;0.1.1&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>验证远程spec</li>
+</ul>
+<p>前提一定要保证你的你的配置文件和代码正确，相关的库引用好，不好就GG了。我就经常碰到这种错误</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua6podspeclintfaile.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[!] The spec did not pass validation, due to 3 errors and 2 warnings.</span><br></pre></td></tr></table></figure>
+<p>上面也出现这样的情况是因为存在警告而没有错误，可以忽略，但是现在的情况是出现error，是要解决相关的错误的。在我实践的过程大部分修复了相关的错误，甚至把代码都删除了，还是报同样错误，我的天啊，我都把代码删除了，你还不给我验证通过。于是各种百度、Google都是说解决相关的错误。直到找到说是重新发布release版本，OK，于是我重新提交代码，重新提交新的标签、重新验证，一路绿灯。所以要是你有什么错误解决了还是不能验证通过，那就：重新提交代码 -&gt; 重新提交新的标签 -&gt; 重新验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua7%E9%AA%8C%E8%AF%81%E6%88%90%E5%8A%9F.png" alt="image"></p>
+<p>验证成功。</p>
+<h4 id="更新索引库"><a href="#更新索引库" class="headerlink" title="更新索引库"></a>更新索引库</h4><p>提交podspec文件执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// pod repo push 私有索引库名称 spec名称.podspec </span><br><span class="line">pod repo push DDCategorySpecs  DDCategory.podspec</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua8%E6%9B%B4%E6%96%B0%E7%B4%A2%E5%BC%95%E5%BA%93.png" alt="image"></p>
+<p>你会看到是0.1.3版本，因为之前没有注意到代码错误，就去验证以至于一直出错（上面的错误），所以重新提交新的版本，然后重新验证。</p>
+<h4 id="更新Example的使用"><a href="#更新Example的使用" class="headerlink" title="更新Example的使用"></a>更新Example的使用</h4><p>cd进入Example项目路径执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// --no-repo-update 不更新本地索引库 </span><br><span class="line">pod update --no-repo-update</span><br></pre></td></tr></table></figure>
+<p>当然也可以使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod install</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua9%E6%9B%B4%E6%96%B0%E4%BD%BF%E7%94%A8.png" alt="image"></p>
+<h4 id="依赖第三方库"><a href="#依赖第三方库" class="headerlink" title="依赖第三方库"></a>依赖第三方库</h4><p>在很多情况下，会引用到第三方的库，比如：一个请求组件需要依赖AFNetworking库。需要在spec文件中设置相关参数。</p>
+<p>例如依赖AFNetworking：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;</span><br></pre></td></tr></table></figure>
+<p>接着重复以上操作：提交代码 -&gt; 远程验证 -&gt; 打标签(不要新的版本，这不忽略) -&gt; 更新索引库</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua10%E4%BE%9D%E8%B5%96AFN.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua11afnpod.png" alt="image"></p>
+<p>如图所示AFNetworking存在一些警告，使用<code>--allow-warnings</code>忽略。</p>
+<h4 id="Subspecs"><a href="#Subspecs" class="headerlink" title="Subspecs"></a>Subspecs</h4><p>什么是Subspecs？就是一个库中下面有N个子库，有时候我们只需要用到其中一个字库，而不需要把全部都要pod进来，这样不仅可以减少应用的体积，运行速度也快。</p>
+<p>首先我们先用命令看看AFNetworking有什么Subspecs子库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search &apos;AFNetworking&apos;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua12subspec.png" alt="image"></p>
+<p>从图上可以看到有5个Subspecs库，那么工程上只用到Reachability这个Subspecs，所以我们只需要在Podfile文件中这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;AFNetworking&apos;  改为  pod &apos;AFNetworking/Reachability&apos;</span><br></pre></td></tr></table></figure>
+<p>就可以单独使用Reachability功能。那么别人支持操作，是否我们也可以创建自己的Subspecs呢？</p>
+<p>在创建Subspecs之前，因为例子需要，这里添加一个文件为Tool文件夹，存放工具类。如图所示：<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua13%E5%A4%A9%E5%81%87tool.png" alt="image"></p>
+<ul>
+<li>Subspecs格式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s.subspec &apos;子库名称&apos; do |别名| </span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>因为需要分离出子库，需要在子库里分别指定，所以直接把原来的s.source_files和s.dependency都注释掉，然后这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># s.source_files = &apos;DDCategory/Classes/**/*&apos;</span><br><span class="line"># s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;</span><br><span class="line"></span><br><span class="line">s.subspec &apos;Tool&apos; do |t|</span><br><span class="line">t.source_files = &apos;DDCategory/Classes/Tool/**/*&apos;</span><br><span class="line">t.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">s.subspec &apos;CategoryTool&apos; do |c|</span><br><span class="line">c.source_files = &apos;DDCategory/Classes/CategoryTool/**/*&apos;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<ul>
+<li>远程验证spec</li>
+</ul>
+<p>验证的时候发现出现了一个错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ERROR | [DDCategory/Tool,DDCategory/CategoryTool] file patterns: The `source_files` pattern did not match any file.</span><br></pre></td></tr></table></figure>
+<p>说找不到找到匹配的文件，是路径错误了。然后我就仔细分析一下，名称有没有写错，结果是写错了😯😯，好吧修正回来再次验证还是同样的错误，什么鬼？于是又查资料，没结果。使出终极办法，发布新的版本，打个0.1.4版本吧，验证通过😆😆。</p>
+<ul>
+<li>查看构建Subspecs是否成功</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search &apos;DDCategory&apos;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua15searchDDcategory.png" alt="image"></p>
+<p>很遗憾没有像AFNetworking那样可以看到相关的Subspecs，是不是没有成功呢？是不是因为是私有库而看不到呢？</p>
+<p>测试：<br>在Profile文件中修改成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;DDCategory/Tool&apos;</span><br></pre></td></tr></table></figure>
+<p>然后在终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod install</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua14%E6%9E%84%E5%BB%BAsubspec%E6%88%90%E5%8A%9F.png" alt="image"></p>
+<p>发现是成功的。所以是因为私有库的原因？不好意思，我也不知道，如果有人知道请告诉我，谢谢。</p>
+<h4 id="资源文件处理"><a href="#资源文件处理" class="headerlink" title="资源文件处理"></a>资源文件处理</h4><h5 id="添加资源文件"><a href="#添加资源文件" class="headerlink" title="添加资源文件"></a>添加资源文件</h5><p>在创建模板库的时候发现有两个文件夹：Assets、Classes。在之前也展示过吧代码是存放在Classes中，那么Assets就是存放资源文件的。</p>
+<p>如图所示添加资源到Assets中：<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua16%E5%A4%A9%E5%81%87%E5%9B%BE%E7%89%87.png" alt="image"></p>
+<h5 id="修改spec文件"><a href="#修改spec文件" class="headerlink" title="修改spec文件"></a>修改spec文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s.resource_bundles = &#123;</span><br><span class="line">&apos;DDCategory&apos; =&gt; [&apos;DDCategory/Assets/*&apos;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里把.png后缀去掉，因为图片可能是jpg或者其他，去掉表示任何文件类型都可以</p>
+<h5 id="本地安装测试"><a href="#本地安装测试" class="headerlink" title="本地安装测试"></a>本地安装测试</h5><ul>
+<li>cd进入Example工程路径，pod intasll</li>
+</ul>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua18%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85%E6%B5%8B%E8%AF%95.png" alt="image"></p>
+<ul>
+<li>显示图片</li>
+</ul>
+<p>我在Test工程中<code>pod install</code>DDCategory组件，在ViewController中添加UIImageView来显示图片资源：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">[<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"><span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">UIImageView</span> *view = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line"><span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"share_88_qq_friend_normal"</span>];</span><br><span class="line">view.image = image;</span><br><span class="line">view.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">100</span>, image.size.width, image.size.height);</span><br><span class="line">[<span class="keyword">self</span>.view addSubview:view];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua19%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87.png" alt="image"></p>
+<p>结果不显示图片，肯定不显示了。因为imageNamed:方法加载路径不对。官方注释着imageNamed:加载的是main bundle中的资源。所以要加载组件库的bundle才行。而组件的bundle路径是在这里：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua20%E7%9C%8B%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%841.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua20%E7%9C%8B%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%842.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua20%E7%9C%8B%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%843.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua20%E7%9C%8B%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%844.png" alt="image"></p>
+<p>所以这里新建一个DDBundleTool工具类继承NSObject，来获取组件下的bundle，以及bundle下的图片资源，这里可能有人想说为什么不使用NSBundle分类就搞定的，我也尝试过，发现一个问题，因为底层需要self.class，而self.class指向的是NSBundle的库Foundation，并不是DDDCategory库，DDBundleTool的self.class则指向DDDCategory库</p>
+<p>.h文件：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">DDBundleTool</span> : <span class="title">NSObject</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 获取组件下的bundle</span></span><br><span class="line">+ (<span class="built_in">NSBundle</span> *)dd_currentMainBundle;</span><br><span class="line"><span class="comment">/// 获取组件下图片路径</span></span><br><span class="line">+ (<span class="built_in">NSString</span> *)dd_imagePathWithImageName:(<span class="built_in">NSString</span> *)imageName;</span><br><span class="line"><span class="comment">/// 获取组件下图片</span></span><br><span class="line">+ (<span class="built_in">UIImage</span> *)dd_imageWithImageName:(<span class="built_in">NSString</span> *)imageName;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>.m文件：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">DDBundleTool</span></span></span><br><span class="line"><span class="comment">/// 获取组件下的bundle</span></span><br><span class="line">+ (<span class="built_in">NSBundle</span> *)dd_currentMainBundle&#123;</span><br><span class="line"><span class="comment">// 获取的是DDCategory组件下的bundle</span></span><br><span class="line"><span class="keyword">return</span> [<span class="built_in">NSBundle</span> bundleForClass:<span class="keyword">self</span>.class];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 获取组件下图片路径</span></span><br><span class="line">+ (<span class="built_in">NSString</span> *)dd_imagePathWithImageName:(<span class="built_in">NSString</span> *)imageName&#123;</span><br><span class="line"><span class="comment">// 根据系统的比例获取2x、3x图</span></span><br><span class="line"><span class="built_in">NSInteger</span> scale = [[<span class="built_in">UIScreen</span> mainScreen] scale];</span><br><span class="line"><span class="built_in">NSBundle</span> *currentBundle = [<span class="built_in">NSBundle</span> bundleForClass:<span class="keyword">self</span>.class];</span><br><span class="line"><span class="built_in">NSString</span> *name = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@%zdx"</span>,imageName,scale];</span><br><span class="line"><span class="built_in">NSString</span> *dir = <span class="string">@"DDCategory.bundle"</span>;</span><br><span class="line"><span class="built_in">NSString</span> *path = [currentBundle pathForResource:name ofType:<span class="string">@"png"</span> inDirectory:dir];</span><br><span class="line"><span class="comment">// 当scale == 3时，且没有提供3x倍图时，获取2x倍图</span></span><br><span class="line"><span class="keyword">if</span> (path == <span class="literal">nil</span> &amp;&amp; scale != <span class="number">2</span>) &#123;</span><br><span class="line">name = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@2x"</span>,imageName];</span><br><span class="line">path = [currentBundle pathForResource:name ofType:<span class="string">@"png"</span> inDirectory:dir];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>得到路径后新添加一个UIImage分类(UIImage+Bundle)来获取图片</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"UIImage+Bundle.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"DDBundleTool.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">Bundle</span>)</span></span><br><span class="line"></span><br><span class="line">+ (instancetype)dd_imageWithName:(<span class="built_in">NSString</span> *)imageName&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *path = [DDBundleTool dd_imagePathWithImageName:imageName];</span><br><span class="line"><span class="keyword">return</span> path ? [<span class="built_in">UIImage</span> imageWithContentsOfFile:path] : <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>那么在DDViewController中显示图片：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"UIImage+Bundle.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"DDBundleTool.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">Bundle</span>)</span></span><br><span class="line"></span><br><span class="line">+ (instancetype)dd_imageWithName:(<span class="built_in">NSString</span> *)imageName&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *path = [DDBundleTool dd_imagePathWithImageName:imageName];</span><br><span class="line"><span class="keyword">return</span> path ? [<span class="built_in">UIImage</span> imageWithContentsOfFile:path] : <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua28%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87.png" alt="image"></p>
+<p>可能有人会问为什么加载的目录DDCategory.bundle写死，要加载每一个组件的图片，尽可能自己实现加载步骤，毕竟减少依赖性。</p>
+<blockquote>
+<p>注意：记得每次修改组件中的代码，不是在Example中测试而是另外工程中测试都是需要提交代码 -&gt; 打标签 -&gt; 修改spec对应的版本 -&gt; 验证 -&gt; 绑定spec这几个步骤的。工程中使用重新 pod install 对应的版本。</p>
+</blockquote>
+<h4 id="加载xib"><a href="#加载xib" class="headerlink" title="加载xib"></a>加载xib</h4><h5 id="添加xib"><a href="#添加xib" class="headerlink" title="添加xib"></a>添加xib</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua23%E6%B7%BB%E5%8A%A0xib.png" alt="image"></p>
+<p>如果出现：Safe Area Layout Guide before iOS 9.0错误，修改xib这里:<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua24xib%E5%8F%96%E6%B6%88layout.png" alt="image"></p>
+<h5 id="本地加载xib测试"><a href="#本地加载xib测试" class="headerlink" title="本地加载xib测试"></a>本地加载xib测试</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSBundle</span> *curBundle = [DDBundleTool dd_currentMainBundle];</span><br><span class="line">TestView *testView = (TestView *)[curBundle loadNibNamed:<span class="string">@"TestView2"</span> owner:<span class="literal">nil</span> options:<span class="literal">nil</span>].firstObject;</span><br><span class="line">testView.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="built_in">CGRectGetMaxY</span>(view.frame), <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">[<span class="keyword">self</span>.view addSubview:testView];</span><br></pre></td></tr></table></figure>
+<p>打印错误信息是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Could not load the &quot;share_88_qq_friend_normal.png&quot; image referenced from a nib in the bundle with identifier &quot;org.cocoapods.DDCategory&quot;</span><br></pre></td></tr></table></figure>
+<p>发现图片在xib中引用的路径不对，所以修改路径：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua26%E4%BF%AE%E6%94%B9xib%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84.png" alt="image"></p>
+<p>再次运行</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua27%E6%98%BE%E7%A4%BAxib%E5%9B%BE%E7%89%87.png" alt="image"></p>
+<h5 id="修改spec文件-1"><a href="#修改spec文件-1" class="headerlink" title="修改spec文件"></a>修改spec文件</h5><p>在pod中,xib不能当成源文件(即s.source_files)，因为xib文件和bundle文件一样被视为资源文件，否则pod install之后会报错”Unable to run command ‘StripNIB xxx.nib’ - this target might include its own product”.所以必须要将xib放入资源文件中(即s.resources)</p>
+<p>使用此方式后,虽然可以在不改变原xib任何代码的情况下直接使用,但是需要将xib中使用到的图片文件拷贝到当前项目的Assets.xcassets中</p>
+<p>下图就是亲身经历：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua25podxib%E5%87%BA%E9%94%99.png" alt="image"></p>
+<p>因为新建的xib是放在Classes目录下的，所以在podSpec文件中添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.resources = &apos;DDCategory/Classes/**/*.xib&apos;</span><br></pre></td></tr></table></figure>
+<h5 id="提交代码-amp-打标签"><a href="#提交代码-amp-打标签" class="headerlink" title="提交代码&amp;打标签"></a>提交代码&amp;打标签</h5><p>提交代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br><span class="line">git commit -m &apos;更新描述&apos; </span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>打标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &apos;新版本号&apos; -m &apos;注释&apos; </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>再次提醒：版本号要与spec的版本号对应。</p>
+</blockquote>
+<h5 id="远程验证"><a href="#远程验证" class="headerlink" title="远程验证"></a>远程验证</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint</span><br></pre></td></tr></table></figure>
+<p>如果验证中出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR | [iOS] xcodebuild: Returned an unsuccessful exit code. You can use `--verbose` for more information.</span><br></pre></td></tr></table></figure></p>
+<p>根据提示找到真正的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- NOTE  | xcodebuild:  DDCategory/DDCategory/Classes/TestView.xib:vUN-kp-3ea: error: Safe Area Layout Guide before iOS 9.0</span><br></pre></td></tr></table></figure>
+<p>因为Safe Area Layout Guide before的原因</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua24xib%E9%AA%8C%E8%AF%81%E5%A4%B1%E8%B4%A5.png" alt="image"></p>
+<p>所以在xib中把Safe Area Layout Guide before iOS 9.0取消即可。</p>
+<h5 id="安装测试"><a href="#安装测试" class="headerlink" title="安装测试"></a>安装测试</h5><p>cd到Test工程，重新pod install，在ViewController中</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">[<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"></span><br><span class="line"><span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> dd_imagePathWithName:<span class="string">@"share_88_qq_friend_normal"</span> targetClass:<span class="keyword">self</span>.class];</span><br><span class="line"><span class="built_in">UIImageView</span> *view = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">view.image = image;</span><br><span class="line">view.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">100</span>, image.size.width, image.size.height);</span><br><span class="line">[<span class="keyword">self</span>.view addSubview:view];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSBundle</span> *curBundle = [<span class="built_in">NSBundle</span> bundleForClass:<span class="keyword">self</span>.class];</span><br><span class="line">TestView *testView = (TestView *)[curBundle loadNibNamed:<span class="string">@"TestView"</span> owner:<span class="literal">nil</span> options:<span class="literal">nil</span>].firstObject;</span><br><span class="line">testView.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="built_in">CGRectGetMaxY</span>(view.frame), <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">[<span class="keyword">self</span>.view addSubview:testView];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua29test%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95.png" alt="image"></p>
+<h4 id="补充subspec目录分层"><a href="#补充subspec目录分层" class="headerlink" title="补充subspec目录分层"></a>补充subspec目录分层</h4><p>上面说到subspec来实现目录分层，并没有很好地分类归纳，可以看看AFNetworking是怎样分层目录的：</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua30AFNetworking%E5%88%86%E5%B1%82.png" alt="image"></p>
+<p>现在整理podspec文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Pod::Spec.new do |s|</span><br><span class="line"># 库名称</span><br><span class="line">s.name             = &apos;DDCategory&apos;</span><br><span class="line"># 库版本</span><br><span class="line">s.version          = &apos;0.1.7.7&apos;</span><br><span class="line"># 库摘要</span><br><span class="line">s.summary          = &apos;DDCategory是分类工具组件&apos;</span><br><span class="line"># 库描述</span><br><span class="line">s.description      = &lt;&lt;-DESC</span><br><span class="line">TODO: Add long description of the pod here.</span><br><span class="line">DESC</span><br><span class="line"># 库主页</span><br><span class="line">s.homepage         = &apos;https://gitee.com/DaisukeIT&apos;</span><br><span class="line"># 库截图</span><br><span class="line"># s.screenshots     = &apos;www.example.com/screenshots_1&apos;, &apos;www.example.com/screenshots_2&apos;</span><br><span class="line"># 库许可证</span><br><span class="line">s.license          = &#123; :type =&gt; &apos;MIT&apos;, :file =&gt; &apos;LICENSE&apos; &#125;</span><br><span class="line"># 库作者</span><br><span class="line">s.author           = &#123; &apos;DaiSuke&apos; =&gt; &apos;1123047669@qq.com&apos; &#125;</span><br><span class="line"># 库源路径</span><br><span class="line">s.source           = &#123; :git =&gt; &apos;https://gitee.com/DaisukeIT/DDCategory.git&apos;, :tag =&gt; s.version.to_s &#125;</span><br><span class="line"># 库社会分享</span><br><span class="line"># s.social_media_url = &apos;https://twitter.com/&lt;TWITTER_USERNAME&gt;&apos;</span><br><span class="line"># 库使用最低版本</span><br><span class="line">s.ios.deployment_target = &apos;8.0&apos;</span><br><span class="line"></span><br><span class="line"># 设置 源文件路径 =&gt; 不是整个工程的文件，而是自己封装的代码，以后别的工程引入，就会引入这里的代码。</span><br><span class="line">s.source_files = &apos;DDCategory/Classes/DDCategory.h&apos;</span><br><span class="line"># 设置资源</span><br><span class="line">#s.resources = &apos;DDCategory/Classes/TestView/*.xib&apos;</span><br><span class="line"></span><br><span class="line"># 库的资源</span><br><span class="line">s.resource_bundles = &#123;</span><br><span class="line">&apos;DDCategory&apos; =&gt; [&apos;DDCategory/Assets/*&apos;]</span><br><span class="line">&#125;</span><br><span class="line"># 库公共头文件</span><br><span class="line">s.public_header_files = &apos;DDCategory/Classes/DDCategory.h&apos;</span><br><span class="line"># 库需要的系统库</span><br><span class="line"># s.frameworks = &apos;UIKit&apos;, &apos;MapKit&apos;</span><br><span class="line"># 库的需要依赖的第三方库</span><br><span class="line">#  s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;</span><br><span class="line"></span><br><span class="line"># 库的字库</span><br><span class="line">s.subspec &apos;TestView&apos; do |v|</span><br><span class="line">v.source_files = &apos;DDCategory/Classes/TestView/*.&#123;h,m&#125;&apos;</span><br><span class="line">v.resources = &apos;DDCategory/Classes/TestView/*.xib&apos;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">s.subspec &apos;Tool&apos; do |t|</span><br><span class="line">t.source_files = &apos;DDCategory/Classes/Tool/*.&#123;h,m&#125;&apos;</span><br><span class="line">t.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">s.subspec &apos;CategoryTool&apos; do |c|</span><br><span class="line">c.source_files = &apos;DDCategory/Classes/CategoryTool/*.&#123;h,m&#125;&apos;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>最后目录变成:</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua34%E5%88%86%E5%B1%82%E7%9B%AE%E5%BD%95.png" alt="image"></p>
+<blockquote>
+<p>再次提醒:出现”Unable to run command ‘StripNIB xxx.nib’ - this target might include its own product”是因为找不到xib路径运行，所以要在podspec文件中指定资源路径。</p>
+</blockquote>
+<h4 id="use-frameworks"><a href="#use-frameworks" class="headerlink" title="use_frameworks!"></a>use_frameworks!</h4><h5 id="不使用use-frameworks"><a href="#不使用use-frameworks" class="headerlink" title="不使用use_frameworks!"></a>不使用use_frameworks!</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua36%E4%B8%8D%E4%BD%BF%E7%94%A8use_frameworks.png" alt="image"></p>
+<h5 id="使用use-frameworks"><a href="#使用use-frameworks" class="headerlink" title="使用use_frameworks!"></a>使用use_frameworks!</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua38%E4%BD%BF%E7%94%A8use_frameworks.png" alt="image"></p>
+<h5 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h5><ol>
+<li>静态库：（静态链接库）（.a）在编译时会将库copy一份到目标程序中，编译完成之后，目标程序不依赖外部的库，也可以运行。缺点是会使应用程序变大</li>
+<li>framework：实际上是一种打包方式，将库的二进制文件，头文件和有关的资源文件打包到一起，方便管理和分发。</li>
+</ol>
+<p>具体可参考：<a href="https://www.jianshu.com/p/ac629a1cb8f5" target="_blank" rel="external">podfile中 use_frameworks! 和 #use_frameworks!区别</a></p>
+<h3 id="公开库组件化-Trunk方式"><a href="#公开库组件化-Trunk方式" class="headerlink" title="公开库组件化(Trunk方式)"></a>公开库组件化(Trunk方式)</h3><h4 id="Trunk注册"><a href="#Trunk注册" class="headerlink" title="Trunk注册"></a>Trunk注册</h4><p>出于安全性等方面的考虑，CocoaPods团队把提交代码的方式改为trunk。<br>如果没有安装cocoapods请在终端执行以下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
+<p>注册trunk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register zilin_weng@163.com &apos;weng1250&apos;  --verbose</span><br></pre></td></tr></table></figure>
+<h4 id="索引库"><a href="#索引库" class="headerlink" title="索引库"></a>索引库</h4><p>因为CocoaPods已经为我们创建好了，在Profile文件中，你经常看到这个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br></pre></td></tr></table></figure>
+<p>没错，GitHub上实现CocoaPods都是基于这个就是索引库。</p>
+<h4 id="创建GitHub上的代码库"><a href="#创建GitHub上的代码库" class="headerlink" title="创建GitHub上的代码库"></a>创建GitHub上的代码库</h4><p>其实跟码云上基本一样<br><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua100%E5%88%9B%E5%BB%BAGitHub%E4%BB%93%E5%BA%93.png" alt="image"></p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua101GitHub%E4%BB%93%E5%BA%93.png" alt="image"></p>
+<h4 id="克隆代码到本地"><a href="#克隆代码到本地" class="headerlink" title="克隆代码到本地"></a>克隆代码到本地</h4><p>在本地新建一个文件夹命名为DDCategoryGitHub</p>
+<h5 id="使用命令"><a href="#使用命令" class="headerlink" title="使用命令"></a>使用命令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd 进入DDCategoryGitHub目录</span><br><span class="line">// https://github.com/DaisukeZJY/DDCategory.git就是刚才创建DDCategory的路径</span><br><span class="line">git clone https://github.com/DaisukeZJY/DDCategory.git</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua102%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93.png" alt="image"></p>
+<h5 id="使用SourceTree等工具"><a href="#使用SourceTree等工具" class="headerlink" title="使用SourceTree等工具"></a>使用SourceTree等工具</h5><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua103sourcesTree.png" alt="image"></p>
+<h4 id="创建podspec文件"><a href="#创建podspec文件" class="headerlink" title="创建podspec文件"></a>创建podspec文件</h4><p>在终端执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd 进入DDCategory目录</span><br><span class="line">// DDCategory是podspec名称，最好跟库名保持一致。类似：DDCategory.podspec</span><br><span class="line">pod spec create DDCategory</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua105podspec.png" alt="image"></p>
+<p>当然你也可以拷贝别人的podspec文件到该目录下。</p>
+<h4 id="创建主要代码文件夹-amp-demo"><a href="#创建主要代码文件夹-amp-demo" class="headerlink" title="创建主要代码文件夹&amp;demo"></a>创建主要代码文件夹&amp;demo</h4><p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua106%E5%88%9B%E5%BB%BAdemo.png" alt="image"></p>
+<h4 id="添加代码"><a href="#添加代码" class="headerlink" title="添加代码"></a>添加代码</h4><p>为了跟码云的目录上一致在DDCategory下新建Classes目录，也方便管理。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/zujianhua107%E5%A4%A9%E5%81%87%E4%BB%A3%E7%A0%81.png" alt="image"></p>
+<h3 id="如何划分组件？"><a href="#如何划分组件？" class="headerlink" title="如何划分组件？"></a>如何划分组件？</h3><p>划分组件没有一个明确的标准，基本都是依靠着业务需求、功能划分等划分。业务上一般来说是根据不同业务线来划分，比如：<code>发现</code>、<code>个人中心</code>两个业务线没有必然关系，可以划分两个不同的大组件；功能上一般来说<code>请求库</code>、<code>工具库</code>、<code>基础SDK</code>、<code>地图</code>、<code>埋点</code>、<code>加解密</code>、<code>数据库</code>、<code>缓存</code>等划分。粒度性可以跟团队商量结合，粒度可大可小，按实际开发情况来。</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>以上内容是我参考着以下文章来记录学习实际操作的过程，虽然结果也不尽人意，出现莫名其妙的错误，但是谢谢，对我非常有帮助。如有侵权请联系删除！<br>参考文章：</p>
+<ul>
+<li><a href="https://juejin.im/post/5ac5d5abf265da2396129e63" target="_blank" rel="external">iOS 组件化开发（一）：远程私有库的基本使用</a></li>
+<li><a href="https://juejin.im/post/5ac5daf451882555627d8491" target="_blank" rel="external">iOS 组件化开发（二）：远程私有库的更新与子库</a></li>
+<li><a href="https://juejin.im/post/5ac6eb496fb9a028bb193b4a" target="_blank" rel="external">iOS 组件化开发（三）：加载资源文件</a></li>
+<li><a href="https://mp.weixin.qq.com/s/xmJfpigZwJNjMQbdRwXrEQ" target="_blank" rel="external">iOS组件化探究之私有库的创建</a></li>
+<li><a href="https://www.jianshu.com/p/7b4667cde80b" target="_blank" rel="external">教你如何从0到1实现组件化架构</a></li>
+</ul>
+
+          
         
       
     </div>
