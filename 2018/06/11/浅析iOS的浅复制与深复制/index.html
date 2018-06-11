@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="copy,复制," />
 
 
 
@@ -86,15 +86,33 @@
 
 
 
-<meta name="description" content="just&apos;s like IT">
-<meta property="og:type" content="website">
-<meta property="og:title" content="DaiSuke">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="最近同事问我一个问题：原数组A，进行复制得到数组B，改变数组B的Person元素对象，不影响数组A的Person元素对象，如何操作？第一感觉是进行深复制，同样数组里面的元素对象也要进行深复制，于是就找到相关的API：
+1- (instancetype)initWithArray:(NSArray&amp;lt;ObjectType&amp;gt; *)array copyItems:(BOOL)flag;
+然后同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析iOS的浅复制与深复制">
+<meta property="og:url" content="http://yoursite.com/2018/06/11/浅析iOS的浅复制与深复制/index.html">
 <meta property="og:site_name" content="DaiSuke">
-<meta property="og:description" content="just&apos;s like IT">
+<meta property="og:description" content="最近同事问我一个问题：原数组A，进行复制得到数组B，改变数组B的Person元素对象，不影响数组A的Person元素对象，如何操作？第一感觉是进行深复制，同样数组里面的元素对象也要进行深复制，于是就找到相关的API：
+1- (instancetype)initWithArray:(NSArray&amp;lt;ObjectType&amp;gt; *)array copyItems:(BOOL)flag;
+然后同">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy1.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy2.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy3.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy4.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy5.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy6.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy7.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy8.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy9.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy10.png">
+<meta property="og:updated_time" content="2018-06-11T15:17:40.807Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DaiSuke">
-<meta name="twitter:description" content="just&apos;s like IT">
+<meta name="twitter:title" content="浅析iOS的浅复制与深复制">
+<meta name="twitter:description" content="最近同事问我一个问题：原数组A，进行复制得到数组B，改变数组B的Person元素对象，不影响数组A的Person元素对象，如何操作？第一感觉是进行深复制，同样数组里面的元素对象也要进行深复制，于是就找到相关的API：
+1- (instancetype)initWithArray:(NSArray&amp;lt;ObjectType&amp;gt; *)array copyItems:(BOOL)flag;
+然后同">
+<meta name="twitter:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy1.png">
 
 
 
@@ -124,7 +142,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/11/浅析iOS的浅复制与深复制/"/>
 
 
 
@@ -141,7 +159,7 @@ daovoice('update');
 
 
 
-  <title>DaiSuke</title>
+  <title>浅析iOS的浅复制与深复制 | DaiSuke</title>
   
 
 
@@ -170,8 +188,7 @@ daovoice('update');
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 <a href="https://github.com/DaisukeZJY" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,9 +301,9 @@ daovoice('update');
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -316,9 +333,7 @@ daovoice('update');
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/11/浅析iOS的浅复制与深复制/" itemprop="url">浅析iOS的浅复制与深复制</a></h1>
+          <h1 class="post-title" itemprop="name headline">浅析iOS的浅复制与深复制</h1>
         
 
         <div class="post-meta">
@@ -416,9 +431,7 @@ daovoice('update');
       
 
       
-        
-          
-            <p>最近同事问我一个问题：原数组A，进行复制得到数组B，改变数组B的Person元素对象，不影响数组A的Person元素对象，如何操作？<br>第一感觉是进行深复制，同样数组里面的元素对象也要进行深复制，于是就找到相关的API：</p>
+        <p>最近同事问我一个问题：原数组A，进行复制得到数组B，改变数组B的Person元素对象，不影响数组A的Person元素对象，如何操作？<br>第一感觉是进行深复制，同样数组里面的元素对象也要进行深复制，于是就找到相关的API：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithArray:(<span class="built_in">NSArray</span>&lt;ObjectType&gt; *)array copyItems:(<span class="built_in">BOOL</span>)flag;</span><br></pre></td></tr></table></figure>
 <p>然后同事跟我说还有其他方法吗？要不分享一下iOS的复制吧？然后就有了这篇文章。文章如有错误欢迎指出更正，小弟虚心受教，也怕误人子弟。</p>
 <h3 id="为什么要复制？"><a href="#为什么要复制？" class="headerlink" title="为什么要复制？"></a>为什么要复制？</h3><p>定义：在面向对象编程中，对象复制是创建一个现有对象的副本，即面向对象编程中的一个数据单元。生成的对象称为对象副本或者仅仅是原始对象的副本。</p>
@@ -669,8 +682,6 @@ daovoice('update');
 <li><a href="https://www.cnblogs.com/loying/p/4862275" target="_blank" rel="external">ios 深度复制 copy &amp; mutablecopy</a></li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -685,365 +696,53 @@ daovoice('update');
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/基于CocoaPods实现组件化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/30/基于CocoaPods实现组件化/" itemprop="url">基于CocoaPods实现私有库的组件化</a></h1>
-        
-
-        <div class="post-meta">
-
-<i class="fa fa-thumb-tack"></i>
-<font color=7CCD7C>置顶</font>
-<span class="post-meta-divider">|</span>
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T10:40:17+08:00">
-                2018-05-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/copy/" rel="tag"><i class="fa fa-tag"></i> copy</a>
           
-
+            <a href="/tags/复制/" rel="tag"><i class="fa fa-tag"></i> 复制</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/30/基于CocoaPods实现组件化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/30/基于CocoaPods实现组件化/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/30/基于CocoaPods实现组件化/" class="leancloud_visitors" data-flag-title="基于CocoaPods实现私有库的组件化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>emmmmm，打开博客、社区很多都是说组件化。。。所以现在参考着各路大神的博客&amp;思路自己也跟着实现一下。</p>
-<h2 id="什么是组件化？"><a href="#什么是组件化？" class="headerlink" title="什么是组件化？"></a>什么是组件化？</h2><p>对于什么是组件化，我的概念其实是模糊的，不敢说大话，怕误人子弟，只能按照自己的理解说说：组件化跟模块化有着本质的相似，模块化又是什么呢？举个例子，例如微信，有<code>微信</code>、<code>通讯录</code>、<code>发现</code>、<code>我</code>四个业务大模块。那么模块化就是根据业务的不同一个一个来划分模块。每个程序员单独开发一个模块，其他模块不需要他管理维护甚至开发，提供个接口就可以了，这样就简单实现模块化了。模块也有大模块和小模块之分，不仅仅表现于大模块，每一个view或者每一个功能都是模块。</p>
-<p>组件化的思想也是一样的，组件化也是根据业务或者功能来划分的，例如：工程上的请求库，如果使用是AFN，必然要封装多几层吧，这样既解耦又容易抽取第三方库。把封装的代码与第三方库集成一起作为请求网络数据的组件。上述例子是按照功能划分的，也可以往大的方向划分，例如苹果公司：Mac是一个组件、iPhone是一个组件、iPod是一个组件等等。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/30/基于CocoaPods实现组件化/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/Swift-微博/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/27/Swift-微博/" itemprop="url">Swift-微博</a></h1>
+        <div class="post-widgets">
         
 
-        <div class="post-meta">
+        
 
-<i class="fa fa-thumb-tack"></i>
-<font color=7CCD7C>置顶</font>
-<span class="post-meta-divider">|</span>
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T14:24:34+08:00">
-                2018-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
             </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/27/Swift-微博/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/27/Swift-微博/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/27/Swift-微博/" class="leancloud_visitors" data-flag-title="Swift-微博">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p><code>Swift</code>的基础知识基本学完，这次写的不是别的，是培训常模仿的微博项目，现在我也是边模仿边学习的心态。我会记录<code>小码哥</code>中模仿<code>微博</code>的从<code>0</code>到<code>1</code>的过程，希望以后看到自己写的烂文章会笑起来，哈哈。</p>
-<p>另外文章篇幅可能很长很长，所以想看的同学可以好好收藏一下。如果觉得可以帮助到你的话，请<code>Star</code>我，也可以<code>Fort</code>一下工程关注项目的进展情况。当然过程中有什么问题的话，随时欢迎<code>Issues</code></p>
-<p>如有侵权，请联系删除。</p>
-</blockquote>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/weibo%E9%A6%96%E9%A1%B5%E6%95%B0%E6%8D%AE3.gif" alt="image"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/27/Swift-微博/#more" rel="contents">
-              Read more &raquo;
-            </a>
           </div>
-          <!--/noindex-->
         
+        </div>
       
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/基于CocoaPods实现组件化/" rel="next" title="基于CocoaPods实现私有库的组件化">
+                <i class="fa fa-chevron-left"></i> 基于CocoaPods实现私有库的组件化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1053,1245 +752,29 @@ daovoice('update');
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/15/图享APP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/15/图享APP/" itemprop="url">图享APP</a></h1>
-        
-
-        <div class="post-meta">
-
-<i class="fa fa-thumb-tack"></i>
-<font color=7CCD7C>置顶</font>
-<span class="post-meta-divider">|</span>
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-15T12:30:16+08:00">
-                2018-04-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/15/图享APP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/15/图享APP/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/15/图享APP/" class="leancloud_visitors" data-flag-title="图享APP">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近整理文章的时候发现自己的一个旧项目，原来已经一年时间没有完善了，现在有时间顺便完善一点再写个文章描述一下吧！</p>
-<blockquote>
-<p>图享APP是基于<a href="https://unsplash.com/">Unsplash</a>外国一个网站的API完成的，Unsplash是分享图片为主要的一个网站，网站上的图片是可以任意使用的，不受侵权限制。当然为了不必要的纷争还是慎用吧。从<code>2017/2/16</code>开始到<code>2017/4/19</code>利用晚上时间完成大部分功能，目前是没有上线的，因为是使用第三方API。</p>
-</blockquote>
-<p><img src="http://7xv233.com1.z0.glb.clouddn.com/shareImageGif%E9%A6%96%E9%A1%B5.gif" alt="首页"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/15/图享APP/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/阿里的BeeHive框架初探/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/20/阿里的BeeHive框架初探/" itemprop="url">阿里的BeeHive框架初探</a></h1>
-        
-
-        <div class="post-meta">
-
-<i class="fa fa-thumb-tack"></i>
-<font color=7CCD7C>置顶</font>
-<span class="post-meta-divider">|</span>
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-20T11:46:02+08:00">
-                2018-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/02/20/阿里的BeeHive框架初探/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/20/阿里的BeeHive框架初探/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/02/20/阿里的BeeHive框架初探/" class="leancloud_visitors" data-flag-title="阿里的BeeHive框架初探">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>好久没有写文章了，感觉自己快要生锈了，最近忙完公司的新项目。趁下一个版本还没有出来，抽空看看有什么新的框架，学习一波。<br>看看现在的MVC、MVP、MVVM等设计模式，无非就是为了解耦、组件化等优点。项目一大，各种跨模块跳转就变得很平常了，所以有时候想抽一个模块出来，但是一动牵扯全身，连测试一个小功能都要运行整个项目。<br>其实我关注阿里的<a href="https://github.com/alibaba/BeeHive">BeeHive</a>也有一段时间了，也第一时间运行了demo，发现功力不够，理解不了，可能是当时急躁吧。现在想着闲着，为什么不挑战一下呢。</p>
-</blockquote>
-<hr>
-<p>我结合<a href="https://github.com/alibaba/BeeHive/blob/master/README-CN.md">官方文档</a>以及其他作者写的文章看看框架的原理，可能理解的不对或者写的不好，如果有错误欢迎更正，毕竟还是小白，一起共勉吧。<br>至于对框架的陈述，看官方文档就可以了，这里不再累述。</p>
-<hr>
-<p>一个非常重要的提示：<code>我写的非常啰嗦，逻辑经常跳转，只做自己学习笔记</code></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/20/阿里的BeeHive框架初探/#more" rel="contents">
-              Read more &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/06/11/浅析iOS的浅复制与深复制/"
+           data-title="浅析iOS的浅复制与深复制" data-url="http://yoursite.com/2018/06/11/浅析iOS的浅复制与深复制/">
+      </div>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
-  
-  
-  
 
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/03/真的是手把手教你如何Hexo一个你自己的github网站/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/06/03/真的是手把手教你如何Hexo一个你自己的github网站/" itemprop="url">真的是手把手教你如何Hexo一个你自己的github网站</a></h1>
-        
-
-        <div class="post-meta">
-
-<i class="fa fa-thumb-tack"></i>
-<font color=7CCD7C>置顶</font>
-<span class="post-meta-divider">|</span>
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-03T10:47:27+08:00">
-                2016-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/06/03/真的是手把手教你如何Hexo一个你自己的github网站/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/真的是手把手教你如何Hexo一个你自己的github网站/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/06/03/真的是手把手教你如何Hexo一个你自己的github网站/" class="leancloud_visitors" data-flag-title="真的是手把手教你如何Hexo一个你自己的github网站">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>结合本人的个人经验，自己也摸索很久了，网上的资源很多，翻阅了很多资料，但是感觉不全。原谅作者是一个菜鸟。但是呢， 你摸索久了，自然而然也会总结出经验。好了废话不多，先看看作者的个人网站。<a href="http://daisuke.cn/">DaiSuke</a>。现在结合自己操作流程，你们也来操作一下吧。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/06/03/真的是手把手教你如何Hexo一个你自己的github网站/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/Swift-访问控制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/Swift-访问控制/" itemprop="url">Swift-访问控制</a></h1>
-        
-
-        <div class="post-meta">
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T10:43:20+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/26/Swift-访问控制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/26/Swift-访问控制/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/26/Swift-访问控制/" class="leancloud_visitors" data-flag-title="Swift-访问控制">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>访问控制可以限定其他源文件或模块中的代码对代码的访问级别</p>
-<ul>
-<li>可以明确地给单个类型（类、结构体、枚举）设置访问级别，也可以给这些类型的属性、函数、基本类型、下标索引等设置访问级别</li>
-<li>可以限定协议在一定的范围内使用，包括协议里的全局变量、变量和函数</li>
-</ul>
-<p>访问控制基于模块与源文件之间：</p>
-<ul>
-<li>模块指的是以独立单元构建和发布的framework或application。在Swift中的一个模块可以使用import关键字引入另外一个模块</li>
-<li>源文件是单个源码文件，它通常属于一个模块，源文件可以包含多个类、函数和属性的定义。</li>
-</ul>
-<p>Swift为代码中的实体提供了四种不同的访问级别：public、internal、fileprivate、private。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/26/Swift-访问控制/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/Swift-泛型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/24/Swift-泛型/" itemprop="url">Swift-泛型</a></h1>
-        
-
-        <div class="post-meta">
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-24T22:00:10+08:00">
-                2018-04-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/24/Swift-泛型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/24/Swift-泛型/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/24/Swift-泛型/" class="leancloud_visitors" data-flag-title="Swift-泛型">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li>Swift提供了泛型，可以写出灵活且可重用的函数和类型</li>
-<li>Swift标准库是通过了泛型代码构建出来的</li>
-<li>Swift的数组和字典类型都是泛型集</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/24/Swift-泛型/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/Swift-协议protocol/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/23/Swift-协议protocol/" itemprop="url">Swift-协议(protocol)</a></h1>
-        
-
-        <div class="post-meta">
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T20:47:14+08:00">
-                2018-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/23/Swift-协议protocol/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/23/Swift-协议protocol/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/23/Swift-协议protocol/" class="leancloud_visitors" data-flag-title="Swift-协议(protocol)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>协议定义了一个蓝图，规定了用来实现某一特定任务或者功能的方法、属性，以及其他需要的东西。类、结构体或枚举都可以遵循协议，并为协议定义的要求提供具体实现。某个类型能够满足某个协议的要求，就可以说该类遵循了协议</p>
-<p>除了遵循协议的类型必须实现的要求外，还可以对协议进行扩展，通过扩展来实现一部分要求或实现一些附加功能，这样遵循协议的类型就能够使用这些功能</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/23/Swift-协议protocol/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/Swift-扩展extension/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiSuke">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiSuke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/20/Swift-扩展extension/" itemprop="url">Swift-扩展extension</a></h1>
-        
-
-        <div class="post-meta">
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T20:40:36+08:00">
-                2018-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/20/Swift-扩展extension/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/20/Swift-扩展extension/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/20/Swift-扩展extension/" class="leancloud_visitors" data-flag-title="Swift-扩展extension">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>扩展就是向一个已有的类、结构体和枚举类型添加新功能。扩展可以对一个类型添加新的功能，但是不能重写已有的功能。</p>
-<p>Swift中扩展可以：</p>
-<ul>
-<li>添加计算型属性和计算型静态属性</li>
-<li>定义实例方法和类型方法</li>
-<li>提供新的构造器</li>
-<li>定义下标</li>
-<li>定义和使用新的嵌套类型</li>
-<li>使一个已有类型符合某个协议</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/20/Swift-扩展extension/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-
-          
 
         </div>
         
@@ -2312,8 +795,17 @@ daovoice('update');
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2393,6 +885,22 @@ daovoice('update');
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要复制？"><span class="nav-number">1.</span> <span class="nav-text">为什么要复制？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在iOS中哪些类支持复制功能？"><span class="nav-number">2.</span> <span class="nav-text">在iOS中哪些类支持复制功能？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅复制-or-深复制？"><span class="nav-number">3.</span> <span class="nav-text">浅复制 or 深复制？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明类型一定是进行复制后的类型吗？"><span class="nav-number">4.</span> <span class="nav-text">声明类型一定是进行复制后的类型吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深复制真的是深复制吗？"><span class="nav-number">5.</span> <span class="nav-text">深复制真的是深复制吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#归档方式"><span class="nav-number">5.1.</span> <span class="nav-text">归档方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自带API初始化方式"><span class="nav-number">5.2.</span> <span class="nav-text">自带API初始化方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让对象支持复制操作？"><span class="nav-number">6.</span> <span class="nav-text">如何让对象支持复制操作？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象中有对象属性时如何支持复制操作？"><span class="nav-number">7.</span> <span class="nav-text">对象中有对象属性时如何支持复制操作？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让子类对象支持复制操作？"><span class="nav-number">8.</span> <span class="nav-text">如何让子类对象支持复制操作？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互相引用进行深拷贝结果如何？"><span class="nav-number">9.</span> <span class="nav-text">互相引用进行深拷贝结果如何？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基类runtime方式让所有子类自动实现深复制操作（有不足之处）"><span class="nav-number">10.</span> <span class="nav-text">基类runtime方式让所有子类自动实现深复制操作（有不足之处）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基类BaseModel遵循NSCopying协议"><span class="nav-number">10.1.</span> <span class="nav-text">基类BaseModel遵循NSCopying协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基类BaseModel遵循NSCoding协议"><span class="nav-number">10.2.</span> <span class="nav-text">基类BaseModel遵循NSCoding协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明属性是使用copy、strong的区别？"><span class="nav-number">11.</span> <span class="nav-text">声明属性是使用copy、strong的区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#copy声明"><span class="nav-number">11.1.</span> <span class="nav-text">copy声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strong声明"><span class="nav-number">11.2.</span> <span class="nav-text">strong声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写Setter方法"><span class="nav-number">11.3.</span> <span class="nav-text">重写Setter方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可变类型"><span class="nav-number">11.4.</span> <span class="nav-text">可变类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">12.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2531,6 +1039,10 @@ Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a>
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
