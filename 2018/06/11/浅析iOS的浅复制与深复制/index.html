@@ -106,7 +106,7 @@
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy8.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy9.png">
 <meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/copy10.png">
-<meta property="og:updated_time" content="2018-06-11T15:17:40.807Z">
+<meta property="og:updated_time" content="2018-06-11T15:18:48.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析iOS的浅复制与深复制">
 <meta name="twitter:description" content="最近同事问我一个问题：原数组A，进行复制得到数组B，改变数组B的Person元素对象，不影响数组A的Person元素对象，如何操作？第一感觉是进行深复制，同样数组里面的元素对象也要进行深复制，于是就找到相关的API：
@@ -434,6 +434,7 @@ daovoice('update');
         <p>最近同事问我一个问题：原数组A，进行复制得到数组B，改变数组B的Person元素对象，不影响数组A的Person元素对象，如何操作？<br>第一感觉是进行深复制，同样数组里面的元素对象也要进行深复制，于是就找到相关的API：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithArray:(<span class="built_in">NSArray</span>&lt;ObjectType&gt; *)array copyItems:(<span class="built_in">BOOL</span>)flag;</span><br></pre></td></tr></table></figure>
 <p>然后同事跟我说还有其他方法吗？要不分享一下iOS的复制吧？然后就有了这篇文章。文章如有错误欢迎指出更正，小弟虚心受教，也怕误人子弟。</p>
+<a id="more"></a>
 <h3 id="为什么要复制？"><a href="#为什么要复制？" class="headerlink" title="为什么要复制？"></a>为什么要复制？</h3><p>定义：在面向对象编程中，对象复制是创建一个现有对象的副本，即面向对象编程中的一个数据单元。生成的对象称为对象副本或者仅仅是原始对象的副本。</p>
 <p>意义：为了操作对象副本数据时不影响原对象数据</p>
 <h3 id="在iOS中哪些类支持复制功能？"><a href="#在iOS中哪些类支持复制功能？" class="headerlink" title="在iOS中哪些类支持复制功能？"></a>在iOS中哪些类支持复制功能？</h3><p>NSString、NSMutableString、NSArray、NSMutableArray、NSDictionary、NSMutableDictionary…<br>不难发现在API中这些类需要遵循<code>&lt;NSCopying, NSMutableCopying&gt;</code>。至于为什么要遵循这两个协议，协议中需要实现哪些方法后面涉及，这里不做阐释。但是至少可以总结出想要类支持复制功能，就要遵循<code>&lt;NSCopying, NSMutableCopying&gt;</code>以及实现对应方法。</p>
