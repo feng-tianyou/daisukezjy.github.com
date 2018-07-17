@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="即时通讯,阿里云," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="即时通讯作为社交软件必不可少的功能，较好的通讯体验不仅提升用户的好感度，也增加用户对APP的粘度。
+
+即时聊通讯功能应用广泛，例如：微信、QQ、微博等社交为主的应用。但是对于大部分并不是以社交为主体的小应用来说，更关心的是如何快速搭建并实现即时通讯功能，那么使用第三方SDK能满足基本需求，也能快速达到预期效果。常见的即时通讯SDK有：环信、融云、云通信、腾讯云、阿里云等等。无论集成还是使用都很方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个不太完善的即时通讯流程架构图">
+<meta property="og:url" content="http://yoursite.com/2018/07/17/InstantMessaging-iOS/index.html">
+<meta property="og:site_name" content="DaiSuke">
+<meta property="og:description" content="即时通讯作为社交软件必不可少的功能，较好的通讯体验不仅提升用户的好感度，也增加用户对APP的粘度。
+
+即时聊通讯功能应用广泛，例如：微信、QQ、微博等社交为主的应用。但是对于大部分并不是以社交为主体的小应用来说，更关心的是如何快速搭建并实现即时通讯功能，那么使用第三方SDK能满足基本需求，也能快速达到预期效果。常见的即时通讯SDK有：环信、融云、云通信、腾讯云、阿里云等等。无论集成还是使用都很方">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%B7%A5%E7%A8%8B%E5%B8%AE%E6%B6%88%E6%81%AF%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%A5%BD%E5%8F%8B%E5%B7%AE%E5%BC%822.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E9%98%BF%E9%87%8C%E7%AE%A1%E7%90%86%E7%B1%BB.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E8%8E%B7%E5%8F%96%E7%A6%BB%E7%BA%BF%E6%B6%88%E6%81%AF%281%29.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%281%29.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E8%8E%B7%E5%8F%96%E5%8E%86%E5%8F%B2%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%88%A0%E9%99%A4%E6%B6%88%E6%81%AF.png">
+<meta property="og:updated_time" content="2018-07-17T14:08:10.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个不太完善的即时通讯流程架构图">
+<meta name="twitter:description" content="即时通讯作为社交软件必不可少的功能，较好的通讯体验不仅提升用户的好感度，也增加用户对APP的粘度。
+
+即时聊通讯功能应用广泛，例如：微信、QQ、微博等社交为主的应用。但是对于大部分并不是以社交为主体的小应用来说，更关心的是如何快速搭建并实现即时通讯功能，那么使用第三方SDK能满足基本需求，也能快速达到预期效果。常见的即时通讯SDK有：环信、融云、云通信、腾讯云、阿里云等等。无论集成还是使用都很方">
+<meta name="twitter:image" content="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%B7%A5%E7%A8%8B%E5%B8%AE%E6%B6%88%E6%81%AF%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/17/InstantMessaging-iOS/"/>
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+daovoice('init', {
+app_id: "cbefc69b"
+});
+daovoice('update');
+</script>
+
+
+
+
+
+
+  <title>一个不太完善的即时通讯流程架构图 | DaiSuke</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c9ee80663574cfe4141f5d6a33812bb8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a href="https://github.com/DaisukeZJY" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DaiSuke</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Who am I</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/InstantMessaging-iOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiSuke">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiSuke">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一个不太完善的即时通讯流程架构图</h1>
+        
+
+        <div class="post-meta">
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T21:41:25+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/17/InstantMessaging-iOS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/17/InstantMessaging-iOS/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/17/InstantMessaging-iOS/" class="leancloud_visitors" data-flag-title="一个不太完善的即时通讯流程架构图">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>即时通讯作为社交软件必不可少的功能，较好的通讯体验不仅提升用户的好感度，也增加用户对APP的粘度。</p>
+</blockquote>
+<p>即时聊通讯功能应用广泛，例如：微信、QQ、微博等社交为主的应用。但是对于大部分并不是以社交为主体的小应用来说，更关心的是如何快速搭建并实现即时通讯功能，那么使用第三方SDK能满足基本需求，也能快速达到预期效果。常见的即时通讯SDK有：环信、融云、云通信、腾讯云、阿里云等等。无论集成还是使用都很方便，甚至还提供了配套的UI来帮助开发者，所以开发者只需要根据业务以及设计稿做一些调整就能完成即时通讯功能，大大地减少开发周期以及因为能力不足无法完成等问题。</p>
+<p>本文介绍的不是如何使用SDK，也不是如何构建通讯架构，更不是如何实现具体的通讯功能。本文介绍的是应用中基于<code>阿里云</code>完成的即时通讯功能的实现流程图，围绕自己制作的一个流程图＋解释，所以想要看完整的实现即时通讯功能的话，下面的内容就不适合看了，当然<code>流程图只是个参考方向，功能不完全完善，看管自己把握</code>，不喜勿喷。</p>
+<a id="more"></a>
+<h3 id="整体流程架构图"><a href="#整体流程架构图" class="headerlink" title="整体流程架构图"></a>整体流程架构图</h3><p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%B7%A5%E7%A8%8B%E5%B8%AE%E6%B6%88%E6%81%AF%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="image"></p>
+<h3 id="功能模块区分"><a href="#功能模块区分" class="headerlink" title="功能模块区分"></a>功能模块区分</h3><ul>
+<li>处理好友差异模块</li>
+<li>阿里云管理模块</li>
+<li>处理离线消息模块</li>
+<li>处理消息模块</li>
+<li>处理发送消息模块</li>
+<li>获取历史消息模块</li>
+<li>删除消息模块</li>
+<li>转发消息模块</li>
+<li>….</li>
+</ul>
+<h3 id="模块功能介绍"><a href="#模块功能介绍" class="headerlink" title="模块功能介绍"></a>模块功能介绍</h3><h4 id="处理好友差异模块"><a href="#处理好友差异模块" class="headerlink" title="处理好友差异模块"></a>处理好友差异模块</h4><p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%A5%BD%E5%8F%8B%E5%B7%AE%E5%BC%822.png" alt="image"></p>
+<p>模块功能是获取好友、群、讨论组差异集合的，注意是差异集合，并不是全部。也就是好友有新增、删除的差异进行更新。获取服务器返回的差异集合进行处理，请求成功时删除本地的缓存，如果是新增好友并更新好友数据库，如果需要创建新的会话，就创建会话。如果是删除好友，删除好友、删除会话、删除消息。对于附带用户相关的设置信息，比如是否需要震动提醒，是否需要声音提醒等先关配置信息。其他就是根据实际的业务需要的数据了。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"></span><br><span class="line">Network</span><br><span class="line"></span><br><span class="line">[network getInitRelationOnSucceeded:^(<span class="built_in">NSDictionary</span> *dic) &#123;</span><br><span class="line">    <span class="keyword">if</span> (setting) &#123;</span><br><span class="line">        <span class="comment">// 用户相关设置数据</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (friends.count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 新增好友差异集合</span></span><br><span class="line">        [MessageTool proccessInitFriends:friends];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (delete_friends.count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 删除好友差异集合</span></span><br><span class="line">        [MessageTool proccessInitDeleteFriendByDeleteUids:delete_friends];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (other) &#123;</span><br><span class="line">        <span class="comment">// 其他附带数据</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        <span class="comment">// 获取离线消息</span></span><br><span class="line">    &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">MessageTool</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 处理好友差异集合中新增好友</span></span><br><span class="line">+ (<span class="keyword">void</span>)proccessInitFriends:(<span class="built_in">NSArray</span> *)friends&#123;</span><br><span class="line">    <span class="keyword">if</span> (friends.count &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除好友缓存</span></span><br><span class="line">    [CacheManager clearNewFriendListCacheData];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> * curDict <span class="keyword">in</span> friends) &#123;</span><br><span class="line">        <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="comment">// 保存新增的好友到数据库</span></span><br><span class="line">        FriendModel *friend = [[FriendModel alloc] initWithDictionary:curDict];</span><br><span class="line">        friend.friendJson = [friend modelToJson:friend];</span><br><span class="line">        FriendDB *friendDB = [[FriendDB alloc] init];</span><br><span class="line">        [friendDB saveModel:friend sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">        <span class="built_in">BOOL</span> inSession = [[curDict objectForKey:<span class="string">@"in_session"</span>] boolValue];</span><br><span class="line">            <span class="keyword">if</span>(inSession)&#123;</span><br><span class="line">                <span class="comment">// 需要新增会话，创建会话，保存到会话数据库中</span></span><br><span class="line">                <span class="built_in">BOOL</span> sessionTop = [[curDict objectForKey:<span class="string">@"session_top"</span>] boolValue];</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> time = [curDict[kParamV] longLongValue];</span><br><span class="line">                SessionModel *session = [SessionModel getSessionModelBySessionId:friend.uid sessionType:SessionTypeForMessageSingle sessionName:friend.name];</span><br><span class="line">                <span class="keyword">if</span>(time &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                    session.saveTime = time;</span><br><span class="line">                &#125;</span><br><span class="line">                session.isTop = sessionTop;</span><br><span class="line">                SessionDB *sessionDB = [[SessionDB alloc] init];</span><br><span class="line">                [sessionDB saveModel:session sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 处理好友差异集合中删除好友</span></span><br><span class="line">+ (<span class="keyword">void</span>)proccessInitDeleteFriendByDeleteUids:(<span class="built_in">NSArray</span> *)deleteUids&#123;</span><br><span class="line">    <span class="keyword">if</span> (friends.count &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除好友缓存</span></span><br><span class="line">    [CacheManager clearNewFriendListCacheData];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSNumber</span> *uid <span class="keyword">in</span> deleteUids.objectEnumerator) &#123;</span><br><span class="line">        <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> currentUid = [uid longLongValue];</span><br><span class="line">            FriendDB *friendDB = [[FriendDB alloc] init];</span><br><span class="line">            __block <span class="built_in">BOOL</span> isSucceed = <span class="literal">NO</span>;</span><br><span class="line">            [friendDB removeModelByUid:currentUid sqliteBlock:^(<span class="built_in">BOOL</span> isTrue) &#123;</span><br><span class="line">                isSucceed = isTrue;</span><br><span class="line">            &#125;];</span><br><span class="line">            <span class="keyword">if</span>(isSucceed)&#123;</span><br><span class="line">                SessionDB *sessionDB = [[SessionDB alloc] init];</span><br><span class="line">                [sessionDB removeModelBySessionId:currentUid sessionType:SessionTypeForMessageSingle sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">                MessageDB *messageDB = [[MessageDB alloc] init];</span><br><span class="line">                [messageDB removeMessageBySessionId:currentUid sessionType:SessionTypeForMessageSingle sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="阿里云管理模块"><a href="#阿里云管理模块" class="headerlink" title="阿里云管理模块"></a>阿里云管理模块</h4><p>即时通讯是基于阿里云的，那么相比要对阿里云进行封装处理，阿里云管理类ALiPushManager被AppDelegate拥有，也就是全局性的。ALiPushManage类r主要分为三打功能，一是初始化，二是添加定时器用于定时获取离线消息，三是接收即时的通讯消息。</p>
+<p>为什么有了接收即时消息功能了还需要添加定时获取离线消息呢？原因是为了保证消息的同步，谁也说不定即时消息能即时到达，不管是网络原因还是阿里云SDK原因还是各种原因，那么有了定时获取离线消息，能保证阿里云推送不到的时候可以通过获取离线消息来获取即时消息，接下来就是要处理重复消息即可。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E9%98%BF%E9%87%8C%E7%AE%A1%E7%90%86%E7%B1%BB.png" alt="image"></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"></span><br><span class="line">+ (<span class="keyword">id</span>)share &#123;</span><br><span class="line">    <span class="keyword">static</span> ALiPushManager *aliPushManager = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        aliPushManager = [[ALiPushManager alloc] init];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注册接收CloudChannel推送下来的消息(可用于实时消息聊天，或者及时消息指令)</span></span><br><span class="line">        [[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:aliPushManager selector:<span class="keyword">@selector</span>(receiveAliyunTcpMessage:) name:KNOTIF_ALIYUN_SOCKET_MESSAGE object:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加定时器</span></span><br><span class="line">        aliPushManager.timerForGetOffLineMsg = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">45</span> target:aliPushManager selector:<span class="keyword">@selector</span>(isNeedGetOffLineMsg) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> aliPushManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定时获取离线消息</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line">- (<span class="keyword">void</span>)isNeedGetOffLineMsg&#123;</span><br><span class="line">    <span class="keyword">if</span>(_needTurnNextTime)&#123;</span><br><span class="line">        _needTurnNextTime = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(KGLOBALINFOMANAGER.appEnterBackground)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(KGLOBALINFOMANAGER.isLockForRefreshUI)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(KGLOBALINFOMANAGER.isLogin == <span class="literal">NO</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取离线消息</span></span><br><span class="line">    MessageParamModel *paramModel = [MessageParamModel new];</span><br><span class="line">    <span class="comment">// 此请求设置为心跳包</span></span><br><span class="line">    paramModel.isHeartbeat = <span class="literal">YES</span>;</span><br><span class="line">    [network getMessageOffLineByParamModel:paramModel];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注册监听即时消息</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line">- (<span class="keyword">void</span>)receiveAliyunTcpMessage:(<span class="built_in">NSNotification</span> *)notification &#123;</span><br><span class="line">    <span class="comment">//接收推送下来的消息(可用于实时消息聊天，或者及时消息指令)</span></span><br><span class="line">    _needTurnNextTime = <span class="literal">YES</span>;</span><br><span class="line">    CCPSysMessage *data = [notification object];</span><br><span class="line">    <span class="keyword">if</span>(KGLOBALINFOMANAGER.isLogin &amp;&amp; !KGLOBALINFOMANAGER.isLockForRefreshUI)&#123;</span><br><span class="line">        <span class="comment">// 1、组装为消息模型MessageModel</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2、处理消息</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="处理离线消息模块"><a href="#处理离线消息模块" class="headerlink" title="处理离线消息模块"></a>处理离线消息模块</h4><p>离线消息模块是请求服务器获取离线消息，进行一些列操作的模块。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E8%8E%B7%E5%8F%96%E7%A6%BB%E7%BA%BF%E6%B6%88%E6%81%AF%281%29.png" alt="image"></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line">-(<span class="keyword">void</span>)getMessageOffLine &#123;</span><br><span class="line">    <span class="comment">// 如果是正在获取离线消息，直接return</span></span><br><span class="line">    <span class="keyword">if</span>(KGLOBALINFOMANAGER.isGetOffLineMsg)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    KGLOBALINFOMANAGER.isGetOffLineMsg = <span class="literal">YES</span>;</span><br><span class="line"></span><br><span class="line">    [network opGetWithUrlPath:kPathOfflineMessage</span><br><span class="line">    params:dicParam</span><br><span class="line">    onSucceeded:^(<span class="built_in">NSDictionary</span> *dic) &#123;</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dicData = [dic objectForKey:kParamData];</span><br><span class="line">    OffLineMessageModel *model = [OffLineMessageModel getModelByDic:dicData];</span><br><span class="line">    model.isHeartbeat = paramModel.isHeartbeat;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 处理获取的离线消息</span></span><br><span class="line">    [MessageTool proccessOffLineMessageByOffLineMessageModel:model];</span><br><span class="line"></span><br><span class="line">    &#125; onError:^(Error *error) &#123;</span><br><span class="line">        <span class="comment">// 错误处理</span></span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">OffLineMessageModel</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 获取离线消息总数（包括单聊、群聊、讨论组）</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)getArrSocketMsg&#123;</span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrMsg = [<span class="built_in">NSMutableArray</span> new];</span><br><span class="line">    <span class="keyword">self</span>.notify.count &gt; <span class="number">0</span>?[arrMsg addObjectsFromArray:<span class="keyword">self</span>.notify]:<span class="string">@""</span>;</span><br><span class="line">    <span class="keyword">self</span>.singled.count &gt; <span class="number">0</span>?[arrMsg addObjectsFromArray:<span class="keyword">self</span>.singled]:<span class="string">@""</span>;</span><br><span class="line">    <span class="keyword">self</span>.multiple.count &gt; <span class="number">0</span>?[arrMsg addObjectsFromArray:<span class="keyword">self</span>.multiple]:<span class="string">@""</span>;</span><br><span class="line">    <span class="built_in">NSArray</span> *arrSocketMsg = [MessageModel getArrModelByArrServiceMsgs:arrMsg];</span><br><span class="line">    <span class="keyword">return</span> arrSocketMsg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">MessageTool</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 根据服务器获取的字典消息数组转成msgModel数组</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)getArrModelByArrServiceMsgs:(<span class="built_in">NSArray</span> *)msgDictDataArray &#123;</span><br><span class="line">    <span class="built_in">NSMutableArray</span> * tmpArrays = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">if</span> (msgDictDataArray &amp;&amp; msgDictDataArray.count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        tmpArrays = [<span class="built_in">NSMutableArray</span> new];</span><br><span class="line">        <span class="comment">// 遍历会话数据msgDictDataArray</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dataDict <span class="keyword">in</span> msgDictDataArray) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取会话总条数</span></span><br><span class="line">            <span class="built_in">NSInteger</span> count = [dataDict getIntValueByKey:kParamCount];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 相关参数。。。</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>([dataDict objectForKey:kParamMsgs] &amp;&amp; [dataDict objectForKey:kParamMsgs] != kNull)&#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 获取会话消息数</span></span><br><span class="line">                <span class="built_in">NSArray</span> *msgDictArray = [dataDict objectForKey:kParamMsgs];</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 相关参数。。。</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(count &gt; msgDictArray.count)&#123;</span><br><span class="line">                    <span class="comment">// 清除当前会话缓存消息</span></span><br><span class="line">                    MessageDB *messageDB = [[MessageDB alloc] init];</span><br><span class="line">                    [messageDB removeMessageBySessionId:sessionId sessionType:sessionType sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dicMsg <span class="keyword">in</span> msgDictArray.objectEnumerator) &#123;</span><br><span class="line">                    <span class="comment">// 组装为消息model</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 执行消息相关类型</span></span><br><span class="line">                    <span class="comment">// 如果是语音类型，下载语音</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 添加model</span></span><br><span class="line">                    [tmpArrays addObject:model];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 组装为消息model</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 添加model</span></span><br><span class="line">                [tmpArrays addObject:model];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmpArrays;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 处理获取的离线消息</span></span><br><span class="line">+ (<span class="keyword">void</span>)proccessOffLineMessageByOffLineMessageModel:(OffLineMessageModel *)model&#123;</span><br><span class="line">    <span class="comment">// 获取消息model数组</span></span><br><span class="line">    <span class="built_in">NSArray</span> *arrSocketMsg = [model getArrSocketMsg];</span><br><span class="line">    <span class="keyword">if</span>(arrSocketMsg.count &gt; <span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; arrSocketMsg.count; i++) &#123;</span><br><span class="line">                MessageModel *msg = [arrSocketMsg objectAtIndex:i];</span><br><span class="line">                msg.isHeartbeat = model.isHeartbeat;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 处理消息</span></span><br><span class="line">                [MessageTool receiveMessageFromUser:msg hasReadNotifyMessage:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 存储消息的提醒更新数</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(i == arrSocketMsg.count - <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="comment">//发送一个刷新通知</span></span><br><span class="line">                    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">                    <span class="comment">// 发送相关UI通知</span></span><br><span class="line">                    [MessageTool proccessFinishOffLineByOffLineMessageModel:model hasMessage:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 发送相关UI通知</span></span><br><span class="line">        [MessageTool proccessFinishOffLineByOffLineMessageModel:model hasMessage:<span class="literal">NO</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 发送相关UI通知</span></span><br><span class="line">+ (<span class="keyword">void</span>)proccessFinishOffLineByOffLineMessageModel:(OffLineMessageModel *)model hasMessage:(<span class="built_in">BOOL</span>)hasMessage&#123;</span><br><span class="line">    <span class="keyword">if</span>(!model.isHeartbeat)&#123;</span><br><span class="line">        <span class="comment">// 请求相关接口</span></span><br><span class="line">        <span class="comment">// 用户信息</span></span><br><span class="line">        <span class="comment">// 好友列表等</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(model.type &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 请求服务器离线消息阅读状态</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(hasMessage)&#123;</span><br><span class="line">        <span class="comment">// 发送消息列表更新通知</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送tabbar更新通知</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送离线消息完成更新通知</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    KGLOBALINFOMANAGER.isLockForRefreshUI = <span class="literal">NO</span>;</span><br><span class="line">    KGLOBALINFOMANAGER.isGetOffLineMsg = <span class="literal">NO</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="处理消息模块"><a href="#处理消息模块" class="headerlink" title="处理消息模块"></a>处理消息模块</h4><p>处理消息模块是一个消息的汇总模块，包括聊天消息、好友相关消息、群聊相关消息等。通过传入一个消息，对消息进行一些组装、存储、更新到UI等功能。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%281%29.png" alt="image"></p>
+<p>由于模块功能比较多，这里以聊天聊天消息功能进行说明：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="comment">/// 处理聊天消息</span></span><br><span class="line">- (<span class="keyword">void</span>)proccessSessionMessageByMessageInfo:(MessageModel *)messageInfo&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据消息类型，设置是单聊、群聊、还是小助手会话类型id</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> sessionId = [MessageNotifyProccessTool getSessionIdByMsg:messageInfo];</span><br><span class="line">    messageInfo.sessionId = sessionId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//过滤重复的消息</span></span><br><span class="line">    <span class="keyword">if</span>([<span class="keyword">self</span>.messageDBPorxy checkDBHasMessage:messageInfo])&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//写入消息数据库</span></span><br><span class="line">    [<span class="keyword">self</span>.messageDBPorxy saveModel:messageInfo sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    SessionModel *sessionModel = [MessageNotifyProccessTool getSessionModelByMsg:messageInfo];</span><br><span class="line">    <span class="comment">//没有会话名称，则当错误消息处理</span></span><br><span class="line">    <span class="keyword">if</span>(sessionModel.sessionName.length == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//写入最近会话数据库</span></span><br><span class="line">    [<span class="keyword">self</span>.sessionsDBPorxy saveModel:sessionModel sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果是UI锁住，不进行下面操作</span></span><br><span class="line">    <span class="keyword">if</span>(KGLOBALINFOMANAGER.isLockForRefreshUI)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新消息提醒数</span></span><br><span class="line">    [MessageNotifyProccessTool updateNewCountBySessionId:messageInfo.sessionId sessionType:messageInfo.sessionType sessionSecondId:messageInfo.sessionSecondId];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发送一个刷新通知</span></span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(sessionModel.isReceive)&#123;</span><br><span class="line">            <span class="comment">// 发送震动、声音提醒通知</span></span><br><span class="line">            [MessageNotifyProccessTool proccessReceiveMessageNeedQuakeOrSoundByMessage:messageInfo];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 发送更新UI通知</span></span><br><span class="line">        [MessageNotifyProccessTool sendNotificationByMessage:messageInfo];</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="处理发送消息模块"><a href="#处理发送消息模块" class="headerlink" title="处理发送消息模块"></a>处理发送消息模块</h4><p>发送消息模块负责处理发送聊天信息，需要注意的是图片、语音类型的消息如何处理。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png" alt="image"></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">///发送消息</span></span><br><span class="line">- (<span class="keyword">void</span>)sendMessage:(MessageModel *)msgModel &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发送消息到服务器</span></span><br><span class="line">    [network postMessageByParamModel:msgModel];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加到当前数据数组，刷新列表</span></span><br><span class="line">    [_messageListArray addObject:msgModel];</span><br><span class="line">    _contentListView.messageArray = _messageListArray;</span><br><span class="line">    [<span class="keyword">self</span> reloadData];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">MessageTool</span><br><span class="line"></span><br><span class="line"><span class="comment">//发送消息前处理相关数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)proccessSendMessageByMessageInfo:(MessageModel *)messageInfo</span><br><span class="line">finishBlock:(JsonModelBlock)finishBlock</span><br><span class="line">errorBlock:(ErrorBlock)errorBlock&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加新的消息到消息DB</span></span><br><span class="line">    messageInfo.state = SocketMessageStateSubmit;</span><br><span class="line">    MessageDB *messageDB = [[MessageDB alloc] init];</span><br><span class="line">    [messageDB saveModel:messageInfo sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新会话DB</span></span><br><span class="line">    SessionModel *sessionModel = [MessageNotifyProccessTool getSessionModelByMsg:messageInfo];</span><br><span class="line">    SessionDB *sessionsDB = [[SessionDB alloc] init];</span><br><span class="line">    [sessionsDB saveModel:sessionModel sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果是图片、语音类型</span></span><br><span class="line">    <span class="keyword">switch</span> (messageInfo.contentType) &#123;</span><br><span class="line">        <span class="keyword">case</span> ContentTypeForImage:</span><br><span class="line">        <span class="keyword">case</span> ContentTypeForAudio:&#123;</span><br><span class="line">            <span class="comment">// 上传文件</span></span><br><span class="line">            [<span class="keyword">self</span> proccessUploadFileByMessageInfo:messageInfo finishBlock:finishBlock errorBlock:errorBlock];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">default</span>:&#123;</span><br><span class="line">            [BlockTool executeModelBlock:finishBlock model:messageInfo];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理文件消息</span></span><br><span class="line">+ (<span class="keyword">void</span>)proccessUploadFileByMessageInfo:(MessageModel *)messageInfo</span><br><span class="line">finishBlock:(JsonModelBlock)finishBlock</span><br><span class="line">errorBlock:(ErrorBlock)errorBlock&#123;</span><br><span class="line">    <span class="comment">// 文件名不能为空</span></span><br><span class="line">    <span class="keyword">if</span> (!messageInfo.filePath || !messageInfo.fileName) &#123;</span><br><span class="line">        Error  *error = [[Error alloc] init];</span><br><span class="line">        error.errorCode = ERRCODE0002;</span><br><span class="line">        error.errorDescription = <span class="string">@"message filePath or fileName not nil"</span>;</span><br><span class="line">        [BlockTool executeErrorBlock:errorBlock error:error];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否已经上传过</span></span><br><span class="line">    <span class="keyword">if</span>([MessageTool checkFileMessageHasUploadByMessageInfo:messageInfo finishBlock:finishBlock])&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    @weakify(<span class="keyword">self</span>)</span><br><span class="line">    FileType fileType = [[MessageTool getDicFileType] getIntValueByKey:@(messageInfo.contentType)];</span><br><span class="line">    messageInfo.state = SocketMessageStateUpdateFile;</span><br><span class="line">    <span class="comment">// 上传到服务器</span></span><br><span class="line">    [[FileNetwork shareEngine] postFileByName:messageInfo.fileName Path:messageInfo.filePath fileType:fileType  uploadProgressBlock:^(<span class="built_in">NSProgress</span> *uploadProgress) &#123;</span><br><span class="line"></span><br><span class="line">    &#125; onSucceeded:^(<span class="built_in">NSDictionary</span> *dic) &#123;</span><br><span class="line">        @strongify(<span class="keyword">self</span>)</span><br><span class="line">        <span class="keyword">if</span> (RESPO<span class="built_in">NSESUCCESS</span>) &#123;</span><br><span class="line">            <span class="built_in">NSDictionary</span> *dicData = [dic objectForKey:kParamData];</span><br><span class="line">            <span class="built_in">NSString</span> *strUrl = [dicData getStrValueByKey:kParamFileId];</span><br><span class="line">            <span class="comment">// 组装消息model，替换为新的路径</span></span><br><span class="line">            [<span class="keyword">self</span> assembleFileMsgByMessageInfo:messageInfo fileUrl:strUrl finishBlock:finishBlock];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; onError:^(TGError *error) &#123;</span><br><span class="line">        [BlockTool executeErrorBlock:errorBlock error:error];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">///  发送消息过程中错误处理</span></span><br><span class="line">+ (<span class="keyword">void</span>)proccessSendMsgError:(Error *)error</span><br><span class="line">messageInfo:(MessageModel *)messageInfo&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改消息model</span></span><br><span class="line">    <span class="keyword">switch</span> (messageInfo.contentType) &#123;</span><br><span class="line">        <span class="keyword">case</span> ContentTypeForImage:&#123;</span><br><span class="line">            <span class="built_in">NSDictionary</span> *dicContent = @&#123;kParamFileName:ExistStringGet(messageInfo.fileName)</span><br><span class="line">            ,kParamFilePath:ExistStringGet(messageInfo.filePath)&#125;;</span><br><span class="line">            messageInfo.content = [Tools getStrJsonByDic:dicContent];</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> ContentTypeForAudio:&#123;</span><br><span class="line">            <span class="built_in">NSDictionary</span> *dicContent = @&#123;kParamFileName:ExistStringGet(messageInfo.fileName)</span><br><span class="line">            ,kParamFilePath:ExistStringGet(messageInfo.filePath)</span><br><span class="line">            ,kParamSecond:ExistStringGet(messageInfo.content)&#125;;</span><br><span class="line">            messageInfo.content = [Tools getStrJsonByDic:dicContent];</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新消息DB</span></span><br><span class="line">    messageInfo.state = SocketMessageStateFail;</span><br><span class="line">    MessageDB *messageDB = [[MessageDB alloc] init];</span><br><span class="line">    [messageDB saveModel:messageInfo sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新会话DB</span></span><br><span class="line">    SessionModel *sessionModel = [MessageNotifyProccessTool getSessionModelByMsg:messageInfo];</span><br><span class="line">    SessionDB *sessionsDB = [[SessionDB alloc] init];</span><br><span class="line">    [sessionsDB saveModel:sessionModel sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发送相关通知</span></span><br><span class="line">    <span class="comment">// 发送发送消息失败通知</span></span><br><span class="line">    <span class="comment">// 发送更新UI通知</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">Network</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 发送消息</span></span><br><span class="line">-(<span class="keyword">void</span>)postMessageByParamModel:(<span class="keyword">id</span>&lt;MessageParamProtocol&gt;)paramModel</span><br><span class="line">onSucceeded:(JsonModelBlock)succeededBlock</span><br><span class="line">onError:(ErrorBlock)errorBlock&#123;</span><br><span class="line"></span><br><span class="line">    @weakify(<span class="keyword">self</span>)</span><br><span class="line">    [MessageTool proccessSendMessageByMessageInfo:paramModel.messageInfo finishBlock:^(__kindof JsonModel *model) &#123;</span><br><span class="line">        @strongify(<span class="keyword">self</span>)</span><br><span class="line">        paramModel.messageInfo = model;</span><br><span class="line">        <span class="comment">// 处理完之后请求服务器</span></span><br><span class="line">        [<span class="keyword">self</span> proccessSendMessageByParamModel:paramModel onSucceeded:succeededBlock onError:errorBlock];</span><br><span class="line">    &#125; errorBlock:^(TGError *error) &#123;</span><br><span class="line">        [MessageTool proccessSendMsgError:error messageInfo:paramModel.messageInfo];</span><br><span class="line">        [BlockTool executeErrorBlock:errorBlock error:error];</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 处理完之后请求服务器</span></span><br><span class="line">- (<span class="keyword">void</span>)proccessSendMessageByParamModel:(<span class="keyword">id</span>&lt;MessageParamProtocol&gt;)paramModel onSucceeded:(JsonModelBlock)succeededBlock onError:(ErrorBlock)errorBlock&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 相关参数配置</span></span><br><span class="line"></span><br><span class="line">    [network opPostWithUrlPath:kPathMessage</span><br><span class="line">    params:dicParam</span><br><span class="line">    onSucceeded:^(<span class="built_in">NSDictionary</span> *dic) &#123;</span><br><span class="line">    DLog(<span class="string">@"message:%@"</span>,[dic objectForKey:kParamMessage]);</span><br><span class="line">    <span class="built_in">NSDictionary</span> * dataDict = [dic getOBJCValueByKey:kParamData];</span><br><span class="line">        <span class="keyword">if</span> (dataDict) &#123;</span><br><span class="line">            [messageInfo setValueForHttpResponseByDicData:dataDict];</span><br><span class="line">            messageInfo.state = SocketMessageStateSent;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 发送成功，转到处理消息</span></span><br><span class="line">            [[MessageNotifyProccessTool share] proccessSessionMessageByMessageInfo:messageInfo];</span><br><span class="line">        &#125;</span><br><span class="line">        ExistActionDo(succeededBlock, succeededBlock(messageInfo));</span><br><span class="line">    &#125; onError:^(TGError *error) &#123;</span><br><span class="line">        <span class="comment">// 发送失败处理</span></span><br><span class="line">        [MessageTool proccessSendMsgError:error messageInfo:paramModel.messageInfo];</span><br><span class="line">        [BlockTool executeErrorBlock:errorBlock error:error];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="获取历史消息模块"><a href="#获取历史消息模块" class="headerlink" title="获取历史消息模块"></a>获取历史消息模块</h4><p>获取历史消息应用场景在于用户下拉查看以往消息的时候，过程其实跟获取离线消息过程相似。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E8%8E%B7%E5%8F%96%E5%8E%86%E5%8F%B2%E6%B6%88%E6%81%AF.png" alt="image"></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取历史消息</span></span><br><span class="line">- (<span class="keyword">void</span>)getMessageListBySessionId:(<span class="keyword">long</span> <span class="keyword">long</span>)sessionId</span><br><span class="line">sessionType:(SessionType)sessionType</span><br><span class="line">sessionSecondId:(<span class="keyword">long</span> <span class="keyword">long</span>)sessionSecondId</span><br><span class="line">start:(<span class="built_in">NSInteger</span>)start</span><br><span class="line">limit:(<span class="built_in">NSInteger</span>)limit</span><br><span class="line">timeStamp:(<span class="built_in">NSString</span> *)timeStamp</span><br><span class="line">sqliteBlock:(SqliteArrayBlock)sqliteBlock&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 组装查询条件SQL语句</span></span><br><span class="line">    <span class="built_in">NSString</span> * sessionTypeStr = [<span class="keyword">self</span> getSessionTypeNameByType:sessionType];</span><br><span class="line">    <span class="built_in">NSString</span> *strWhere = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"sessionId = %@ AND sessionType = '%@'"</span>,@(sessionId),sessionTypeStr];</span><br><span class="line">    <span class="built_in">NSString</span> *strCondition =  [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"WHERE (%@) ORDER BY time DESC LIMIT %@,%@"</span>,strWhere,@(start),@(limit)];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从数据库中获取</span></span><br><span class="line">    [<span class="keyword">self</span>.dbTool executeSelectByTablename:TABLE_NAME_MESSAGES arrField:<span class="literal">nil</span> dicCondition:<span class="literal">nil</span> conditionAndOrderBySql:strCondition completeBlock:^(<span class="built_in">BOOL</span> bSuccess, <span class="keyword">id</span> result) &#123;</span><br><span class="line">        <span class="comment">// 操作成功</span></span><br><span class="line">        <span class="keyword">if</span> (bSuccess) &#123;</span><br><span class="line">            <span class="built_in">NSMutableArray</span> * messages = [<span class="built_in">NSMutableArray</span> new];</span><br><span class="line">            <span class="comment">// 组装为消息model数组</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dicMsg <span class="keyword">in</span> result) &#123;</span><br><span class="line">                <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">                    MessageModel *msgModel = [[MessageModel alloc] initWithDictionary:dicMsg];</span><br><span class="line">                    <span class="keyword">if</span> (msgModel.contentType == ContentTypeForImage)&#123;</span><br><span class="line">                        msgModel.filePath = msgModel.content;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (msgModel.contentType == ContentTypeForAudio)&#123;</span><br><span class="line">                        msgModel.filePath = msgModel.content;</span><br><span class="line">                    &#125;</span><br><span class="line">                    [messages addObject:msgModel];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 回调数据给UI</span></span><br><span class="line">            <span class="keyword">if</span>(messages.count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                ExistActionDo(sqliteBlock, sqliteBlock(<span class="literal">NO</span>,messages));</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 请求服务器获取历史消息</span></span><br><span class="line">                [network getHistoryMessageByParamModel:参数];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 操作失败</span></span><br><span class="line">            Error *error = [[Error alloc] init];</span><br><span class="line">            error.errorCode = ERRCODE0002;</span><br><span class="line">            error.errorDescription = <span class="string">@"获取历史消息失败"</span>;</span><br><span class="line">            <span class="comment">//回调给UI层</span></span><br><span class="line">            <span class="comment">// 发送更UI通知</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">Network</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)getHistoryMessageByParamModel:(<span class="keyword">id</span>&lt;MessageParamProtocol&gt;)paramModel</span><br><span class="line">onSucceeded:(<span class="built_in">NSArrayBlock</span>)succeededBlock</span><br><span class="line">onError:(ErrorBlock)errorBlock&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSDictionary</span> *dicParam = [paramModel getParamDicForGetHistoryMessage];</span><br><span class="line"></span><br><span class="line">    [network opGetWithUrlPath:kPathMessage</span><br><span class="line">    params:dicParam</span><br><span class="line">    onSucceeded:^(<span class="built_in">NSDictionary</span> *dic) &#123;</span><br><span class="line">        <span class="keyword">if</span>(RESPO<span class="built_in">NSESUCCESS</span>)&#123;</span><br><span class="line">            <span class="built_in">NSArray</span> *arrHistoryMsg = [<span class="built_in">NSArray</span> new];</span><br><span class="line">            <span class="built_in">NSArray</span> * historyMessages = [dic getOBJCValueByKey:kParamData];</span><br><span class="line">            <span class="keyword">if</span> (historyMessages &amp;&amp; historyMessages.count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            arrHistoryMsg = [MessageTool getArrModelByArrServiceMsgs:historyMessages];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 回调arrHistoryMsg数据给UI层</span></span><br><span class="line">        <span class="comment">// 发送更新UI通知，附带相关信息</span></span><br><span class="line">    &#125;</span><br><span class="line">    &#125; onError:^(Error *error) &#123;</span><br><span class="line">        <span class="comment">// 发送更新UI通知，附带错误信息</span></span><br><span class="line">        <span class="comment">// 回调error错误给UI</span></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">MessageTool</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 根据服务器获取的字典消息数组转成msgModel数组</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)getArrModelByArrServiceMsgs:(<span class="built_in">NSArray</span> *)msgDictDataArray &#123;</span><br><span class="line">    <span class="built_in">NSMutableArray</span> * tmpArrays = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">if</span> (msgDictDataArray &amp;&amp; msgDictDataArray.count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        tmpArrays = [<span class="built_in">NSMutableArray</span> new];</span><br><span class="line">        <span class="comment">// 遍历会话数据msgDictDataArray</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dataDict <span class="keyword">in</span> msgDictDataArray) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取会话总条数</span></span><br><span class="line">            <span class="built_in">NSInteger</span> count = [dataDict getIntValueByKey:kParamCount];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 相关参数。。。</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>([dataDict objectForKey:kParamMsgs] &amp;&amp; [dataDict objectForKey:kParamMsgs] != kNull)&#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 获取会话消息数</span></span><br><span class="line">                <span class="built_in">NSArray</span> *msgDictArray = [dataDict objectForKey:kParamMsgs];</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 相关参数。。。</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(count &gt; msgDictArray.count)&#123;</span><br><span class="line">                    <span class="comment">// 清除当前会话缓存消息</span></span><br><span class="line">                    MessageDB *messageDB = [[MessageDB alloc] init];</span><br><span class="line">                    [messageDB removeMessageBySessionId:sessionId sessionType:sessionType sqliteBlock:<span class="literal">nil</span>];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dicMsg <span class="keyword">in</span> msgDictArray.objectEnumerator) &#123;</span><br><span class="line">                    <span class="comment">// 组装为消息model</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 执行消息相关类型</span></span><br><span class="line">                    <span class="comment">// 如果是语音类型，下载语音</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 添加model</span></span><br><span class="line">                    [tmpArrays addObject:model];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 组装为消息model</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 添加model</span></span><br><span class="line">                [tmpArrays addObject:model];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmpArrays;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="删除消息模块"><a href="#删除消息模块" class="headerlink" title="删除消息模块"></a>删除消息模块</h4><p>删除消息功能应用场景是在在消息列表中，一般用户长按消息出现UIMenuItem，选择删除item之后的操作。</p>
+<p><img src="http://7xv233.com1.z0.glb.clouddn.com/jishitongxun%E5%88%A0%E9%99%A4%E6%B6%88%E6%81%AF.png" alt="image"></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)deleteMessage:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">    <span class="keyword">if</span> (_curSelectMessageInfo) &#123;</span><br><span class="line">        __<span class="keyword">weak</span> ChatBaseView *weakSelf = <span class="keyword">self</span>;</span><br><span class="line">        [AlertView showNormalWithTitle:<span class="literal">nil</span></span><br><span class="line">        message:<span class="string">@"确定删除？"</span></span><br><span class="line">        cancel:kAlertCancel</span><br><span class="line">        cancelHandler:<span class="literal">nil</span></span><br><span class="line">        submit:kAlertSure</span><br><span class="line">        submitHandler:^(AlertView *alertView) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">BOOL</span> isLatest = <span class="literal">NO</span>;</span><br><span class="line">            isLatest = [[_messageListArray lastObject] isEqual:_curSelectMessageInfo];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 列表删除数据，刷新消息列表</span></span><br><span class="line">            [_messageListArray removeObject:_curSelectMessageInfo];</span><br><span class="line">            [weakSelf reloadData];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 删除消息DB中当前的消息</span></span><br><span class="line">            MessageDB *messageDB = [[MessageDB alloc] init];</span><br><span class="line">            [messageDB removeMessage:_curSelectMessageInfo];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 判断message是不是最后一条数据</span></span><br><span class="line">            <span class="keyword">if</span> (isLatest) &#123;</span><br><span class="line">                SessionDB *sessionDB = [[SessionDB alloc] init];</span><br><span class="line">                <span class="keyword">if</span>(_messageListArray.count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    MessageModel *lastMsg = [_messageListArray lastObject];</span><br><span class="line">                    [<span class="keyword">self</span> updateSessionLastMsgByMsg:lastMsg];</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                _session.contentType = ContentTypeForText;</span><br><span class="line">                _session.lastMsg = <span class="string">@""</span>;</span><br><span class="line">                [sessionDB saveModel:_session sqliteBlock:^(<span class="built_in">BOOL</span> isTrue) &#123;</span><br><span class="line">                &#125;];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="转发消息模块"><a href="#转发消息模块" class="headerlink" title="转发消息模块"></a>转发消息模块</h4><p>转发消息功能应用场景是在在消息列表中，一般用户长按消息出现UIMenuItem，选择转发item之后的操作。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 转发消息</span></span><br><span class="line">- (<span class="keyword">void</span>)referenceMessage:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">    <span class="keyword">if</span> (_curSelectMessageInfo) &#123;</span><br><span class="line">        <span class="comment">// 组装要转发的数据</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 跳转到好友列表，附带转发的数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在好友列表中选中好友，跳转到与好友的聊天页面，判断是否有会话，没有就创建新的会话，保存到会话数据库中，走发送消息的流程（发送的消息就是转发的消息），接下来就是走发送消息的流程，具体查看发送消息模块</span><br></pre></td></tr></table></figure>
+<h3 id="流程图流程说明"><a href="#流程图流程说明" class="headerlink" title="流程图流程说明"></a>流程图流程说明</h3><ul>
+<li>APP启动</li>
+</ul>
+<p>app启动时创建阿里云管理类，上面已说明阿里云管理类的主要功能。当APP执行到applicationDidBecomeActive:方法时，全局参数isLockForRefreshUI进行锁住，为什么要锁住呢？这个参数是作为获取离线消息是否成功的标志，防止定时器获取离线消息时刷新UI，暂时不需要刷新UI的话就要对isLockForRefreshUI进行锁住。所以已启动就要将isLockForRefreshUI赋值为YES，除了获取好友差异集合-&gt;获取取离线消息成功之后isLockForRefreshUI才会设置为NO。</p>
+<ul>
+<li>好友差异集合</li>
+</ul>
+<p>到了获取好友差异集合，那么如果失败会进行递归获取，直到获取成功。当成功之后获取离线消息。</p>
+<ul>
+<li>离线消息</li>
+</ul>
+<p>这里有一个全局参数isGetOffLineMsg进行控制，isGetOffLineMsg表示如果正在获取的情况下return掉，不会进行请求。从好友接口到获取离线消息这过程不会设置为心跳包，而定时器获取则为是心跳包请求。</p>
+<ul>
+<li>处理离线消息</li>
+</ul>
+<p>获取离线消息成功之后对一切数据进行处理，具体的功能查看处理消息模块即可。这个功能也适用于阿里云推送下来的消息以及发送消息成功之后对消息的一系列操作。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>转载请注明出处。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/即时通讯/" rel="tag"><i class="fa fa-tag"></i> 即时通讯</a>
+          
+            <a href="/tags/阿里云/" rel="tag"><i class="fa fa-tag"></i> 阿里云</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/11/浅析iOS的浅复制与深复制/" rel="next" title="浅析iOS的浅复制与深复制">
+                <i class="fa fa-chevron-left"></i> 浅析iOS的浅复制与深复制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/07/17/InstantMessaging-iOS/"
+           data-title="一个不太完善的即时通讯流程架构图" data-url="http://yoursite.com/2018/07/17/InstantMessaging-iOS/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="DaiSuke" />
+            
+              <p class="site-author-name" itemprop="name">DaiSuke</p>
+              <p class="site-description motion-element" itemprop="description">just's like IT</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DaisukeZJY" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="feng.daisuke@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#整体流程架构图"><span class="nav-number">1.</span> <span class="nav-text">整体流程架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能模块区分"><span class="nav-number">2.</span> <span class="nav-text">功能模块区分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块功能介绍"><span class="nav-number">3.</span> <span class="nav-text">模块功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#处理好友差异模块"><span class="nav-number">3.1.</span> <span class="nav-text">处理好友差异模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阿里云管理模块"><span class="nav-number">3.2.</span> <span class="nav-text">阿里云管理模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理离线消息模块"><span class="nav-number">3.3.</span> <span class="nav-text">处理离线消息模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理消息模块"><span class="nav-number">3.4.</span> <span class="nav-text">处理消息模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理发送消息模块"><span class="nav-number">3.5.</span> <span class="nav-text">处理发送消息模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取历史消息模块"><span class="nav-number">3.6.</span> <span class="nav-text">获取历史消息模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除消息模块"><span class="nav-number">3.7.</span> <span class="nav-text">删除消息模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转发消息模块"><span class="nav-number">3.8.</span> <span class="nav-text">转发消息模块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程图流程说明"><span class="nav-number">4.</span> <span class="nav-text">流程图流程说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明"><span class="nav-number">5.</span> <span class="nav-text">声明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiSuke</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"daisukecn"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("EHtYvSIfNxQXWTd66LKTOamk-gzGzoHsz", "QmOk07bceNRvEUFI2Wxs2R0n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
